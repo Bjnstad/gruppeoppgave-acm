@@ -1,0 +1,16 @@
+﻿@model List<gruppeoppgave_acm.Models.Movie>
+@{
+    ViewBag.Title = "Index";
+}
+<div class="container">
+
+
+    <div class="row">
+
+        @foreach (var movie in Model)
+        {
+            @Html.Partial("../Movie/MoviePartial", movie)
+        }
+    </div>
+</div>
+
