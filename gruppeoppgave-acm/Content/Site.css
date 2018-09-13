@@ -1,6 +1,7 @@
 ﻿body {
     padding-top: 50px;
     padding-bottom: 20px;
+    background-color: #202020!important;
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -28,4 +29,20 @@ textarea {
     height: 350px;
     background-repeat: no-repeat;
     background-size: cover;
+}
+
+.category-navigation {
+    display: flex;
+    list-style: none;
+    padding: 0;
+}
+
+
+h4 {
+    font-size: 34px!important;
+    line-height: 40px!important;
+}
+
+.text--white {
+   color: #fff;
 }

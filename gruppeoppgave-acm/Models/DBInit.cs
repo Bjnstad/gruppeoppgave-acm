@@ -43,7 +43,7 @@ namespace gruppeoppgave_acm.Models
             {
                 Title = "De Utrolige",
                 Price = 39,
-                Description = "En hyggelig barnefilm",
+                Description = "En veldig hyggelig barnefilm",
                 Thumbnail = "https://orig00.deviantart.net/ac74/f/2010/253/d/e/the_incredibles_parr_family_by_kalulu77-d2yfpi2.jpg"
             };
 
@@ -51,6 +51,29 @@ namespace gruppeoppgave_acm.Models
             context.Movie.Add(newMovie2);
             context.Movie.Add(newMovie3);
             context.Movie.Add(newMovie4);
+
+            Category superhelt = new Category
+            {
+                Name = "Superhelt"
+            };
+
+            context.Categories.Add(superhelt);
+
+            Category_Relation cr = new Category_Relation
+            {
+                Movie = newMovie,
+                Category = superhelt
+            };
+
+            Category_Relation cr2 = new Category_Relation
+            {
+                Movie = newMovie2,
+                Category = superhelt
+            };
+
+            context.Category_Relations.Add(cr);
+            context.Category_Relations.Add(cr2);
+
             context.Customer.Add(newCustomer);
             base.Seed(context);
         }

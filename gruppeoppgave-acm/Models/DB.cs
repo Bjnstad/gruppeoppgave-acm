@@ -20,5 +20,7 @@ namespace gruppeoppgave_acm.Models
         public virtual DbSet<Customer> Customer { get; set; }
         public virtual DbSet<Order> Order { get; set; }
         public virtual DbSet<OrderLine> OrderLines { get; set; }
+        public virtual DbSet<Category> Categories { get; set; }
+        public virtual DbSet<Category_Relation> Category_Relations { get; set; }
     }
 }

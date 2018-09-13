@@ -1,16 +1,16 @@
-﻿@model List<gruppeoppgave_acm.Models.Movie>
+﻿@model gruppeoppgave_acm.Models.MoviesView
 @{
     ViewBag.Title = "Index";
 }
-<div class="container">
+<div>
 
+    @Html.Partial("../Movie/Categories", Model.Categories)
 
     <div class="row">
-
-        @foreach (var movie in Model)
+        @foreach (var movie in Model.Movies)
         {
             @Html.Partial("../Movie/MoviePartial", movie)
         }
-    </div>
+        </div>
 </div>
 

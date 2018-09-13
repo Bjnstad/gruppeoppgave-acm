@@ -116,10 +116,12 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Category.cs" />
+    <Compile Include="Models\Category_Relation.cs" />
     <Compile Include="Models\DB.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\DBInit.cs" />
     <Compile Include="Models\Movie.cs" />
+    <Compile Include="Models\MoviesView.cs" />
     <Compile Include="Models\Order.cs" />
     <Compile Include="Models\OrderLine.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -135,6 +137,7 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Movie\MoviePartial.cshtml" />
     <Content Include="Views\Login\Login.cshtml" />
+    <Content Include="Views\Movie\Categories.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

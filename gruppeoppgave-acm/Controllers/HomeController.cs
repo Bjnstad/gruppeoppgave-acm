@@ -24,8 +24,15 @@ namespace gruppeoppgave_acm.Controllers
         // GET: Home
         public ActionResult Index()
         {
-            var movies = db.Movie.ToList();
-            return View(movies);
+            List<Category> categories = db.Categories.ToList();
+            List<Movie> movies = db.Movie.ToList();
+
+            MoviesView mv = new MoviesView
+            {
+                Movies = movies,
+                Categories = categories
+            };
+            return View(mv);
         }
     }
 }
