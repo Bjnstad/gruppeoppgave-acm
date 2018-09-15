@@ -7,7 +7,12 @@ namespace gruppeoppgave_acm.Models
     {
         protected override void Seed(DB context)
         {
-            var newCustomer = new Customer
+            Category superhelt = new Category
+            {
+                Name = "Superhelt"
+            };
+
+            Customer newCustomer = new Customer
             {
                 Forname = "Axel",
                 Surname = "Bjørnstad",
@@ -15,7 +20,7 @@ namespace gruppeoppgave_acm.Models
                 Email = "axebjo@gmail.com"  
             };
 
-            var newMovie = new Movie
+            Movie newMovie = new Movie
             {
                 Title = "Spiderman",
                 Price = 99,
@@ -23,7 +28,7 @@ namespace gruppeoppgave_acm.Models
                 Thumbnail = "https://get.pxhere.com/photo/plastic-red-toy-iron-man-action-figure-marvel-superhero-spiderman-fictional-character-621150.jpg"
             };
 
-            var newMovie2 = new Movie
+            Movie newMovie2 = new Movie
             {
                 Title = "Batman",
                 Price = 56,
@@ -31,7 +36,7 @@ namespace gruppeoppgave_acm.Models
                 Thumbnail = "https://upload.wikimedia.org/wikipedia/commons/8/89/Batman_%28retouched%29_%28cropped%29.jpg"
             };
 
-            var newMovie3 = new Movie
+            Movie newMovie3 = new Movie
             {
                 Title = "Jame Bond",
                 Price = 129,
@@ -39,7 +44,7 @@ namespace gruppeoppgave_acm.Models
                 Thumbnail = "https://upload.wikimedia.org/wikipedia/commons/2/2e/James_Bond_at_Madame_Tussauds%2C_London.jpg"
             };
 
-            var newMovie4 = new Movie
+            Movie newMovie4 = new Movie
             {
                 Title = "De Utrolige",
                 Price = 39,
@@ -51,11 +56,6 @@ namespace gruppeoppgave_acm.Models
             context.Movie.Add(newMovie2);
             context.Movie.Add(newMovie3);
             context.Movie.Add(newMovie4);
-
-            Category superhelt = new Category
-            {
-                Name = "Superhelt"
-            };
 
             context.Categories.Add(superhelt);
 

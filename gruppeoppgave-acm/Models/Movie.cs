@@ -11,5 +11,15 @@ namespace gruppeoppgave_acm.Models
         public string Thumbnail { get; set; }
         public virtual List<OrderLine> OrderLines { get; set; }
         public virtual List<Category_Relation> Category_Relation { get; set; }
+
+        public void addCategory(Category category)
+        {
+            DB db = new DB();
+            db.Category_Relations.Add(new Category_Relation
+            {
+                Movie = this,
+                Category = category
+            });
+        } 
     }
 }
