@@ -11,6 +11,8 @@ namespace gruppeoppgave_acm.Models
         [Required(ErrorMessage = "Required")]
         public string Surname { get; set; }
         [Required(ErrorMessage = "Required")]
+
+        [DataType(DataType.PhoneNumber)]
         public string Phone { get; set; }
         [Required(ErrorMessage = "Required")]
 

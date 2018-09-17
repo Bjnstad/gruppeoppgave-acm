@@ -1,8 +1,6 @@
 ﻿using gruppeoppgave_acm.Models;
-using System;
-using System.Collections.Generic;
+using System.Data.Entity.Validation;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace gruppeoppgave_acm.Controllers
@@ -24,11 +22,36 @@ namespace gruppeoppgave_acm.Controllers
 
             using (DB db = new DB())
             {
-                db.Customer.Add(customerModel);
-                db.SaveChanges();
+                if (db.Customer.Any(bruker => bruker.ID == customerModel.ID))
+                {
+                    ViewBag.DuplicateID = "User already exists";
+                    return View("Register", customerModel);
+                }
 
+                if (db.Customer.Any(bruker => bruker.Email == customerModel.Email))
+                {
+                    ViewBag.DuplicateEmail = "Email already in use";
+                    return View("Register", customerModel);
+                }
+
+                db.Customer.Add(customerModel);
+                try
+                {
+                    db.SaveChanges();
+                }
+                catch (DbEntityValidationException ex)
+                {
+                    foreach (var entityValidationErrors in ex.EntityValidationErrors)
+                    {
+                        foreach (var validationError in entityValidationErrors.ValidationErrors)
+                        {
+                            Response.Write("Property: " + validationError.PropertyName + " Error: " + validationError.ErrorMessage);
+                        }
+                    }
+                }
             }
             ModelState.Clear();
+            ViewBag.RegisterSuccess = "User successfully added.";
             return View("Register");
         }
 
