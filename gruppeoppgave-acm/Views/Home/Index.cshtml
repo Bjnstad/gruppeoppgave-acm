@@ -17,7 +17,7 @@
                     @foreach (var category in Model.Categories)
                     {
                         <li>
-                            <input type="checkbox" />
+                            <input type="checkbox" class="cat-checkbox" value="@category.Name"/>
                             <p>
                                 @category.Name
                             </p>
@@ -28,13 +28,7 @@
 
         </div>
         <div class="col col-md-9">
-            <div class="row">
-                @foreach (var movie in Model.Movies)
-                {
-                    @Html.Partial("../Movie/MoviePartial", movie)
-                }
-            </div>
+            @Html.Partial("../Movie/MoviePartial", Model.Movies)
         </div>
     </div>
 </div>
-

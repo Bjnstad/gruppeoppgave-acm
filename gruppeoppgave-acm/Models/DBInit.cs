@@ -12,15 +12,11 @@ namespace gruppeoppgave_acm.Models
                 Name = "Superhelt"
             };
 
-            /*
-            Customer newCustomer = new Customer
+            Category action = new Category
             {
-                Forname = "Axel",
-                Surname = "Bjørnstad",
-                Phone = "12345678",
-                Email = "axebjo@gmail.com"  
+                Name = "Action"
             };
-            */
+
 
             Movie newMovie = new Movie
             {
@@ -73,10 +69,16 @@ namespace gruppeoppgave_acm.Models
                 Category = superhelt
             };
 
+            Category_Relation cr3 = new Category_Relation
+            {
+                Movie = newMovie3,
+                Category = action
+            };
+
             context.Category_Relations.Add(cr);
             context.Category_Relations.Add(cr2);
+            context.Category_Relations.Add(cr3);
 
-            //context.Customer.Add(newCustomer);
             base.Seed(context);
         }
     }
