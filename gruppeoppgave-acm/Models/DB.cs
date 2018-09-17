@@ -23,6 +23,4 @@ namespace gruppeoppgave_acm.Models
         public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<Category_Relation> Category_Relations { get; set; }
     }
-
-
 }

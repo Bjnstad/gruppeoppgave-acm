@@ -12,6 +12,7 @@ namespace gruppeoppgave_acm.Models
                 Name = "Superhelt"
             };
 
+            /*
             Customer newCustomer = new Customer
             {
                 Forname = "Axel",
@@ -19,6 +20,7 @@ namespace gruppeoppgave_acm.Models
                 Phone = "12345678",
                 Email = "axebjo@gmail.com"  
             };
+            */
 
             Movie newMovie = new Movie
             {
@@ -74,7 +76,7 @@ namespace gruppeoppgave_acm.Models
             context.Category_Relations.Add(cr);
             context.Category_Relations.Add(cr2);
 
-            context.Customer.Add(newCustomer);
+            //context.Customer.Add(newCustomer);
             base.Seed(context);
         }
     }
