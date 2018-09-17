@@ -7,10 +7,34 @@
     @Html.Partial("../Movie/Categories", Model.Categories)
 
     <div class="row">
-        @foreach (var movie in Model.Movies)
-        {
-            @Html.Partial("../Movie/MoviePartial", movie)
-        }
+        <div class="col col-md-3">
+
+            <div class="filter-wrapper" style="background-color: #fff">
+                <h3 style="text-align:center;">
+                    Filtrer filmer
+                </h3>
+                <ul>
+                    @foreach (var category in Model.Categories)
+                    {
+                        <li>
+                            <input type="checkbox" />
+                            <p>
+                                @category.Name
+                            </p>
+                        </li>
+                    }
+                </ul>
+            </div>
+
         </div>
+        <div class="col col-md-9">
+            <div class="row">
+                @foreach (var movie in Model.Movies)
+                {
+                    @Html.Partial("../Movie/MoviePartial", movie)
+                }
+            </div>
+        </div>
+    </div>
 </div>
 
