@@ -1,4 +1,5 @@
 ﻿using gruppeoppgave_acm.Models;
+using System;
 using System.Data.Entity.Validation;
 using System.Linq;
 using System.Web.Mvc;
@@ -7,47 +8,33 @@ namespace gruppeoppgave_acm.Controllers
 {
     public class CustomerController : Controller
     {
-        private Customer customerModel = new Customer();
 
 
-
+        [HttpGet]
         public ActionResult Register(int id=0)
         {
+            Customer customerModel = new Customer();
             return View(customerModel);
         }
 
         [HttpPost]
-        public ActionResult Register(Customer CustomerController)
+        public ActionResult Register(Customer customerModel)
         {
-
             using (DB db = new DB())
             {
-                if (db.Customer.Any(bruker => bruker.ID == customerModel.ID))
+                db.Customer.Add(customerModel);
+                db.SaveChanges();
+                
+                if (db.Customer.Any(bruker => bruker.Username == customerModel.Username))
                 {
-                    ViewBag.DuplicateID = "User already exists";
+                    ViewBag.DuplicateUserName = "Username already exists";
                     return View("Register", customerModel);
                 }
 
                 if (db.Customer.Any(bruker => bruker.Email == customerModel.Email))
                 {
-                    ViewBag.DuplicateEmail = "Email already in use";
+                    ViewBag.DuplicateEmail = "Email already exists";
                     return View("Register", customerModel);
-                }
-
-                db.Customer.Add(customerModel);
-                try
-                {
-                    db.SaveChanges();
-                }
-                catch (DbEntityValidationException ex)
-                {
-                    foreach (var entityValidationErrors in ex.EntityValidationErrors)
-                    {
-                        foreach (var validationError in entityValidationErrors.ValidationErrors)
-                        {
-                            Response.Write("Property: " + validationError.PropertyName + " Error: " + validationError.ErrorMessage);
-                        }
-                    }
                 }
             }
             ModelState.Clear();

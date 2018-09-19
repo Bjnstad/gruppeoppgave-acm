@@ -12,15 +12,16 @@ namespace gruppeoppgave_acm.Models
                 Name = "Superhelt"
             };
 
-            /*
-            Customer newCustomer = new Customer
+            
+            /*Customer newCustomer = new Customer
             {
                 Forname = "Axel",
                 Surname = "Bjørnstad",
                 Phone = "12345678",
-                Email = "axebjo@gmail.com"  
-            };
-            */
+                Email = "axebjo@gmail.com",  
+                Password = "hei123"
+            }; */
+            
 
             Movie newMovie = new Movie
             {
@@ -77,6 +78,8 @@ namespace gruppeoppgave_acm.Models
             context.Category_Relations.Add(cr2);
 
             //context.Customer.Add(newCustomer);
+
+            //context.SaveChanges();
             base.Seed(context);
         }
     }

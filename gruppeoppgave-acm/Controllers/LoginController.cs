@@ -7,11 +7,15 @@ using System.Web.Mvc;
 namespace gruppeoppgave_acm.Controllers
 {
     public class LoginController : Controller
-    {
+    { 
         // GET: Login
-        public ActionResult Index()
+        public ActionResult Login()
         {
-            return View("Login");
+
+
+
+
+            return View();
         }
     }
 }
