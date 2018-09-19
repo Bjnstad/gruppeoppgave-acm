@@ -9,7 +9,6 @@ namespace gruppeoppgave_acm.Controllers
     public class CustomerController : Controller
     {
 
-
         [HttpGet]
         public ActionResult Register(int id=0)
         {
@@ -22,9 +21,6 @@ namespace gruppeoppgave_acm.Controllers
         {
             using (DB db = new DB())
             {
-                db.Customer.Add(customerModel);
-                db.SaveChanges();
-                
                 if (db.Customer.Any(bruker => bruker.Username == customerModel.Username))
                 {
                     ViewBag.DuplicateUserName = "Username already exists";
@@ -36,17 +32,13 @@ namespace gruppeoppgave_acm.Controllers
                     ViewBag.DuplicateEmail = "Email already exists";
                     return View("Register", customerModel);
                 }
+
+                db.Customer.Add(customerModel);
+                db.SaveChanges();
             }
             ModelState.Clear();
             ViewBag.RegisterSuccess = "User successfully added.";
-            return View("Register");
+            return View("../Login/Login");
         }
-
-        public ActionResult Login()
-        {
-
-        }
-
-
     }
 }
