@@ -42,6 +42,11 @@ namespace gruppeoppgave_acm.Controllers
             return View("Register");
         }
 
+        public ActionResult Login()
+        {
+
+        }
+
 
     }
 }

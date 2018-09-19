@@ -11,10 +11,6 @@ namespace gruppeoppgave_acm.Controllers
         // GET: Login
         public ActionResult Login()
         {
-
-
-
-
             return View();
         }
     }
