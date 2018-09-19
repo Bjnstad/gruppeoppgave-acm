@@ -9,7 +9,6 @@ using System.Web.Mvc;
 namespace gruppeoppgave_acm.Controllers
 {
 
-    [RequireHttps]
     public class HomeController : Controller
     {
         private DB db = new DB();

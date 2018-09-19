@@ -13,5 +13,16 @@ namespace gruppeoppgave_acm.Controllers
         {
             return View();
         }
+
+        [HttpPost]
+        public ActionResult Customer(Customer model)
+        {
+
+        }
+
     }
+
+
+    
+
 }
