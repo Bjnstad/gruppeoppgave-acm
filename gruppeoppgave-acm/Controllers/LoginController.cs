@@ -21,14 +21,36 @@ namespace gruppeoppgave_acm.Controllers
         {
             using (DB db = new DB())
             {
-                if (db.Customer.Any(bruker => bruker.Username == loginModel.Username) && db.Customer.Any(bruker => bruker.Password == loginModel.Password))
+
+                var userData = db.Customer.Where(bruker => bruker.Username == loginModel.Username && bruker.Password == loginModel.Password).FirstOrDefault();
+                if(userData == null)
+                {
+                    ViewBag.LoginUserErr = "Login failed. Check username or password";
+                    return View("Login");
+                } else
+                {
+                    Session["id"] = userData.ID;
+                    Session["userName"] = userData.Username;
+                }
+
+                ViewBag.LoginSuccessAlert = "Login Successful!";
+                return View("LoggedIn");
+
+                //Gammel Funker dårlig
+                /*if (db.Customer.Any(bruker => bruker.Username == loginModel.Username) && db.Customer.Any(bruker => bruker.Password == loginModel.Password))
                 {
                     ViewBag.LoginSuccessAlert = "Login Successful!";
                     return View("LoggedIn");
                 }
-                ViewBag.LoginUserErr = "Login failed. Check username or password";
-                return View("Login");
+                ViewBag.LoginUserErr = "Login failed. Check username or password"; 
+                return View("Login"); */
             }
+        }
+
+        public ActionResult Logout()
+        {
+            Session.Abandon();
+            return RedirectToAction("Index", "Home");
         }
     }
 }
