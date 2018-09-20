@@ -24,6 +24,7 @@ namespace gruppeoppgave_acm.Controllers
 
         /**
          *  Setup for multiple movie purchased at once
+         *  Dirty code - NEED REWRITE
          */
         public ActionResult BuyMovie(int movieID)
         {
@@ -34,21 +35,40 @@ namespace gruppeoppgave_acm.Controllers
             if (movie == null) return null;
             if (customer == null) return null; // Right way to check user loggedin?
 
+
+
+
+
+
+
+
+
+
             Order order = new Order
             {
-                Customer = (Customer)Session["user"],
                 Date = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss"),
+                Customer = customer
             };
-
+            
             OrderLine orderLine = new OrderLine
             {
                 Movie = movie,
                 Order = order
             };
+            if (order.OrderLines == null) order.OrderLines = new List<OrderLine>();
+            order.OrderLines.Add(orderLine);
 
             db.OrderLines.Add(orderLine);
 
-            return null; // SUCCESS
+            customer.Order.Add(order);
+
+
+            db.Customer.Attach(customer);
+            var entry = db.Entry(customer);
+            entry.Property(e => e.Order).IsModified = true;
+            db.SaveChanges();
+
+            return Content("sucess"); // SUCCESS
         }
 
         public ActionResult FilterMovie(string category)
