@@ -16,6 +16,11 @@ namespace gruppeoppgave_acm.Controllers
             return View(loginModel);
         }
 
+
+
+        /**
+         *  Need rewrite 
+         */
         [HttpPost]
         public ActionResult Login(Customer loginModel)
         {
@@ -29,6 +34,9 @@ namespace gruppeoppgave_acm.Controllers
                     return View("Login");
                 } else
                 {
+                    Session["user"] = userData;
+
+
                     Session["id"] = userData.ID;
                     Session["userName"] = userData.Username;
                 }

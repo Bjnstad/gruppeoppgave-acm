@@ -22,4 +22,21 @@ $(".cat-checkbox").change(function () {
             }
         });
     }
+});
+
+
+
+$(".movie-thumbnail").click(function () {
+    $.ajax({
+        type: "GET",
+        url: "/Home/BuyMovie",
+        data: "movieID=" + this.id
+    }).done(function (response) {
+            console.log("Resp: " + response);
+        
+    });
 })
+
+
+
+

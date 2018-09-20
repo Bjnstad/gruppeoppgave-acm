@@ -40,5 +40,7 @@ namespace gruppeoppgave_acm.Controllers
             ViewBag.RegisterSuccess = "User successfully added.";
             return View("../Login/Login");
         }
+
+
     }
 }
