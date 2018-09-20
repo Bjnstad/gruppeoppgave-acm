@@ -41,6 +41,13 @@ namespace gruppeoppgave_acm.Controllers
             return PartialView("../Movie/MoviePartial", movies);
         }
 
+        //Modal view
+        public ActionResult DisplayMovieInfo(int? id)
+        {
+            Movie movie = db.Movie.Find(id);
+            return PartialView("../Movie/MovieModal", movie);
+        }
+
         public ActionResult Index()
         {
             List<Category> categories = db.Categories.ToList();
@@ -52,5 +59,7 @@ namespace gruppeoppgave_acm.Controllers
             };
             return View(mv);
         }
+
+        
     }
 }

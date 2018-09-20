@@ -1,22 +1,24 @@
 ﻿@model System.Collections.Generic.List<gruppeoppgave_acm.Models.Movie>
 
+
 <div class="row" id="movies">
     @foreach (var movie in Model)
     {
         <div class="col col-md-4 col-xs-6">
-            <div class="movie-thumbnail" style="background-image: url('@movie.Thumbnail')">
-                <h3>
-                    @movie.Title
-                </h3>
-                <br />
-                <p>
-                    @movie.Price
-                </p>
-                <br />
-                <p>
-                    @movie.Description
-                </p>
-            </div>
+            <a id="movies" href="@Url.Action("DisplayMovieInfo","Home", new {movieId = movie.ID })" >
+                <div class="movie-thumbnail" style="background-image: url('@movie.Thumbnail')">
+                    <h3 style="text-align: center" ;>
+                        @movie.Title
+                    </h3>
+                    <br />
+                    <!--<p>kr movie.Price </p>-->
+                    <br />
+                    <!-- <p> movie.Description</p> -->
+                </div>
+            </a>
         </div>
+        <br />
     }
 </div>
+
+  
