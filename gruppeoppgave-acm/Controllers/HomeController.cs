@@ -22,6 +22,35 @@ namespace gruppeoppgave_acm.Controllers
             base.Dispose(disposing);
         }
 
+        /**
+         *  Setup for multiple movie purchased at once
+         */
+        public ActionResult BuyMovie(int movieID)
+        {
+            Movie movie = db.Movie.Where(m => m.ID == movieID).First();
+            Customer customer = (Customer)Session["user"];
+
+            // Create error messages
+            if (movie == null) return null;
+            if (customer == null) return null; // Right way to check user loggedin?
+
+            Order order = new Order
+            {
+                Customer = (Customer)Session["user"],
+                Date = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss"),
+            };
+
+            OrderLine orderLine = new OrderLine
+            {
+                Movie = movie,
+                Order = order
+            };
+
+            db.OrderLines.Add(orderLine);
+
+            return null; // SUCCESS
+        }
+
         public ActionResult FilterMovie(string category)
         {
             List<Category> categories = db.Categories.ToList();
