@@ -50,7 +50,8 @@ namespace gruppeoppgave_acm.Controllers
         public ActionResult Logout()
         {
             Session.Abandon();
-            return RedirectToAction("Index", "Home");
+            //return View("../Home/Index");
+            return RedirectToAction("Index", "Home", new { area ="home" });
         }
     }
 }
