@@ -1,0 +1,35 @@
+﻿@model gruppeoppgave_acm.Models.Movie
+
+
+@{
+    ViewBag.Title = "MovieDetails";
+}
+
+
+<div class="container">
+
+    <label class="text-success">@ViewBag.OrderSuccessfullyAdded</label>
+
+    <div class="row">
+        <div class="col">
+            <div class="detail-img" style="background-image: url('@Html.DisplayFor(model => model.Thumbnail)')"></div>
+        </div>
+            <div class="col">
+                <h2>
+                    @Html.DisplayFor(model => model.Title)
+                </h2>
+
+                <p>@Html.DisplayFor(model => model.Description)</p>
+                    
+                <a href="@Url.Action("BuyMovie", "Home", new {movieID = Model.ID })" class="btn btn-primary">Buy Movie</a>
+            </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+

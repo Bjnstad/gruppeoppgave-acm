@@ -1,10 +1,16 @@
 ﻿@model gruppeoppgave_acm.Models.MoviesView
+
+
+
 @{
     ViewBag.Title = "Index";
 }
 <div>
 
-    @Html.Partial("../Movie/Categories", Model.Categories)
+    @Html.Partial("../Movie/Categories", Model.Categories) 
+
+    <label class="text-success">@ViewBag.OrderSuccessfullyAdded</label>
+
 
     <div class="row">
         <div class="col col-md-3">
@@ -17,7 +23,7 @@
                     @foreach (var category in Model.Categories)
                     {
                         <li>
-                            <input type="checkbox" class="cat-checkbox" value="@category.Name"/>
+                            <input type="checkbox" class="cat-checkbox" value="@category.Name" />
                             <p>
                                 @category.Name
                             </p>

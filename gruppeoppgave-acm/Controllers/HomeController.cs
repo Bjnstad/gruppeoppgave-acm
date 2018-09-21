@@ -26,14 +26,34 @@ namespace gruppeoppgave_acm.Controllers
          *  Setup for multiple movie purchased at once
          *  Dirty code - NEED REWRITE
          */
+
+
+        public ActionResult MovieDetails(int movieID)
+        {
+            Movie movie = db.Movie.Find(movieID);
+            Customer customer = (Customer)Session["user"];
+
+            if (movie == null) return View("Index");
+
+            return View("../Movie/MovieDetails", movie);
+        }
+        
         public ActionResult BuyMovie(int movieID)
         {
-            Movie movie = db.Movie.Where(m => m.ID == movieID).First();
+            //Movie movie = db.Movie.Where(m => m.ID == movieID).First();
+            Movie movie = db.Movie.Find(movieID);
             Customer customer = (Customer)Session["user"];
 
             // Create error messages
-            if (movie == null) return null;
-            if (customer == null) return null; // Right way to check user loggedin?
+            if (movie == null) {
+
+                return View("Index");
+            }
+            if (customer == null)
+            {
+                ViewBag.OrderUserNotLoggedIn = "Need to be logged in to buy movies :) ";
+                return View("../Login/Login");
+            } // Right way to check user loggedin? Works fine :)
 
 
 
@@ -65,10 +85,13 @@ namespace gruppeoppgave_acm.Controllers
 
             db.Customer.Attach(customer);
             var entry = db.Entry(customer);
-            entry.Property(e => e.Order).IsModified = true;
+           // entry.Property(e => e.Order).IsModified = true;
             db.SaveChanges();
+            ViewBag.OrderSuccessfullyAdded = "Order Successfull! ";
+            return View("../Profile/Index");
+            
 
-            return Content("sucess"); // SUCCESS
+            //return Content("sucess"); // SUCCESS
         }
 
         public ActionResult FilterMovie(string category)
@@ -88,13 +111,6 @@ namespace gruppeoppgave_acm.Controllers
                 }
             }
             return PartialView("../Movie/MoviePartial", movies);
-        }
-
-        //Modal view
-        public ActionResult DisplayMovieInfo(int? id)
-        {
-            Movie movie = db.Movie.Find(id);
-            return PartialView("../Movie/MovieModal", movie);
         }
 
         public ActionResult Index()

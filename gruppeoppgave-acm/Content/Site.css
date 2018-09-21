@@ -28,7 +28,14 @@ textarea {
     height: 350px;
     background-repeat: no-repeat;
     background-size: cover;
+}
 
+.detail-img {
+    height: 500px;
+    width: 329px;
+    position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .category-navigation {
