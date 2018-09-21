@@ -4,20 +4,21 @@
     @foreach (var movie in Model)
     {
         <div class="col col-md-4 col-xs-6">
-            <a href="@Url.Action("MovieDetails", "Home", new { movieID=movie.ID })"
-            <div id="@movie.ID" class="movie-thumbnail" style="background-image: url('@movie.Thumbnail')">
-                <h3>
-                    @movie.Title
-                </h3>
-                <br />
-                <p>
-                    @movie.Price
-                </p>
-                <br />
-                <p>
-                    @movie.Description
-                </p>
-            </div>
+            <a href="@Url.Action("MovieDetails", "Home", new { movieID=movie.ID })">
+                <div id="@movie.ID" class="movie-thumbnail" style="background-image: url('@movie.Thumbnail')">
+                    <h3>
+                        @movie.Title
+                    </h3>
+                    <br />
+                    <p>
+                        @movie.Price
+                    </p>
+                    <br />
+                    <p>
+                        @movie.Description
+                    </p>
+                </div>
+            </a>
         </div>
     }
 </div>
