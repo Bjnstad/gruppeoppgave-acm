@@ -40,3 +40,5 @@ $(".movie-thumbnail").click(function (element) {
     var parent = element.target.offsetParent;
     console.log(movies.index(parent))
 })
+
+

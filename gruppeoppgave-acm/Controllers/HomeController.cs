@@ -31,11 +31,10 @@ namespace gruppeoppgave_acm.Controllers
         public ActionResult MovieDetails(int movieID)
         {
             Movie movie = db.Movie.Find(movieID);
-            Customer customer = (Customer)Session["user"];
 
             if (movie == null) return View("Index");
 
-            return View("../Movie/MovieDetails", movie);
+            return PartialView("../Movie/MovieDetails", movie);
         }
         
         public ActionResult BuyMovie(int movieID)
@@ -85,13 +84,14 @@ namespace gruppeoppgave_acm.Controllers
 
             db.Customer.Attach(customer);
             var entry = db.Entry(customer);
-           // entry.Property(e => e.Order).IsModified = true;
+            entry.Property(e => e.Order).IsModified = true;
             db.SaveChanges();
             ViewBag.OrderSuccessfullyAdded = "Order Successfull! ";
-            return View("../Profile/Index");
+            //return Content("sucess"); // SUCCESS
+
+            return View("../Profile/");
             
 
-            //return Content("sucess"); // SUCCESS
         }
 
         public ActionResult GetMovie(int id)
