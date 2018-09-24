@@ -36,7 +36,26 @@ $(".movie-thumbnail2").click(function () {
  *  Extend movie view
  */
 $(".movie-thumbnail").click(function (element) {
-    var movies = $("#movies").children();
-    var parent = element.target.offsetParent;
-    console.log(movies.index(parent))
+    $.ajax({
+        type: "GET",
+        url: "/Home/GetMovie",
+        data: "movieID=" + this.id
+    }).done(function (response) {
+        // TODO: Check failed respons
+
+
+        var movies = $("#movies").children();
+        var parent = element.target.offsetParent;
+        var index = movies.index(parent);
+
+        console.log(movies[index]);
+        var e = document.getElementById("movies");
+        
+
+        
+        var div = document.createElement('div');
+        $(div).html(response);
+
+        $("#movies").append(response.trim());
+    });
 })

@@ -94,9 +94,9 @@ namespace gruppeoppgave_acm.Controllers
             //return Content("sucess"); // SUCCESS
         }
 
-        public ActionResult GetMovie(int id)
+        public ActionResult GetMovie(int movieID)
         {
-            Movie movie = db.Movie.Find(id);
+            Movie movie = db.Movie.Find(movieID);
             if (movie == null) return Content("Movie not found");
             return PartialView("../Movie/MovieExtendPartial", movie);
         }
