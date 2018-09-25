@@ -9,7 +9,7 @@ namespace oslomet_film.DAL
         public DB() : base("name=ACM")
         {
             Database.CreateIfNotExists();
-            //Database.SetInitializer(new DBInit());
+            Database.SetInitializer(new DBInit());
         }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
