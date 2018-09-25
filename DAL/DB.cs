@@ -2,7 +2,7 @@
 using System.Data.Entity.ModelConfiguration.Conventions;
 using oslomet_film.Models;
 
-namespace DAL
+namespace oslomet_film.DAL
 {
     public class DB : DbContext
     {
