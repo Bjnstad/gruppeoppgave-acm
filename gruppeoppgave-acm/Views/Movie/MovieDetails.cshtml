@@ -6,25 +6,42 @@
 }
 
 
-<div class="container">
-
-    <label class="text-success">@ViewBag.OrderSuccessfullyAdded</label>
-
-    <div class="row">
-        <div class="col">
-            <div class="detail-img" style="background-image: url('@Html.DisplayFor(model => model.Thumbnail)')"></div>
-        </div>
-            <div class="col">
-                <h2>
-                    @Html.DisplayFor(model => model.Title)
-                </h2>
-
-                <p>@Html.DisplayFor(model => model.Description)</p>
-                    
-                <a href="@Url.Action("BuyMovie", "Home", new {movieID = Model.ID })" class="btn btn-primary">Buy Movie</a>
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
+            <div class="modal-body">
+                <label class="text-success">@ViewBag.OrderSuccessfullyAdded</label>
+
+                <div class="row">
+                    <div class="col">
+                        <div class="detail-img" style="background-image: url('@Html.DisplayFor(model => model.Thumbnail)')"></div>
+                    </div>
+                    <div class="col">
+                        <h2>
+                            @Html.DisplayFor(model => model.Title)
+                        </h2>
+
+                        <p>@Html.DisplayFor(model => model.Description)</p>
+
+                        <a href="@Url.Action("BuyMovie", "Home", new {movieID = Model.ID })" class="btn btn-primary">Buy Movie</a>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
     </div>
 </div>
+
+
 
 
 

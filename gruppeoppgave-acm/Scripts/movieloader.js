@@ -36,7 +36,7 @@ $(".movie-thumbnail2").click(function () {
  *  Extend movie view
  */
 $(".movie-thumbnail").click(function (element) {
-    $.ajax({
+aa    $.ajax({
         type: "GET",
         url: "/Home/GetMovie",
         data: "movieID=" + this.id

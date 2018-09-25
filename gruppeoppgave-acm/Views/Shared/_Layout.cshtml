@@ -24,15 +24,23 @@
                     <a href="#">Link 1</a> |
                     <a href="#">Link 2</a> |
                     <a href="#">Link 3</a> |
-                    <a> @if (Session["id"] == null)
-                    {
-                        <a>@Html.ActionLink("Login", "../Login/Login") </a>
-                    }
-                    else { <a href="/Login/Logout">Log out</a> }
-
-
-
-                        </a>
+                    <a>
+                        @if (Session["id"] == null)
+                        {
+                            <a>@Html.ActionLink("Login", "../Login/Login") </a>
+                        }
+                        else
+                        { <a href="/Login/Logout">Log out</a>}
+                    </a> |
+                    <a class="profileform">
+                        @if (Session["id"] != null)
+                        {
+                          <a id="profileBtn" href="/Profile"> Edit @Session["userName"].ToString() ?</a>
+                        } else
+                        {
+                            <a id="hideprofilebutton"></a>
+                        }
+                    </a>
                 </nav>
             </div>
         </div>

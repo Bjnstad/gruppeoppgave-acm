@@ -54,3 +54,7 @@ h4 {
    color: #fff;
 }
 
+#hideprofilebutton {
+    display: none;
+}
+
