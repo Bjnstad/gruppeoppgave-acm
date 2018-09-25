@@ -2,14 +2,14 @@
 using System.Data.Entity.ModelConfiguration.Conventions;
 using oslomet_film.Models;
 
-namespace DAL
+namespace oslomet_film.DAL
 {
     public class DB : DbContext
     {
         public DB() : base("name=ACM")
         {
             Database.CreateIfNotExists();
-            //Database.SetInitializer(new DBInit());
+            Database.SetInitializer(new DBInit());
         }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

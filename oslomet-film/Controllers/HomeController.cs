@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using oslomet_film.BLL;
 using System.Web.Mvc;
 
 namespace oslomet_film.Controllers
@@ -11,7 +8,9 @@ namespace oslomet_film.Controllers
         // GET: Home
         public ActionResult Index()
         {
-            return View();
+            var movieBLL = new MovieBLL();
+            var movies = movieBLL.GetAll();
+            return View(movies);
         }
     }
 }
