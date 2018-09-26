@@ -8,6 +8,16 @@ namespace oslomet_film.DAL
     {
         protected override void Seed(DB context)
         {
+            Customer newCustomer = new Customer
+            {
+                Username = "axel",
+                Name = "Axel",
+                Surname = "Bjørnstad",
+                Phone = "12345678",
+                Email = "axebjo@gmail.com",
+                Password = "hei123"
+            };
+
             Movie newMovie = new Movie
         {
             Title = "Spiderman",
@@ -44,6 +54,9 @@ namespace oslomet_film.DAL
             context.Movie.Add(newMovie2);
             context.Movie.Add(newMovie3);
             context.Movie.Add(newMovie4);
+
+            context.Customer.Add(newCustomer);
+
             context.SaveChanges();
             base.Seed(context);
         }

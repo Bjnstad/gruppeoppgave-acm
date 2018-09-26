@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace oslomet_film.Models
 {
-    class Customer
+    public class Customer
     {
         public int ID { get; set; }
 
@@ -15,7 +12,7 @@ namespace oslomet_film.Models
         public string Username { get; set; }
 
         [Required(ErrorMessage = "Required")]
-        public string Forname { get; set; }
+        public string Name { get; set; }
 
         [Required(ErrorMessage = "Required")]
         public string Surname { get; set; }
@@ -33,7 +30,6 @@ namespace oslomet_film.Models
         [Required(ErrorMessage = "Required")]
         public string Password { get; set; }
 
-        public virtual List<Order> Order { get; set; }
+        //public virtual List<Order> Order { get; set; }
     }
-}
 }
