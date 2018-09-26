@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 
 
-namespace oslomet_film.Models
+namespace oslomet_film.Model
 {
     public class Customer
     {

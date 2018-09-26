@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace oslomet_film.Models
+namespace oslomet_film.Model
 {
     public class Movie
     {
@@ -10,6 +10,6 @@ namespace oslomet_film.Models
         public string Description { get; set; }
         public string Thumbnail { get; set; }
         //public virtual List<OrderLine> OrderLines { get; set; }
-        //public virtual List<Category_Relation> Category_Relation { get; set; }
+        public virtual List<Category_Relation> Category_Relation { get; set; }
     }
 }

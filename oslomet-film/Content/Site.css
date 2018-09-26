@@ -16,3 +16,8 @@ textarea {
     max-width: 280px;
 }
 
+
+.movie-thumbnail {
+    height: 288px;
+}
+

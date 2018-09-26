@@ -42,11 +42,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Category.cs" />
-    <Compile Include="Category_Relation.cs" />
+    <Compile Include="Movie\Category.cs" />
     <Compile Include="Customer.cs" />
     <Compile Include="DBCustomer.cs" />
-    <Compile Include="Movie.cs" />
+    <Compile Include="Movie\Category_Relation.cs" />
+    <Compile Include="Movie\Movie.cs" />
+    <Compile Include="Movie\MovieMerge.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
