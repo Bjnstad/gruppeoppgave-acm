@@ -1,0 +1,10 @@
+﻿@model List<oslomet_film.Model.CartItem>
+
+@foreach(var item in Model)
+{
+<div>
+    <p>@item.Movie.Title</p>
+    <p>@item.Price</p>
+</div>
+}
+

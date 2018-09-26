@@ -13,6 +13,12 @@ namespace oslomet_film.DAL
             return movies;
         }
 
+        public Movie GetMovie(int movieID)
+        {
+            var db = new DB();
+            return db.Movie.Find(movieID);
+        } 
+
         public List<Category> GetCategories()
         {
             var db = new DB();

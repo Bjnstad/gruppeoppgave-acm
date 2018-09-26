@@ -116,6 +116,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MovieController.cs" />
@@ -141,6 +142,7 @@
     <Content Include="Views\Customer\DeleteCustomer.cshtml" />
     <Content Include="Views\Customer\FetchCustomer.cshtml" />
     <Content Include="Views\Movie\MovieList.cshtml" />
+    <Content Include="Views\Cart\CartPartial.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
