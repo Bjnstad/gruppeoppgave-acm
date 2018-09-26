@@ -1,4 +1,4 @@
-﻿namespace oslomet_film.Models
+﻿namespace oslomet_film.Model
 {
     public class Category_Relation
     {

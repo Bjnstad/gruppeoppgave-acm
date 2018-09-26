@@ -1,6 +1,6 @@
 ﻿using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
-using oslomet_film.Models;
+using oslomet_film.Model;
 
 namespace oslomet_film.DAL
 {

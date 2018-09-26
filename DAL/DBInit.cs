@@ -1,5 +1,5 @@
 ﻿using oslomet_film.DAL;
-using oslomet_film.Models;
+using oslomet_film.Model;
 using System.Data.Entity;
 
 namespace oslomet_film.DAL
