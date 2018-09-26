@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using oslomet_film.Model;
+using System.Diagnostics;
 
 namespace oslomet_film.DAL
 {
@@ -36,7 +37,8 @@ namespace oslomet_film.DAL
             var db = new DB();
 
             var userData = db.Customer.Where(user => user.Username == loginModel.Username && user.Password == loginModel.Password).FirstOrDefault();
-            Console.WriteLine(userData.ToString());
+            Debug.WriteLine(userData.ToString());
+            Debug.WriteLine("Dette er en test");
             //Customer userData = db.Customer.FirstOrDefault(user => user.Username == loginModel.Username);
             if(userData == null)
             {
