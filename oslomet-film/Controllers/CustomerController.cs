@@ -50,8 +50,7 @@ namespace oslomet_film.Controllers
         [HttpPost]
         public ActionResult Login(Customer loginModel)
         {
-            if (ModelState.IsValid)
-            {
+            
                 var customerBLL = new CustomerBLL();
                 bool loginSuccess = customerBLL.login(loginModel);
                 if (loginSuccess)
@@ -59,7 +58,6 @@ namespace oslomet_film.Controllers
                     ViewBag.LoginSuccess = "Login successfull!";
                     return RedirectToAction("../Home/Index");
                 }
-            }
             ViewBag.LoginFailed = "Login failed";
             return View(loginModel);
         }
@@ -75,15 +73,12 @@ namespace oslomet_film.Controllers
         [HttpPost]
         public ActionResult EditUser(int id, Customer editModel)
         {
-            if (ModelState.IsValid)
+            var customerBLL = new CustomerBLL();
+            bool editSuccess = customerBLL.editUser(id, editModel);
+            if (editSuccess)
             {
-                var customerBLL = new CustomerBLL();
-                bool editSuccess = customerBLL.editUser(id, editModel);
-                if (editSuccess)
-                {
-                    ViewBag.EditSuccessfull = "Edit Successfull";
-                    return RedirectToAction("DisplayCustomers");
-                }
+                ViewBag.EditSuccessfull = "Edit Successfull";
+                return RedirectToAction("DisplayCustomers");
             }
             ViewBag.EditFailed = "Edit failed";
             return View(editModel);

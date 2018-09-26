@@ -43,8 +43,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Movie\Category.cs" />
-    <Compile Include="Customer.cs" />
-    <Compile Include="DBCustomer.cs" />
+    <Compile Include="Customer\Customer.cs" />
+    <Compile Include="Customer\DBCustomer.cs" />
     <Compile Include="Movie\Category_Relation.cs" />
     <Compile Include="Movie\Movie.cs" />
     <Compile Include="Movie\MovieMerge.cs" />
