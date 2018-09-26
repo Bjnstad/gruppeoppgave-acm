@@ -8,7 +8,6 @@ namespace oslomet_film.BLL
     {
         public List<Movie> GetAll()
         {
-
             var movieDAL = new MovieDAL();
             List<Movie> movies = movieDAL.GetAll();
             return movies;
