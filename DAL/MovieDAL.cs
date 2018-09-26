@@ -12,5 +12,12 @@ namespace oslomet_film.DAL
             List<Movie> movies = db.Movie.ToList();
             return movies;
         }
+
+        public List<Category> GetCategories()
+        {
+            var db = new DB();
+            List<Category> categories = db.Category.ToList();
+            return categories;
+        }
     }
 }
