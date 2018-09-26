@@ -14,5 +14,11 @@ namespace oslomet_film.Controllers
             return PartialView("MovieList", movies);
         }
 
+        public Movie GetMovie(int movieID)
+        {
+            var movieBLL = new MovieBLL();
+            return movieBLL.GetMovie(movieID);
+        }
+
     }
 }

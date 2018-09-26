@@ -33,10 +33,10 @@ $(".movie-thumbnail").click(function () {
 /**
  *  Extend movie view
  */
-$(".movie-thumbnail").click(function (element) {
+$(".movie-thumbnail2").click(function (element) {
     $.ajax({
         type: "GET",
-        url: "/Home/GetMovie",
+        url: "/Movie/GetMovie",
         data: "movieID=" + this.id
     }).done(function (response) {
         // TODO: Check failed respons
