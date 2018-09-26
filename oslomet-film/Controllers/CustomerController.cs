@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using oslomet_film.BLL;
-using oslomet_film.Models;
+using oslomet_film.Model;
 
 namespace oslomet_film.Controllers
 {
