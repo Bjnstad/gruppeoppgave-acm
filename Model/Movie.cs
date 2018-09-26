@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace oslomet_film.Model
+namespace oslomet_film.Models
 {
     public class Movie
     {

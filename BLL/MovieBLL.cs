@@ -12,7 +12,7 @@ namespace oslomet_film.BLL
             List<Movie> movies = movieDAL.GetAll();
             return movies;
         }
-        s
+        
         public List<Category> GetCategories()
         {
             var movieDAL = new MovieDAL();

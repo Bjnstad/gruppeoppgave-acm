@@ -42,6 +42,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Category.cs" />
+    <Compile Include="Category_Relation.cs" />
     <Compile Include="Customer.cs" />
     <Compile Include="DBCustomer.cs" />
     <Compile Include="Movie.cs" />
