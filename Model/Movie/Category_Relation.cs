@@ -1,5 +1,5 @@
 ﻿namespace oslomet_film.Model
-{
+    {
     public class Category_Relation
     {
         public int ID { get; set; }

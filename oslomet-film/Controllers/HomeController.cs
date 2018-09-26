@@ -9,8 +9,8 @@ namespace oslomet_film.Controllers
         public ActionResult Index()
         {
             var movieBLL = new MovieBLL();
-            var movies = movieBLL.GetAll();
-            return View(movies);
+            var moviemerge = movieBLL.GetAll();
+            return View(moviemerge);
         }
     }
 }

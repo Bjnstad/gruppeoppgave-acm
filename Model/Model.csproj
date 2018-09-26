@@ -43,9 +43,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Movie\Category.cs" />
-    <Compile Include="Movie\Category_Relation.cs" />
     <Compile Include="Customer.cs" />
     <Compile Include="DBCustomer.cs" />
+    <Compile Include="Movie\Category_Relation.cs" />
     <Compile Include="Movie\Movie.cs" />
     <Compile Include="Movie\MovieMerge.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

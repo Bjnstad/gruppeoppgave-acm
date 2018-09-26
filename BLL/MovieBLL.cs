@@ -18,8 +18,8 @@ namespace oslomet_film.BLL
         {
             var movieDAL = new MovieDAL();
             MovieMerge movieMerge = new MovieMerge();
-            movieMerge.movies = movieDAL.GetMovies();
-            movieMerge.categories = movieDAL.GetCategories();
+            movieMerge.Movie = movieDAL.GetMovies();
+            movieMerge.Category = movieDAL.GetCategories();
             return movieMerge;
         }
         

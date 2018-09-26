@@ -1,20 +1,18 @@
 ﻿/**
  *  Filter on  categories 
  */
-$(".cat-checkbox").change(function () {
-    if (this.checked) {
-        $.ajax({
-            type: "GET",
-            url: "/Home/FilterMovie",
-            data: "category=" + this.value
-        }).done(function (response) {
-            if (response === "null") {
-                console.log("null: " + response);
-            } else {
-                $('#movies').html(response);
-            }
-        });
-    }
+$(".category").click(function () {
+    $.ajax({
+        type: "GET",
+        url: "/Movie/FilterMovies",
+        data: "categoryID=" + this.id
+    }).done(function (response) {
+        if (response === "null") {
+            console.log("null: " + response);
+        } else {
+            $('#movies').html(response);
+        }
+    });
 });
 
 

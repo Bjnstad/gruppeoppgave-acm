@@ -50,10 +50,47 @@ namespace oslomet_film.DAL
                 Thumbnail = "https://orig00.deviantart.net/ac74/f/2010/253/d/e/the_incredibles_parr_family_by_kalulu77-d2yfpi2.jpg"
             };
 
+            Category superhelt = new Category
+            {
+                Name = "Superhelter",
+            };
+
+            Category action = new Category
+            {
+                Name = "Action"
+            };
+
+
+            Category_Relation relation = new Category_Relation
+            {
+                Category = superhelt,
+                Movie = newMovie
+            };
+
+            Category_Relation relation2 = new Category_Relation
+            {
+                Category = superhelt,
+                Movie = newMovie2
+            };
+
+            Category_Relation relation3 = new Category_Relation
+            {
+                Category = action,
+                Movie = newMovie3
+            };
+
+
             context.Movie.Add(newMovie);
             context.Movie.Add(newMovie2);
             context.Movie.Add(newMovie3);
             context.Movie.Add(newMovie4);
+
+            context.Category.Add(superhelt);
+            context.Category.Add(action);
+
+            context.Category_Relations.Add(relation);
+            context.Category_Relations.Add(relation2);
+            context.Category_Relations.Add(relation3);
 
             context.Customer.Add(newCustomer);
 

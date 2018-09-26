@@ -1,4 +1,15 @@
-﻿@model List<oslomet_film.Model.Movie>
-@Html.Partial("../Movie/MovieList", Model)
+﻿@model oslomet_film.Model.MovieMerge
+
+<div style="display: flex">
+    @foreach (var category in Model.Category)
+    {
+        <a class="category" href="#" id="@category.ID">
+            @category.Name
+        </a>
+    }
+</div>
+
+
+@Html.Partial("../Movie/MovieList", Model.Movie)
 
 

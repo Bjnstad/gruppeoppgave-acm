@@ -5,7 +5,7 @@ namespace oslomet_film.Model
 {
     public class MovieMerge
     {
-        public List<Movie> movies { get; set; }
-        public List<Category> categories { get; set; }
+        public List<Movie> Movie { get; set; }
+        public List<Category> Category { get; set; }
     }
 }

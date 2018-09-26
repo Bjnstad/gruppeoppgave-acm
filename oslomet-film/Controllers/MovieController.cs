@@ -7,8 +7,6 @@ namespace oslomet_film.Controllers
 {
     public class MovieController : Controller
     {
-
-
         public ActionResult FilterMovies(int categoryID)
         {
             var movieBLL = new MovieBLL();
