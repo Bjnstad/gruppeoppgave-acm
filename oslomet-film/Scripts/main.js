@@ -19,13 +19,13 @@ $(".category").click(function () {
 /**
  * Buy movie
  */
-$(".movie-thumbnail2").click(function () {
+$(".movie-thumbnail").click(function () {
     $.ajax({
         type: "GET",
-        url: "/Home/BuyMovie",
+        url: "/Cart/AddItem",
         data: "movieID=" + this.id
     }).done(function (response) {
-        console.log("Resp: " + response);
+        $("#cart").html(response)
     });
 })
 
