@@ -56,6 +56,11 @@ namespace oslomet_film.Controllers
                 if (loginSuccess)
                 {
                     ViewBag.LoginSuccess = "Login successfull!";
+
+                    Session["customer"] = loginModel;
+                    Session["userName"] = loginModel.Username;
+                    var customer = (Customer)Session["customer"];
+
                     return RedirectToAction("../Home/Index");
                 }
             ViewBag.LoginFailed = "Login failed";
@@ -66,7 +71,6 @@ namespace oslomet_film.Controllers
         {
             var customerBLL = new CustomerBLL();
             Customer editModel = customerBLL.fetchCustomer(id);
-            //Customer editModel = new Customer();
             return View(editModel);
         }
 
@@ -108,6 +112,17 @@ namespace oslomet_film.Controllers
             var customerBLL = new CustomerBLL();
             Customer customerDetails = customerBLL.fetchCustomer(id);
             return View(customerDetails);
+        }
+
+        public ActionResult Profile()
+        {
+            return View();
+        }
+
+        public ActionResult Logout()
+        {
+            Session.Abandon();
+            return RedirectToAction("../Home/Index");
         }
 
     }

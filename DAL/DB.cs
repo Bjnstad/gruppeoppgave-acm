@@ -21,7 +21,6 @@ namespace oslomet_film.DAL
         public virtual DbSet<Category> Category { get; set; }
         public virtual DbSet<Category_Relation> Category_Relations { get; set; }
         public virtual DbSet<DBCustomer> Customers { get; set; }
-        //public virtual DbSet<Customer> Customer { get; set; }
 
     }
 }

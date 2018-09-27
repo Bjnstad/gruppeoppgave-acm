@@ -4,19 +4,24 @@ using System.Data.Entity;
 
 namespace oslomet_film.DAL
 {
+
     class DBInit : DropCreateDatabaseAlways<DB>
     {
+
         protected override void Seed(DB context)
         {
-            Customer newCustomer = new Customer
+            var salt = CustomerDAL.createSalt();
+
+            /*Customer newCustomer = new DBCustomer
             {
                 Username = "axel",
                 Name = "Axel",
                 Surname = "Bjørnstad",
                 Phone = "12345678",
                 Email = "axebjo@gmail.com",
-                Password = "hei123"
-            };
+                Password = CustomerDAL.createHash("axel", salt),
+                Salt = salt
+            }; */
 
             Movie newMovie = new Movie
             {
@@ -92,7 +97,7 @@ namespace oslomet_film.DAL
             context.Category_Relations.Add(relation2);
             context.Category_Relations.Add(relation3);
 
-            context.Customer.Add(newCustomer);
+            //context.Customers.Add(newCustomer);
 
             context.SaveChanges();
             base.Seed(context);

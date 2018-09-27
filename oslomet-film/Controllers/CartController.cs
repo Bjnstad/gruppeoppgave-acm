@@ -17,22 +17,25 @@ namespace oslomet_film.Controllers
 
         public ActionResult AddItem(int movieID)
         {
+            Cart cart = GetSessionCart();
             MovieBLL movieBLL = new MovieBLL();
             Movie movie = movieBLL.GetMovie(movieID);
-            CartItem item = new CartItem
-            {
-                Movie = movie,
-                Price = movie.Price
-            };
-            Cart cart = GetSessionCart();
-            cart.CartItem.Add(item);
+
+            if (Session["customer"] != null)
+            {                
+                CartItem item = new CartItem
+                {
+                    Movie = movie,
+                    Price = movie.Price
+                };
+                    cart.CartItem.Add(item);
+            }
             return PartialView("CartPartial", cart.CartItem.ToList());
         }
 
         // GET: Cart
         public ActionResult Index()
         {
-            
             return View();
         }
 

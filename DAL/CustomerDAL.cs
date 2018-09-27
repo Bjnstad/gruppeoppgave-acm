@@ -12,7 +12,6 @@ namespace oslomet_film.DAL
 {
     public class CustomerDAL
     {
-
         public List<Customer> getAll()
         {
             var db = new DB();
@@ -83,14 +82,14 @@ namespace oslomet_film.DAL
             }
         }
 
-        private static byte[] createHash(String inputPassword, byte[] inputSalt)
+        public static byte[] createHash(String inputPassword, byte[] inputSalt)
         {
             const int keyLength = 24;
             var pbkd2 = new Rfc2898DeriveBytes(inputPassword, inputSalt, 1000);
             return pbkd2.GetBytes(keyLength);
         } 
 
-        private static byte[] createSalt()
+        public static byte[] createSalt()
         {
             var csprng = new RNGCryptoServiceProvider();
             var salt = new byte[24];
@@ -136,15 +135,14 @@ namespace oslomet_film.DAL
 
                 //db.Entry(editModel).State = System.Data.Entity.EntityState.Modified;
 
-                if(test == true)
-                {
+                //if(test == true)
+               // {
                     db.SaveChanges();
                     return true;
-                }
-                else
-                {
-                    return false;
-                }
+               // }
+               // else
+               // {
+                //}
             } catch
             {
                 return false;
@@ -190,6 +188,5 @@ namespace oslomet_film.DAL
                 return customerDetails;
             }
         }
-
     } 
 }
