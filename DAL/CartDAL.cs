@@ -6,6 +6,6 @@ namespace oslomet_film.DAL
 {
     public class CartDAL
     {
-        
+      
     } 
 }

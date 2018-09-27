@@ -21,18 +21,25 @@ namespace oslomet_film.Controllers
             MovieBLL movieBLL = new MovieBLL();
             Movie movie = movieBLL.GetMovie(movieID);
 
-            if (Session["customer"] != null)
-            {                
-                CartItem item = new CartItem
-                {
-                    Movie = movie,
-                    Price = movie.Price
-                };
-                    cart.CartItem.Add(item);
-            }
+            CartItem item = new CartItem
+            {
+                Movie = movie,
+                Price = movie.Price
+            };
+                cart.CartItem.Add(item);
+           
             return PartialView("CartPartial", cart.CartItem.ToList());
         }
 
+        public ActionResult CreateOrder()
+        {
+            var orderBLL = new OrderBLL();
+            var customer = (Customer)Session["customer"]; 
+            var ok = orderBLL.CreateOrder(GetSessionCart(), customer);
+            return View();
+        }
+
+        
         // GET: Cart
         public ActionResult Index()
         {

@@ -53,6 +53,7 @@
     <Compile Include="DBInit.cs" />
     <Compile Include="DB.cs" />
     <Compile Include="MovieDAL.cs" />
+    <Compile Include="OrderDAL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
