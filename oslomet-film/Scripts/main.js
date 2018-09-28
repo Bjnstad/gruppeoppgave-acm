@@ -15,11 +15,30 @@ $(".category").click(function () {
     });
 });
 
+/**
+ * Buy movies
+ */
+$("buy-movies").click(function () {
+    $.ajax({
+        type: "GET",
+        url: "/Cart/CreateOrder"
+    }).done(function (response) {
+        console.log(response)
+    });
+});
+
 
 /**
- * Buy movie
+ *  Open cart 
  */
- $(".movie-thumbnail").click(function () {
+$("#cart").click(function () {
+    $(".cart-popout").addClass("show");
+});
+
+/**
+ * Add movie to cart
+ */
+$(".movie-thumbnail").click(function () {
     $.ajax({
         type: "GET",
         url: "/Cart/AddItem",
@@ -27,7 +46,7 @@ $(".category").click(function () {
     }).done(function (response) {
         $("#cart").html(response)
     });
-}) 
+});
 
 
 /**

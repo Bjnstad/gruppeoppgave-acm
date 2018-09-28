@@ -48,7 +48,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CartDAL.cs" />
     <Compile Include="CustomerDAL.cs" />
     <Compile Include="DBInit.cs" />
     <Compile Include="DB.cs" />

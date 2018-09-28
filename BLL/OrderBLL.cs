@@ -15,7 +15,6 @@ namespace oslomet_film.BLL
             var ordre = new OrderDAL();
             ordre.CreateOrder(cart, customer);
             return true;
-
         }
     }
 }

@@ -146,6 +146,7 @@
     <Content Include="Views\Cart\CartPartial.cshtml" />
     <Content Include="Views\Customer\Profile.cshtml" />
     <Content Include="Views\Cart\CreateOrder.cshtml" />
+    <Content Include="Views\Cart\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

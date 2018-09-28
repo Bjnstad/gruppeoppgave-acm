@@ -1,0 +1,29 @@
+﻿@model oslomet_film.Model.Cart
+
+
+<h1>
+    Kassen
+</h1>
+
+<div class="row">
+    <div class="col col-md-8">
+        @foreach (var item in Model.CartItem)
+        {
+            <div class="row">
+                <div class="col col-md-12">
+                    <p>@item.Movie.Title</p>
+                    <p>@item.Price</p>
+                </div>
+            </div>
+        }
+    </div>
+
+    <div class="col col-md-4">
+
+        Totalt: 
+
+        <a class="btn btn-success">
+            Kjøp
+        </a>
+    </div>
+</div>

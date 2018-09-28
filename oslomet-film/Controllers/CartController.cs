@@ -26,29 +26,32 @@ namespace oslomet_film.Controllers
                 Movie = movie,
                 Price = movie.Price
             };
-                cart.CartItem.Add(item);
+
+            cart.CartItem.Add(item);
            
             return PartialView("CartPartial", cart.CartItem.ToList());
         }
-
-        public ActionResult CreateOrder()
+        public ActionResult CreateOrder(int movieID)
         {
-            var orderBLL = new OrderBLL();
-            var customer = (Customer)Session["customer"]; 
-            var ok = orderBLL.CreateOrder(GetSessionCart(), customer);
-            return View();
+            if(Session["customer"] == null)
+            {
+                return Content("Ikke logget inn");
+            }
+
+            Cart cart = GetSessionCart();
+
+            OrderBLL orderBLL = new OrderBLL();
+            orderBLL.CreateOrder(cart, (Customer)Session["customer"]);
+            return PartialView("CartPartial", cart.CartItem.ToList());
         }
 
-        
         // GET: Cart
         public ActionResult Index()
         {
-            return View();
+            return View(GetSessionCart());
         }
 
-
-
-        private Cart GetSessionCart()
+        public Cart GetSessionCart()
         {
             Cart cart = (Cart)Session["cart"];
 

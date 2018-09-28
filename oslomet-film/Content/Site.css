@@ -21,3 +21,12 @@ textarea {
     height: 288px;
 }
 
+.show {
+    position: absolute !important;
+    top: 51px !important;
+    width: 274px !important;
+    background-color: #fff !important;
+    right: 75px !important;
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22) !important;
+    padding: 0 15px;
+}
