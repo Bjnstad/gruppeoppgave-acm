@@ -31,6 +31,8 @@ namespace oslomet_film.Controllers
            
             return PartialView("CartPartial", cart.CartItem.ToList());
         }
+
+      
         public ActionResult CreateOrder(int movieID)
         {
             if(Session["customer"] == null)

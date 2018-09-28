@@ -31,6 +31,7 @@ $("buy-movies").click(function () {
 /**
  *  Open cart 
  */
+
 $("#cart").click(function () {
     $(".cart-popout").addClass("show");
 });

@@ -7,6 +7,7 @@
     <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <script src="~/Scripts/modernizr-2.6.2.js"></script>
+
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -33,6 +34,10 @@
                         <li>@Html.ActionLink("Profile", "Profile", "Customer")</li>
                         <li>@Html.ActionLink("Log out", "Logout", "Customer")</li>
                     }
+                    @*@if (Session["customer"] != null)
+                        {
+                            <li>@Html.ActionLink("Handlekurv", "GetCart", "Cart", new { @class = "show" })</li>
+                        }*@
                     <li id="cart">
                     </li>
                 </ul>
@@ -40,7 +45,7 @@
         </div>
     </div>
 
-    <div class="container body-content"> 
+    <div class="container body-content">
         <div>
             <div id="cart">
 
@@ -53,8 +58,31 @@
         </footer>
     </div>
 
-    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
     <script src="~/Scripts/bootstrap.min.js"></script>
     <script src="~/Scripts/main.js"></script>
+
+    @{
+        if (Session["cart"] != null)
+        {
+            <script>
+
+                // Show cart permanent
+                $(function () {
+
+                    $.ajax({
+                        type: "GET",
+                        url: "/Cart/GetCart"
+                    }).done(function (response) {
+                        $("#cart").html(response)
+                    });
+                    $(".cart-popout").addClass("show");
+                });
+            </script>
+
+        }
+
+    }
+
 </body>
 </html>
