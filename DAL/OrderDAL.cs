@@ -1,5 +1,6 @@
 ﻿using oslomet_film.Model;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace oslomet_film.DAL
 {
@@ -29,6 +30,12 @@ namespace oslomet_film.DAL
 
             db.SaveChanges();
         }
-     
+
+        public bool OwnsMovie(Customer customer, Movie movie)
+        {
+            var db = new DB();
+            OrderLine orderlines = db.OrderLine.Where(line => line.Order.Customer.ID.Equals(customer.ID) && line.Movie.ID.Equals(movie.ID)).First();
+            return orderlines != null;
+        }
     }
 }

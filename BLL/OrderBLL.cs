@@ -16,5 +16,11 @@ namespace oslomet_film.BLL
             ordre.CreateOrder(cart, customer);
             return true;
         }
+
+        public bool OwnsMovie(Customer customer, Movie movie)
+        {
+            OrderDAL orderDAL = new OrderDAL();
+            return orderDAL.OwnsMovie(customer, movie);
+        }
     }
 }

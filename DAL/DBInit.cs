@@ -25,34 +25,34 @@ namespace oslomet_film.DAL
 
             Movie newMovie = new Movie
             {
-                Title = "Spiderman",
+                Title = "Utøya",
                 Price = 99,
                 Description = "En film om en edderkopp mann",
-                Thumbnail = "https://get.pxhere.com/photo/plastic-red-toy-iron-man-action-figure-marvel-superhero-spiderman-fictional-character-621150.jpg"
+                Thumbnail = "https://secure.sfanytime.se/movieimages/COVER/db3d3b52-e4ab-4c05-b037-a8f500eaa498_COVER_NO.jpg"
             };
 
             Movie newMovie2 = new Movie
             {
-                Title = "Batman",
+                Title = "Norske byggeklosser",
                 Price = 56,
                 Description = "En film om en flagermus mann",
-                Thumbnail = "https://upload.wikimedia.org/wikipedia/commons/8/89/Batman_%28retouched%29_%28cropped%29.jpg"
+                Thumbnail = "https://secure.sfanytime.se/movieimages/COVER/33343aab-4774-4b2f-b77e-a8c100f48d88_COVER_NO.jpg"
             };
 
             Movie newMovie3 = new Movie
             {
-                Title = "Jame Bond",
+                Title = "A quite place",
                 Price = 129,
                 Description = "En film fylt med action",
-                Thumbnail = "https://upload.wikimedia.org/wikipedia/commons/2/2e/James_Bond_at_Madame_Tussauds%2C_London.jpg"
+                Thumbnail = "https://secure.sfanytime.se/movieimages/COVER/8af70d64-10fb-4e49-a338-a8d5009dd7fd_COVER_NO.jpg"
             };
 
             Movie newMovie4 = new Movie
             {
-                Title = "De Utrolige",
+                Title = "Ready Player One",
                 Price = 39,
                 Description = "En veldig hyggelig barnefilm",
-                Thumbnail = "https://orig00.deviantart.net/ac74/f/2010/253/d/e/the_incredibles_parr_family_by_kalulu77-d2yfpi2.jpg"
+                Thumbnail = "https://secure.sfanytime.se/movieimages/COVER/39c9aef7-ac65-4a15-b304-a8da010616c5_COVER_NO.jpg"
             };
 
             Category superhelt = new Category
