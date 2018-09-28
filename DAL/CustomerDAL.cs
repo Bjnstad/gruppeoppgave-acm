@@ -11,19 +11,49 @@ namespace oslomet_film.DAL
     {
         public List<Customer> getAll()
         {
-            var db = new DB();
-            List<Customer> allCutsomers = db.Customers.Select(c => new Customer()
+            try
             {
-                ID = c.ID,
-                Username = c.Username,
-                Name = c.Name,
-                Surname = c.Surname,
-                Phone = c.Phone,
-                Email = c.Email,
-                Password = null
+                var db = new DB();
+                List<DBCustomer> heiKunder = db.Customers.ToList();
+                List<Customer> DomeneKunder = new List<Customer>();
+
+                foreach(var c in heiKunder)
+                {
+                    var domeneKunde = new Customer();
+                    domeneKunde.ID = c.ID;
+                    domeneKunde.Username = c.Username;
+                    domeneKunde.Name = c.Name;
+                    domeneKunde.Surname = c.Surname;
+                    domeneKunde.Phone = c.Phone;
+                    domeneKunde.Email = c.Email;
+
+                    DomeneKunder.Add(domeneKunde);
+
+                }
+                
+
+                return DomeneKunder;
+                /*
+                List<Customer> allCutsomers = db.Customers.Select(c => new Customer()
+                {
+                    ID = c.ID,
+                    Username = c.Username,
+                    Name = c.Name,
+                    Surname = c.Surname,
+                    Phone = c.Phone,
+                    Email = c.Email,
+                }
+                ).ToList();
+                return allCutsomers;*/
+
             }
-            ).ToList();
-            return allCutsomers;
+            catch(Exception ex)
+            {
+                //GJØR FEILHÅNDTERING HER
+                return null;
+
+            }
+            
             
         }
 

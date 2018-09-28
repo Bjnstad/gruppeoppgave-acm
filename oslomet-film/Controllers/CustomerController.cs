@@ -27,15 +27,12 @@ namespace oslomet_film.Controllers
         [HttpPost]
         public ActionResult Register(Customer customerModel)
         {
-            if (ModelState.IsValid)
+            var customerBLL = new CustomerBLL();
+            bool userAdded = customerBLL.addCustomer(customerModel);
+            if (userAdded)
             {
-                var customerBLL = new CustomerBLL();
-                bool userAdded = customerBLL.addCustomer(customerModel);
-                if (userAdded)
-                {
-                    ViewBag.RegistrationSuccess = "Registration successfull!";
-                    return RedirectToAction("DisplayCustomers");
-                }
+                ViewBag.RegistrationSuccess = "Registration successfull!";
+                return RedirectToAction("Index", "Home");
             }
             ViewBag.RegistrationFailed = "Registration Failed";
             return View(customerModel);
