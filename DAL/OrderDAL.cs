@@ -1,26 +1,33 @@
-﻿using System;
+﻿using oslomet_film.Model;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using oslomet_film.Model;
-using oslomet_film.DAL;
-
-
 
 namespace oslomet_film.DAL
 {
     public class OrderDAL
     {
-        /*public bool AddOrder(Customer customer, int cartID, Cart id)
+        public void CreateOrder(Cart cart, Customer customer)
         {
-        } */
+            var db = new DB();
 
-        public bool CreateOrder(Cart cart, Customer customer)
-        {
-            
-            return true;
+            List<OrderLine> orderLines = new List<Model.OrderLine>();
+            Order order = new Order
+            {
+                Customer = customer
+            };
 
+
+            db.Order.Add(order);
+            foreach (CartItem cartItem in cart.CartItem)
+            {
+                db.OrderLine.Add(new OrderLine
+                {
+                    Order = order,
+                    Movie = cartItem.Movie,
+                    Price = cartItem.Price
+                });
+            }
+
+            db.SaveChanges();
         }
      
     }
