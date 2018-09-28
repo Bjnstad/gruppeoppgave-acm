@@ -28,7 +28,7 @@ namespace oslomet_film.Controllers
             };
 
             cart.CartItem.Add(item);
-           
+            ViewBag.Total = GetTotal();
             return PartialView("CartPartial", cart.CartItem.ToList());
         }
         public ActionResult CreateOrder(int movieID)
@@ -65,6 +65,17 @@ namespace oslomet_film.Controllers
             };
             Session["cart"] = cart;
             return cart;
+        }
+
+
+        private int GetTotal()
+        {
+            int total = 0;
+            Cart cart = GetSessionCart();
+            foreach(CartItem item in cart.CartItem) {
+                total += item.Price;
+            }
+            return total;
         }
     }
 }
