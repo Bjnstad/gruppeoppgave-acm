@@ -7,7 +7,7 @@
     <span class="glyphicon glyphicon-shopping-cart"></span>
 </a>
 
-<div class="cart-popout" style="display: none;">
+<div class="cart-popout-open hide">
 
     <h3>
         Handlekurv
@@ -39,8 +39,8 @@
     <h4>
         <b>
             TOTALT: @ViewBag.Total ,-
-            <a href="/checkout" class="btn btn-success" id="buy-movies">
-                Gå til kassen
+            <a href="@Url.Action("CreateOrder", "Cart")" class="btn btn-success" id="#">
+               Create Order
             </a>
         </b>
     </h4>

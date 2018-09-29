@@ -1,4 +1,5 @@
 ﻿using oslomet_film.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -6,29 +7,65 @@ namespace oslomet_film.DAL
 {
     public class OrderDAL
     {
-        public void CreateOrder(Cart cart, Customer customer)
+        public bool CreateOrder(Cart cart, Customer customer)
         {
-            var db = new DB();
-
-            List<OrderLine> orderLines = new List<Model.OrderLine>();
-            Order order = new Order
+            try
             {
-                Customer = customer
-            };
-
-
-            db.Order.Add(order);
-            foreach (CartItem cartItem in cart.CartItem)
-            {
-                db.OrderLine.Add(new OrderLine
+                using (var db = new DB())
                 {
-                    Order = order,
-                    Movie = cartItem.Movie,
-                    Price = cartItem.Price
-                });
+
+
+
+                    List<OrderLine> orderLines = new List<OrderLine>();
+                    Order order = new Order();
+                    order.Customer = customer;
+
+
+                    foreach (CartItem cartItem in cart.CartItem)
+                    {
+                        var orderLine = new OrderLine();
+                        orderLine.Movie = cartItem.Movie;
+                        orderLine.Price = cartItem.Price;
+                        orderLines.Add(orderLine);
+                        db.OrderLine.Add(orderLine);
+                    }
+
+                    order.OrdeLine = orderLines;
+                    db.Order.Add(order);
+
+
+
+                    db.SaveChanges();
+                    return true;
+
+                }
             }
 
-            db.SaveChanges();
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
+        public List<OrderLine> GetOrderLines(Customer customer)
+        {
+            try
+            {
+                var db = new DB();
+                var orderLineCheck = db.OrderLine.Where(o => o.Order.Customer.ID == customer.ID);
+                if(orderLineCheck != null)
+                {
+                    List<OrderLine> ordre = db.OrderLine.ToList();
+                    return ordre;
+                } else
+                {
+                    return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
         }
 
         public bool OwnsMovie(Customer customer, Movie movie)

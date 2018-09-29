@@ -32,10 +32,10 @@ namespace oslomet_film.Controllers
             return PartialView("CartPartial", cart.CartItem.ToList());
         }
 
-      
-        public ActionResult CreateOrder(int movieID)
+
+        public ActionResult CreateOrder()
         {
-            if(Session["customer"] == null)
+            if (Session["customer"] == null)
             {
                 return Content("Ikke logget inn");
             }
@@ -44,7 +44,7 @@ namespace oslomet_film.Controllers
 
             OrderBLL orderBLL = new OrderBLL();
             orderBLL.CreateOrder(cart, (Customer)Session["customer"]);
-            return PartialView("CartPartial", cart.CartItem.ToList());
+            return RedirectToAction("GetOrders", "Order");
         }
 
         // GET: Cart

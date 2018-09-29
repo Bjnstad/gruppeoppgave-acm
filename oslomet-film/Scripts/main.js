@@ -29,11 +29,23 @@ $("buy-movies").click(function () {
 
 
 /**
- *  Open cart 
+ *  Open/close cart not working
  */
 
-$("#cart").click(function () {
-    $(".cart-popout").addClass("show");
+$(function () {
+    $("#cart").click(function (e) {
+        $(".cart-popout-open").toggleClass("hide show").toggleClass("cart-popoup-open cart-popoup-close");
+        e.stopPropagation()
+    });
+
+    $(".cart-popoup-close").click(function (e) {
+        e.stopPropagation();
+    });
+
+    $(document).click(function () {
+        $(".cart-popout-close").toggleClass("show hide").toggleClass("cart-popoup-close cart-popoup-open");
+    });
+    
 });
 
 /**

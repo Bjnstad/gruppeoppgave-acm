@@ -1,21 +1,25 @@
-﻿using System;
+﻿using oslomet_film.Model;
+using oslomet_film.Controllers;
+using oslomet_film.BLL;
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace oslomet_film.Controllers
 {
-  /*  public ActionResult Index()
+    public class OrderController : Controller
     {
-        Customer customer = (Customer)Session["user"];
-        
-
-        if (customer == null)
+        public ActionResult GetOrders(Customer customer)
         {
-            ViewBag.OrderUserNotLoggedIn = "Create a profile to visit the profile page ";
-            return View("../Login/Login");
-        } // Right way to check user loggedin? Works fine :)
-        List<OrderLine> orderLines = db.OrderLines.Where(orderline => orderline.Order.Customer.ID == customer.ID).ToList();
-        List<Movie> movies = new List<Movie>();
-    } */
+            var OrderBLL = new OrderBLL();
+            customer = (Customer)Session["customer"];
+            List<OrderLine> allOrderLines = OrderBLL.getAll(customer);
+            return View(allOrderLines);
+        }
+    }
+
+
 }

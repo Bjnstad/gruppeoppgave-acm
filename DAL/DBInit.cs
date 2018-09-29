@@ -12,7 +12,7 @@ namespace oslomet_film.DAL
         {
             var salt = CustomerDAL.createSalt();
 
-            /*Customer newCustomer = new DBCustomer
+            var newCustomer = new DBCustomer
             {
                 Username = "axel",
                 Name = "Axel",
@@ -21,7 +21,7 @@ namespace oslomet_film.DAL
                 Email = "axebjo@gmail.com",
                 Password = CustomerDAL.createHash("axel", salt),
                 Salt = salt
-            }; */
+            }; 
 
             Movie newMovie = new Movie
             {
@@ -97,7 +97,7 @@ namespace oslomet_film.DAL
             context.Category_Relations.Add(relation2);
             context.Category_Relations.Add(relation3);
 
-            //context.Customers.Add(newCustomer);
+            context.Customers.Add(newCustomer);
 
             context.SaveChanges();
             base.Seed(context);

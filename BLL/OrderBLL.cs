@@ -17,6 +17,13 @@ namespace oslomet_film.BLL
             return true;
         }
 
+        public List<OrderLine> getAll(Customer customer)
+        {
+            var OrderDAL = new OrderDAL();
+            List<OrderLine> orderlines = OrderDAL.GetOrderLines(customer);
+            return orderlines;
+        }
+
         public bool OwnsMovie(Customer customer, Movie movie)
         {
             OrderDAL orderDAL = new OrderDAL();

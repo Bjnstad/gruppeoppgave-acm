@@ -1,4 +1,6 @@
-﻿namespace oslomet_film.Model
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace oslomet_film.Model
 {
     public class CartItem
     {

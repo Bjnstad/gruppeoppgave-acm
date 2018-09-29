@@ -38,6 +38,10 @@ textarea {
     padding: 0 15px 5px;
 }
 
+.hide {
+    display: none;
+}
+
 .cart-icon {
     top: 23px;
     position: absolute;

@@ -145,9 +145,6 @@ namespace oslomet_film.DAL
         public bool editUser(int id, Customer editModel)
         {
             var db = new DB();
-            byte[] salt = createSalt();
-            byte[] hash = createHash(editModel.Password, salt);
-            bool test = checkUser(editModel.Username, editModel.Email, editModel.Phone);
 
             try
             {
@@ -157,24 +154,38 @@ namespace oslomet_film.DAL
                 editCustomer.Surname = editModel.Surname;
                 editCustomer.Phone = editModel.Phone;
                 editCustomer.Email = editModel.Email;
-                editCustomer.Password = hash;
-                editCustomer.Salt = salt;
+                
 
-                //db.Entry(editModel).State = System.Data.Entity.EntityState.Modified;
-
-                //if(test == true)
-               // {
                     db.SaveChanges();
                     return true;
-               // }
-               // else
-               // {
-                //}
+               
             } catch
             {
                 return false;
             }
         }
+
+       /* public bool editPassword(int id, Customer editPasswordModel)
+        {
+            var db = new DB();
+            byte[] salt = createSalt();
+            byte[] hash = createHash(editPasswordModel.Password, salt);
+
+            try
+            {
+                DBCustomer editCustomer = db.Customers.Find(id);
+                if(editCustomer.Password == editPasswordModel.Password)
+                editCustomer.Password = hash;
+                editCustomer.Salt = salt;
+
+                db.SaveChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        } */
 
         public bool deleteUser(int id)
         {
