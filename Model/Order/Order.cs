@@ -9,11 +9,10 @@ namespace oslomet_film.Model
 {
     public class Order
     {
-        [Key]
         public int ID { get; set; }
         public DateTime Created { get; set; }
         public virtual Customer Customer { get; set; }
-        public virtual List<OrderLine> OrdeLine { get; set; }
+        public virtual List<OrderLine> OrderLine { get; set; }
 
     }
 }

@@ -21,7 +21,7 @@ namespace oslomet_film.Controllers
             MovieBLL movieBLL = new MovieBLL();
             Movie movie = movieBLL.GetMovie(movieID);
 
-            CartItem item = new CartItem
+            CartItem item = new CartItem()
             {
                 Movie = movie,
                 Price = movie.Price
@@ -33,33 +33,37 @@ namespace oslomet_film.Controllers
         }
 
 
-        public ActionResult CreateOrder()
+        public ActionResult CreateOrderLine()
         {
             if (Session["customer"] == null)
             {
                 return Content("Ikke logget inn");
             }
-
             if (Session["cart"] == null)
             {
                 return Content("Handlekurven er tom");
             }
-
             Cart cart = GetSessionCart();
-            Customer customer = (Customer)Session["customer"];
-            OrderBLL orderBLL = new OrderBLL();
-            orderBLL.CreateOrderLine(cart);
+            //List<CartItem> cartItem = cart.CartItem;
+            List<OrderLine> orderLines = new List<OrderLine>();
 
-            /*
-               Cart cart = GetSessionCart();
+            //For å generere en tilfeldig ID på de forskjellige Ordrelinjene
+            Random random = new Random();
 
-               Customer customer = (Customer)Session["customer"];
-
-               OrderBLL orderBLL = new OrderBLL();
-
-               orderBLL.CreateOrder(cart, customer); */
-            return View();
+            foreach (CartItem cartItem in cart.CartItem)
+             {
+                 OrderLine newOrderLine = new OrderLine()
+                 {
+                     ID = random.Next(1000),
+                     Price = cartItem.Price,
+                     Movie = cartItem.Movie
+                 };
+                 orderLines.Add(newOrderLine);
+             } 
+            return View("../Order/OrderLinePartial", orderLines.ToList());
         }
+
+       
 
         // GET: Cart
         public ActionResult Index()

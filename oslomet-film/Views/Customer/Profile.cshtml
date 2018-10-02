@@ -1,28 +1,33 @@
-﻿@model System.Collections.Generic.List<oslomet_film.Model.OrderLine>
+﻿@model IEnumerable<oslomet_film.Model.OrderLine>
 
 @{
     ViewBag.Title = "Profile";
 }
 
-<h2>Welcome @Session["userName"]!</h2>
+<h2>Profile</h2>
 
-<table>
-    @foreach (var orderLine in Model)
-    {
-        <tr>
-            <td>
-                @orderLine.ID
-            </td>
-            <td>
-                @orderLine.Movie
-            </td>
-            <td>
-                @orderLine.Price
-            </td>
-            <td>
-                @orderLine.Order.Created
-            </td>
-        </tr>
-    }
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Price)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Price)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+        </td>
+    </tr>
+}
 
 </table>
