@@ -47,7 +47,7 @@ namespace oslomet_film.DAL
                 return allCutsomers;*/
 
             }
-            catch(Exception ex)
+            catch
             {
                 //GJØR FEILHÅNDTERING HER
                 return null;

@@ -10,24 +10,24 @@ namespace oslomet_film.BLL
 {
     public class OrderBLL
     {
-        public bool CreateOrder(Cart cart, Customer customer)
+        public bool CreateOrder(Cart cart)
         {
             var ordre = new OrderDAL();
-            ordre.CreateOrder(cart, customer);
+            ordre.CreateOrder(cart);
             return true;
         }
 
-        public List<OrderLine> getAll(Customer customer)
+     /*   public List<OrderLine> getAll(Customer customer)
         {
             var OrderDAL = new OrderDAL();
             List<OrderLine> orderlines = OrderDAL.GetOrderLines(customer);
             return orderlines;
-        }
+        } */
 
-        public bool OwnsMovie(Customer customer, Movie movie)
+     /*   public bool OwnsMovie(Customer customer, Movie movie)
         {
             OrderDAL orderDAL = new OrderDAL();
             return orderDAL.OwnsMovie(customer, movie);
-        }
+        } */
     }
 }

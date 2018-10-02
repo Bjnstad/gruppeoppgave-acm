@@ -7,47 +7,45 @@ namespace oslomet_film.DAL
 {
     public class OrderDAL
     {
-        public bool CreateOrder(Cart cart, Customer customer)
+        public bool CreateOrder(Cart cart)
         {
-            try
+
+            using (var db = new DB())
             {
-                using (var db = new DB())
+                List<OrderLine> orderLines = new List<OrderLine>();
+                //Order order = new Order();
+                Random random = new Random();
+
+                foreach (CartItem cartItem in cart.CartItem)
                 {
+                    var orderLine = new OrderLine();
+                    orderLine.ID = random.Next(1000);
+                    orderLine.Movie = cartItem.Movie;
+                    orderLine.Price = cartItem.Price;
+                    orderLines.Add(orderLine);
+                    db.OrderLine.Add(orderLine);
+                }
 
-
-
-                    List<OrderLine> orderLines = new List<OrderLine>();
-                    Order order = new Order();
-                    order.Customer = customer;
-
-
-                    foreach (CartItem cartItem in cart.CartItem)
-                    {
-                        var orderLine = new OrderLine();
-                        orderLine.Movie = cartItem.Movie;
-                        orderLine.Price = cartItem.Price;
-                        orderLines.Add(orderLine);
-                        db.OrderLine.Add(orderLine);
-                    }
-
-                    order.OrdeLine = orderLines;
-                    db.Order.Add(order);
-
+                //order.OrdeLine = orderLines;
+                //db.Order.Add(order);
+                try
+                {
 
 
                     db.SaveChanges();
                     return true;
 
                 }
-            }
 
-            catch (Exception ex)
-            {
-                return false;
+
+                catch
+                {
+                    return false;
+                }
             }
         }
 
-        public List<OrderLine> GetOrderLines(Customer customer)
+     /*   public List<OrderLine> GetOrderLines(Customer customer)
         {
             try
             {
@@ -66,13 +64,13 @@ namespace oslomet_film.DAL
             {
                 return null;
             }
-        }
+        } */
 
-        public bool OwnsMovie(Customer customer, Movie movie)
+      /*  public bool OwnsMovie(Customer customer, Movie movie)
         {
             var db = new DB();
             OrderLine orderlines = db.OrderLine.Where(line => line.Order.Customer.ID.Equals(customer.ID) && line.Movie.ID.Equals(movie.ID)).First();
             return orderlines != null;
-        }
+        } */
     }
 }

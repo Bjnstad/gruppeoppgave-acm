@@ -12,6 +12,5 @@ namespace oslomet_film.Model
         public int ID { get; set; }
         public int Price { get; set; }
         public virtual Movie Movie { get; set; }
-        public virtual Order Order { get; set; }
     }
 }

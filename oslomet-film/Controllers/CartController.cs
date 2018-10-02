@@ -43,7 +43,7 @@ namespace oslomet_film.Controllers
             Cart cart = GetSessionCart();
 
             OrderBLL orderBLL = new OrderBLL();
-            orderBLL.CreateOrder(cart, (Customer)Session["customer"]);
+            orderBLL.CreateOrder(cart);
             return RedirectToAction("GetOrders", "Order");
         }
 
