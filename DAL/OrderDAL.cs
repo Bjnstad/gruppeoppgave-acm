@@ -7,65 +7,75 @@ namespace oslomet_film.DAL
 {
     public class OrderDAL
     {
-        public bool CreateOrder(Cart cart, Customer customer)
+        public bool CreateOrderLine(Cart cart)
         {
-            try
+
+            var db = new DB();
+
+           // List<OrderLine> orderLines = new List<OrderLine>();
+
+            foreach (CartItem cartItem in cart.CartItem)
             {
-                using (var db = new DB())
+                var orderLine = new OrderLine()
                 {
+                    //ID = cartItem.ID,
+                    Price = cartItem.Price,
+                    Movie = cartItem.Movie
+                };
 
+                /*var order = new Order()
+                {
+                    ID = cartItem.ID,
+                    Created = cart.DateCreated,
+                    Customer = orde.Customer,
+                    OrdeLine = orderLines
+                }; */
 
-
-                    List<OrderLine> orderLines = new List<OrderLine>();
-                    Order order = new Order();
-                    order.Customer = customer;
-
-
-                    foreach (CartItem cartItem in cart.CartItem)
-                    {
-                        var orderLine = new OrderLine();
-                        orderLine.Movie = cartItem.Movie;
-                        orderLine.Price = cartItem.Price;
-                        orderLines.Add(orderLine);
-                        db.OrderLine.Add(orderLine);
-                    }
-
-                    order.OrdeLine = orderLines;
-                    db.Order.Add(order);
-
-
-
-                    db.SaveChanges();
-                    return true;
-
-                }
+                db.OrderLine.Add(orderLine);
+                //Order.OrderLine.Add(orderLine);
+                //db.Order.Add(order);
             }
 
-            catch (Exception ex)
+            try
+            {
+                
+                db.SaveChanges();
+                return true;
+            }
+            catch
             {
                 return false;
             }
+                /**orderLine.ID = cartItem.ID;
+                orderLine.Movie = cartItem.Movie;
+                orderLine.Price = cartItem.Price;
+                db.OrderLine.Add(orderLine); //Check the testing
+                Console.Write(db.OrderLine.ToList() + "Dette er steg 1"); //Denne må fungere
+                orderLines.Add(orderLine);
+                Console.Write(orderLines.ToList() + "Dette er steg 2"); */
+                /* order.OrdeLine = orderLines;
+                db.Order.Add(order);
+                Console.Write(order.ToString() + "Dette er steg 3");
+
+                db.SaveChanges();
+                return true; */
+            
         }
 
-        public List<OrderLine> GetOrderLines(Customer customer)
+        public List<Order> GetAll()
         {
-            try
-            {
-                var db = new DB();
-                var orderLineCheck = db.OrderLine.Where(o => o.Order.Customer.ID == customer.ID);
-                if(orderLineCheck != null)
-                {
-                    List<OrderLine> ordre = db.OrderLine.ToList();
-                    return ordre;
-                } else
-                {
-                    return null;
-                }
-            }
-            catch (Exception ex)
-            {
-                return null;
-            }
+            var db = new DB();
+            // var orderLineCheck = db.OrderLine.Where(o => o.Order.Customer.ID == customer.ID);
+            // if(orderLineCheck != null)
+            List<Order> orders = db.Order.ToList();
+            return orders;
+        }
+
+        public List<OrderLine> GetOrderLines()
+        {
+            var db = new DB();
+            List<OrderLine> orderLines = db.OrderLine.ToList();
+            return orderLines;
         }
 
         public bool OwnsMovie(Customer customer, Movie movie)

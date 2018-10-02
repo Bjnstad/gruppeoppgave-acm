@@ -12,14 +12,11 @@ namespace oslomet_film.Controllers
 {
     public class OrderController : Controller
     {
-        public ActionResult GetOrders(Customer customer)
+        public ActionResult GetAll(Customer customer)
         {
             var OrderBLL = new OrderBLL();
-            customer = (Customer)Session["customer"];
-            List<OrderLine> allOrderLines = OrderBLL.getAll(customer);
-            return View(allOrderLines);
+           // OrderBLL.GetAll((Customer)Session["customer"]);
+            return View();
         }
     }
-
-
 }

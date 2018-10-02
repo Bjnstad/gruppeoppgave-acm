@@ -28,7 +28,6 @@ namespace oslomet_film.DAL
                     domeneKunde.Email = c.Email;
 
                     DomeneKunder.Add(domeneKunde);
-
                 }
                 
 
@@ -45,16 +44,12 @@ namespace oslomet_film.DAL
                 }
                 ).ToList();
                 return allCutsomers;*/
-
             }
             catch(Exception ex)
             {
                 //GJØR FEILHÅNDTERING HER
                 return null;
-
             }
-            
-            
         }
 
         public bool addCustomer(Customer customerModel)

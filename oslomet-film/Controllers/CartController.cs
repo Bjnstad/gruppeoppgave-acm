@@ -40,11 +40,25 @@ namespace oslomet_film.Controllers
                 return Content("Ikke logget inn");
             }
 
-            Cart cart = GetSessionCart();
+            if (Session["cart"] == null)
+            {
+                return Content("Handlekurven er tom");
+            }
 
+            Cart cart = GetSessionCart();
+            Customer customer = (Customer)Session["customer"];
             OrderBLL orderBLL = new OrderBLL();
-            orderBLL.CreateOrder(cart, (Customer)Session["customer"]);
-            return RedirectToAction("GetOrders", "Order");
+            orderBLL.CreateOrderLine(cart);
+
+            /*
+               Cart cart = GetSessionCart();
+
+               Customer customer = (Customer)Session["customer"];
+
+               OrderBLL orderBLL = new OrderBLL();
+
+               orderBLL.CreateOrder(cart, customer); */
+            return View();
         }
 
         // GET: Cart

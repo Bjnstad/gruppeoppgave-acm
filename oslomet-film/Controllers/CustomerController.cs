@@ -113,7 +113,11 @@ namespace oslomet_film.Controllers
 
         public ActionResult Profile()
         {
-            return View();
+            var OrderBLL = new OrderBLL();
+            //  List<Order> displayAllOrders = OrderBLL.GetAll();
+            //  return View(displayAllOrders);
+            List<OrderLine> orderLines = OrderBLL.GetOrderLines();
+            return View(orderLines);
         }
 
         public ActionResult Logout()

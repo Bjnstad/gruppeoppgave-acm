@@ -1,7 +1,28 @@
-﻿
+﻿@model System.Collections.Generic.List<oslomet_film.Model.OrderLine>
+
 @{
     ViewBag.Title = "Profile";
 }
 
 <h2>Welcome @Session["userName"]!</h2>
 
+<table>
+    @foreach (var orderLine in Model)
+    {
+        <tr>
+            <td>
+                @orderLine.ID
+            </td>
+            <td>
+                @orderLine.Movie
+            </td>
+            <td>
+                @orderLine.Price
+            </td>
+            <td>
+                @orderLine.Order.Created
+            </td>
+        </tr>
+    }
+
+</table>
