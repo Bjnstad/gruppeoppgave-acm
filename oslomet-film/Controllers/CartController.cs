@@ -35,10 +35,6 @@ namespace oslomet_film.Controllers
 
         public ActionResult CreateOrderLine()
         {
-            if (Session["customer"] == null)
-            {
-                return Content("Ikke logget inn");
-            }
             if (Session["cart"] == null)
             {
                 return Content("Handlekurven er tom");
@@ -46,6 +42,8 @@ namespace oslomet_film.Controllers
             Cart cart = GetSessionCart();
             //List<CartItem> cartItem = cart.CartItem;
             List<OrderLine> orderLines = new List<OrderLine>();
+
+            OrderBLL orderBLL = new OrderBLL();
 
             //For å generere en tilfeldig ID på de forskjellige Ordrelinjene
             Random random = new Random();
@@ -57,11 +55,19 @@ namespace oslomet_film.Controllers
                      ID = random.Next(1000),
                      Price = cartItem.Price,
                      Movie = cartItem.Movie
-                 };
-                 orderLines.Add(newOrderLine);
-             } 
+                };
+                orderLines.Add(newOrderLine);
+                //orderBLL.SaveOrderLine(newOrderLine);
+            }
+
+            orderBLL.SaveOrder(orderLines, (Customer)Session["customer"]);
+
             return View("../Order/OrderLinePartial", orderLines.ToList());
         }
+
+        
+
+        
 
        
 

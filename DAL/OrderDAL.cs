@@ -39,6 +39,27 @@ namespace oslomet_film.DAL
             
         } 
 
+        public bool SaveOrder(List<OrderLine> orderLines, Customer customer)
+        {
+            var db = new DB();
+            DateTime now = DateTime.Now;
+            var order = new Order();
+
+            order.DateCreated = now;
+            order.Customer = customer;
+            order.OrderLine = orderLines;
+
+            db.Order.Add(order);
+            try
+            {
+                db.SaveChanges();
+                return true;
+            } catch
+            {
+                return false;
+            }
+        }
+
         public List<Order> GetAll()
         {
             var db = new DB();

@@ -17,6 +17,13 @@ namespace oslomet_film.BLL
             return true;
         }
 
+        public bool SaveOrder(List<OrderLine> orderLines, Customer customer)
+        {
+            var orderDAL = new OrderDAL();
+            orderDAL.SaveOrder(orderLines, customer);
+            return true;
+        }
+
         public List<Order> GetAll()
         {
             var OrderDAL = new OrderDAL();
