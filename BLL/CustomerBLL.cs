@@ -39,5 +39,11 @@ namespace oslomet_film.BLL
             var CustomerDAL = new CustomerDAL();
             return CustomerDAL.fetchCustomer(id);
         }
+
+        public Customer fetchCustomerByUsername(String username)
+        {
+            var CustomerDAL = new CustomerDAL();
+            return CustomerDAL.fetchCustomerByUsername(username);
+        }
     }
 }

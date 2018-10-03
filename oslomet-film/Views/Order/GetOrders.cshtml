@@ -1,4 +1,4 @@
-﻿@model IEnumerable<oslomet_film.Model.OrderLine>
+﻿@model IEnumerable<oslomet_film.Model.Order>
 
 @{
     ViewBag.Title = "GetOrders";
@@ -14,15 +14,10 @@
 @foreach (var item in Model) {
 <tr>
     <td>
-        @item.Movie.Title
+        @item.OrderLine.ToList()
     </td>
     <td>
-        @item.Movie.Price
-    </td>
-    <td>
-        @item.Price
-    </td>
-    <td>
+        @item.Customer.Name
     </td>
     <td>
         @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
@@ -31,5 +26,5 @@
     </td>
 </tr>
 }
-
 </table>
+

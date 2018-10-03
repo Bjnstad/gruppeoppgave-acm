@@ -47,15 +47,15 @@ namespace oslomet_film.Controllers
         [HttpPost]
         public ActionResult Login(Customer loginModel)
         {
-            
-                var customerBLL = new CustomerBLL();
-                bool loginSuccess = customerBLL.login(loginModel);
-                if (loginSuccess)
+            var customerBLL = new CustomerBLL();
+            bool loginSuccess = customerBLL.login(loginModel);
+            Customer customerSession = customerBLL.fetchCustomerByUsername(loginModel.Username);
+
+            if (loginSuccess)
                 {
                     ViewBag.LoginSuccess = "Login successfull!";
-
-                    Session["customer"] = loginModel;
-                    Session["userName"] = loginModel.Username;
+                    Session["customer"] = customerSession;
+                    //Session["userName"] = loginModel.Username;
                     var customer = (Customer)Session["customer"];
 
                     return RedirectToAction("../Home/Index");
@@ -109,15 +109,6 @@ namespace oslomet_film.Controllers
             var customerBLL = new CustomerBLL();
             Customer customerDetails = customerBLL.fetchCustomer(id);
             return View(customerDetails);
-        }
-
-        public ActionResult Profile()
-        {
-            var OrderBLL = new OrderBLL();
-            //  List<Order> displayAllOrders = OrderBLL.GetAll();
-            //  return View(displayAllOrders);
-            List<OrderLine> orderLines = OrderBLL.GetOrderLines();
-            return View(orderLines);
         }
 
         public ActionResult Logout()

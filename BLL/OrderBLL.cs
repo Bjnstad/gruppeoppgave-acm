@@ -26,23 +26,17 @@ namespace oslomet_film.BLL
 
         public List<Order> GetAll()
         {
-            var OrderDAL = new OrderDAL();
-            List<Order> orders = OrderDAL.GetAll();
-            return orders;
+            var orderDAL = new OrderDAL();
+            List<Order> allOrders = orderDAL.GetAll();
+            return allOrders;
         }
 
-        public List<OrderLine> GetOrderLines()
-        {
-            var OrderDal = new OrderDAL();
-            
-            List<OrderLine> orderLines = OrderDal.GetOrderLines();
-            return orderLines;
-        }
 
-       /* public bool OwnsMovie(Customer customer, Movie movie)
-        {
-            OrderDAL orderDAL = new OrderDAL();
-            return orderDAL.OwnsMovie(customer, movie);
-        } */
+
+        /* public bool OwnsMovie(Customer customer, Movie movie)
+         {
+             OrderDAL orderDAL = new OrderDAL();
+             return orderDAL.OwnsMovie(customer, movie);
+         } */
     }
 }

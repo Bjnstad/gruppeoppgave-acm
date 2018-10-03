@@ -29,21 +29,7 @@ namespace oslomet_film.DAL
 
                     DomeneKunder.Add(domeneKunde);
                 }
-                
-
                 return DomeneKunder;
-                /*
-                List<Customer> allCutsomers = db.Customers.Select(c => new Customer()
-                {
-                    ID = c.ID,
-                    Username = c.Username,
-                    Name = c.Name,
-                    Surname = c.Surname,
-                    Phone = c.Phone,
-                    Email = c.Email,
-                }
-                ).ToList();
-                return allCutsomers;*/
             }
             catch(Exception ex)
             {
@@ -72,7 +58,6 @@ namespace oslomet_film.DAL
             
             try
             {
-                //var checkUser = db.Customers.Where(user => user.Username == customerModel.Username || user.Email == customerModel.Email || user.Phone == customerModel.Phone).FirstOrDefault();
                 if (test == true)
                 {
                     db.Customers.Add(newCustomer);
@@ -134,7 +119,6 @@ namespace oslomet_film.DAL
                 bool passwordCorrect = userData.Password.SequenceEqual(testPassword);
                 return passwordCorrect;
             }
-            
         }
 
         public bool editUser(int id, Customer editModel)
@@ -208,6 +192,30 @@ namespace oslomet_film.DAL
             {
                 return null;
             } else
+            {
+                var customerDetails = new Customer()
+                {
+                    ID = customer.ID,
+                    Username = customer.Username,
+                    Name = customer.Name,
+                    Surname = customer.Surname,
+                    Phone = customer.Phone,
+                    Email = customer.Email,
+                };
+                return customerDetails;
+            }
+        }
+
+        public Customer fetchCustomerByUsername(String username)
+        {
+            var db = new DB();
+            var customer = db.Customers.Where(user => user.Username == username).FirstOrDefault();
+
+            if(customer == null)
+            {
+                return null;
+            } 
+            else
             {
                 var customerDetails = new Customer()
                 {

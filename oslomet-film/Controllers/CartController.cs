@@ -52,12 +52,11 @@ namespace oslomet_film.Controllers
              {
                  OrderLine newOrderLine = new OrderLine()
                  {
-                     ID = random.Next(1000),
+                     //ID = random.Next(1000),
                      Price = cartItem.Price,
                      Movie = cartItem.Movie
                 };
                 orderLines.Add(newOrderLine);
-                //orderBLL.SaveOrderLine(newOrderLine);
             }
 
             orderBLL.SaveOrder(orderLines, (Customer)Session["customer"]);

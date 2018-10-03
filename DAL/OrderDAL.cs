@@ -15,18 +15,16 @@ namespace oslomet_film.DAL
 
             //For å generere en tilfeldig ID på de forskjellige Ordrelinjene
             Random random = new Random();
-            int randomID = random.Next(1000);
             
 
             foreach (CartItem cartItem in cart.CartItem)
             {
                 OrderLine newOrderLine = new OrderLine()
                 {
-                    ID = randomID,
                     Price = cartItem.Price,
                     Movie = cartItem.Movie
                 };
-                db.OrderLine.Add(newOrderLine);
+              //  db.OrderLine.Add(newOrderLine);
             }
             try
             {
@@ -41,40 +39,46 @@ namespace oslomet_film.DAL
 
         public bool SaveOrder(List<OrderLine> orderLines, Customer customer)
         {
-            var db = new DB();
-            DateTime now = DateTime.Now;
-            var order = new Order();
-
-            order.DateCreated = now;
-            order.Customer = customer;
-            order.OrderLine = orderLines;
-
-            db.Order.Add(order);
-            try
+            using (var db = new DB())
             {
-                db.SaveChanges();
-                return true;
-            } catch
-            {
-                return false;
+                DateTime now = DateTime.Now;
+                var order = new Order();
+
+                order.DateCreated = now;
+                order.Customer = customer;
+                order.OrderLine = orderLines;
+
+                foreach (var ordrelinje in orderLines)
+                {
+                    db.OrderLine.Add(ordrelinje);
+                }
+                
+
+                try
+                {
+                    db.Order.Add(order);
+                    db.SaveChanges();
+                    return true;
+                }
+                catch
+                {
+                    return false;
+                }
             }
+            
         }
 
         public List<Order> GetAll()
         {
-            var db = new DB();
-            // var orderLineCheck = db.OrderLine.Where(o => o.Order.Customer.ID == customer.ID);
-            // if(orderLineCheck != null)
-            List<Order> orders = db.Order.ToList();
-            return orders;
+            using(var db = new DB())
+            {
+                List<Order> allOrders = db.Order.ToList();
+                return allOrders;
+            }
+            
         }
 
-        public List<OrderLine> GetOrderLines()
-        {
-            var db = new DB();
-            List<OrderLine> orderLines = db.OrderLine.ToList();
-            return orderLines;
-        }
+        
 
        /* public bool OwnsMovie(Customer customer, Movie movie)
         {
