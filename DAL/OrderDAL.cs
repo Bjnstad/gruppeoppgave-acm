@@ -7,63 +7,108 @@ namespace oslomet_film.DAL
 {
     public class OrderDAL
     {
+        private DB db = new DB();
 
-        public bool CreateOrderLine(Cart cart)
+        public decimal CreateOrderLines(Cart cart, int orderID)
         {
-            //List<OrderLine> orderLines = new List<OrderLine>();
-            var db = new DB();
-
-            //For å generere en tilfeldig ID på de forskjellige Ordrelinjene
-            Random random = new Random();
-            
-
+            decimal orderTotal = 0;
             foreach (CartItem cartItem in cart.CartItem)
             {
-                OrderLine newOrderLine = new OrderLine()
+                OrderLine orderLine = new OrderLine
                 {
+                    Movie = cartItem.Movie,
+                    MovieID = cartItem.Movie.ID,
+                    MovieTitle = cartItem.Movie.Title,
+                    OrderID = orderID,
                     Price = cartItem.Price,
-                    Movie = cartItem.Movie
                 };
-              //  db.OrderLine.Add(newOrderLine);
+
+                db.OrderLine.Add(orderLine);
+                orderTotal += cartItem.Price;
             }
+            db.SaveChanges();
+            //Create method in controller to empty cart
+            return orderTotal;
+        }
+
+
+        public void Review(Cart cart, Customer customer, Order order)
+        {
+            //List<OrderLine> orderLines = new List<OrderLine>();
+
+            order.UserID = customer.ID;
+            order.OrderLines = new List<OrderLine>();
             try
             {
-                db.SaveChanges();
-                return true;
-            } catch
+                foreach (CartItem cartItem in cart.CartItem)
+                {
+                    OrderLine newOrderLine = new OrderLine
+                    {
+                        Movie = cartItem.Movie,
+                        MovieID = cartItem.Movie.ID,
+                        MovieTitle = cartItem.Movie.Title,
+                        Price = cartItem.Price,
+                    };
+                    order.OrderLines.Add(newOrderLine);
+                    order.TotalPrice += cartItem.Price;
+                }
+            }
+            catch(Exception ex) { }
+        }
+
+        public bool Details(int? id, Customer customer, Order order)
+        {
+            order = db.Order.Where(o => o.OrderID == id).SingleOrDefault();
+            if(order == null)
             {
                 return false;
             }
-            
-        } 
+            if(order.UserID == customer.ID)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
+        }
+
+
+        public void CreateOrder(Order order, Cart cart)
+        {
+            order.DateCreated = DateTime.Now;
+            db.Order.Add(order);
+            db.SaveChanges();
+
+            //order.TotalPrice = CreateOrderLines(cart, order.OrderID);
+            db.SaveChanges();
+        }
 
         public bool SaveOrder(List<OrderLine> orderLines, Customer customer)
         {
-            using (var db = new DB())
+            DateTime now = DateTime.Now;
+            var order = new Order();
+
+            order.DateCreated = now;
+            //order.Customer = customer;
+            order.OrderLines = orderLines;
+
+            foreach (var ordrelinje in orderLines)
             {
-                DateTime now = DateTime.Now;
-                var order = new Order();
-
-                order.DateCreated = now;
-                order.Customer = customer;
-                order.OrderLine = orderLines;
-
-                foreach (var ordrelinje in orderLines)
-                {
-                    db.OrderLine.Add(ordrelinje);
-                }
+                db.OrderLine.Add(ordrelinje);
+            }
                 
 
-                try
-                {
-                    db.Order.Add(order);
-                    db.SaveChanges();
-                    return true;
-                }
-                catch
-                {
-                    return false;
-                }
+            try
+            {
+                db.Order.Add(order);
+                db.SaveChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
             }
             
         }

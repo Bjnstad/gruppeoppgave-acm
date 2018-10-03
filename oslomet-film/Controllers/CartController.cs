@@ -4,6 +4,8 @@ using System.Linq;
 using oslomet_film.Model;
 using oslomet_film.BLL;
 using System.Collections.Generic;
+using System.Threading.Tasks;
+using System.Net;
 
 namespace oslomet_film.Controllers
 {
@@ -33,7 +35,7 @@ namespace oslomet_film.Controllers
         }
 
 
-        public ActionResult CreateOrderLine()
+       /* public ActionResult CreateOrderLine()
         {
             if (Session["cart"] == null)
             {
@@ -62,13 +64,45 @@ namespace oslomet_film.Controllers
             orderBLL.SaveOrder(orderLines, (Customer)Session["customer"]);
 
             return View("../Order/OrderLinePartial", orderLines.ToList());
+        } */
+
+        public async Task<ActionResult> Review()
+        {
+            Order order = new Order();
+
+            var ordre = new OrderBLL();
+            ordre.Review((Cart)Session["cart"], (Customer)Session["customer"], order);
+            return View(order);
         }
 
-        
+        [HttpPost]
+        public ActionResult CreateOrder([Bind(Include = "UserId")] Order order)
+        {
+            var ordre = new OrderBLL();
+            ordre.CreateOrder(order, (Cart)Session["cart"]);
+            return RedirectToAction("Details", new { id = order.OrderID });
+        }
 
-        
+        public ActionResult Details(int? id)
+        {
+            Order order = new Order();
+            if(id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
 
-       
+            var ordre = new OrderBLL();
+            ordre.Details(id, (Customer)Session["customer"], order);
+            return View(order);
+        }
+
+
+
+
+
+
+
+
 
         // GET: Cart
         public ActionResult Index()
