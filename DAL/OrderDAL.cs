@@ -14,12 +14,10 @@ namespace oslomet_film.DAL
             {
                 List<OrderLine> orderLines = new List<OrderLine>();
                 //Order order = new Order();
-                Random random = new Random();
 
                 foreach (CartItem cartItem in cart.CartItem)
                 {
                     var orderLine = new OrderLine();
-                    orderLine.ID = random.Next(1000);
                     orderLine.Movie = cartItem.Movie;
                     orderLine.Price = cartItem.Price;
                     orderLines.Add(orderLine);
