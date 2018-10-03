@@ -11,10 +11,10 @@ namespace oslomet_film.BLL
     public class OrderBLL
     {
         
-        public void Review(Cart cart, Customer customer, Order order)
+        public void Review(Cart cart, Customer customer, Order order, OrderLine orderLine)
         {
             var ordre = new OrderDAL();
-            ordre.Review(cart, customer, order);
+            ordre.Review(cart, customer, order, orderLine);
         }
 
         public void CreateOrder(Order order, Cart cart)
@@ -30,13 +30,11 @@ namespace oslomet_film.BLL
             return true;
         }
 
-        public bool Details(int? id, Customer customer, Order order)
+        public Order FetchOrder(int? id, Customer customer)
         {
-            var ordre = new OrderDAL();
-            ordre.Details(id, customer, order);
-            return true;
+            var order = new OrderDAL();
+            return order.FetchOrder(id, customer);
         }
-
 
         public List<Order> GetAll()
         {

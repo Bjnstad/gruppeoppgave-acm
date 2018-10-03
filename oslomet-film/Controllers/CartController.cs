@@ -69,9 +69,10 @@ namespace oslomet_film.Controllers
         public async Task<ActionResult> Review()
         {
             Order order = new Order();
+            OrderLine orderLine = new OrderLine();
 
             var ordre = new OrderBLL();
-            ordre.Review((Cart)Session["cart"], (Customer)Session["customer"], order);
+            ordre.Review((Cart)Session["cart"], (Customer)Session["customer"], order, orderLine);
             return View(order);
         }
 
@@ -80,20 +81,19 @@ namespace oslomet_film.Controllers
         {
             var ordre = new OrderBLL();
             ordre.CreateOrder(order, (Cart)Session["cart"]);
-            return RedirectToAction("Details", new { id = order.OrderID });
+             Session.Remove("cart");
+
+
+            return RedirectToAction("FetchOrder", new { id = order.OrderID });
+
+
         }
 
-        public ActionResult Details(int? id)
+        public ActionResult FetchOrder(int? id, Customer customer)
         {
-            Order order = new Order();
-            if(id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-
-            var ordre = new OrderBLL();
-            ordre.Details(id, (Customer)Session["customer"], order);
-            return View(order);
+            var order = new OrderBLL();
+            Order orderDetails = order.FetchOrder(id, (Customer)Session["customer"]);
+            return View(orderDetails);
         }
 
 

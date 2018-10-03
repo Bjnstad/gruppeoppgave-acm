@@ -32,48 +32,33 @@ namespace oslomet_film.DAL
         }
 
 
-        public void Review(Cart cart, Customer customer, Order order)
+        public void Review(Cart cart, Customer customer, Order order, OrderLine orderLine)
         {
             //List<OrderLine> orderLines = new List<OrderLine>();
 
             order.UserID = customer.ID;
+            order.CustomerName = customer.Name + " " + customer.Surname;
             order.OrderLines = new List<OrderLine>();
             try
             {
                 foreach (CartItem cartItem in cart.CartItem)
                 {
-                    OrderLine newOrderLine = new OrderLine
+                    orderLine = new OrderLine
                     {
                         Movie = cartItem.Movie,
                         MovieID = cartItem.Movie.ID,
                         MovieTitle = cartItem.Movie.Title,
                         Price = cartItem.Price,
+                        //OrderID = order.OrderID
                     };
-                    order.OrderLines.Add(newOrderLine);
+                    order.OrderLines.Add(orderLine);
                     order.TotalPrice += cartItem.Price;
+                    db.OrderLine.Add(orderLine);
                 }
+                db.SaveChanges();
             }
-            catch(Exception ex) { }
+            catch (Exception ex) { }
         }
-
-        public bool Details(int? id, Customer customer, Order order)
-        {
-            order = db.Order.Where(o => o.OrderID == id).SingleOrDefault();
-            if(order == null)
-            {
-                return false;
-            }
-            if(order.UserID == customer.ID)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-
-        }
-
 
         public void CreateOrder(Order order, Cart cart)
         {
@@ -82,8 +67,25 @@ namespace oslomet_film.DAL
             db.SaveChanges();
 
             //order.TotalPrice = CreateOrderLines(cart, order.OrderID);
-            db.SaveChanges();
+            //db.SaveChanges();
         }
+
+        public Order FetchOrder(int? id, Customer customer)
+        {
+            var order = db.Order.Where(o => o.OrderID == id && o.UserID == customer.ID).FirstOrDefault();
+
+            if (order == null)
+            {
+                return null;
+            }
+            else
+            {
+                return order;
+            }
+        }
+
+
+        
 
         public bool SaveOrder(List<OrderLine> orderLines, Customer customer)
         {
@@ -115,12 +117,8 @@ namespace oslomet_film.DAL
 
         public List<Order> GetAll()
         {
-            using(var db = new DB())
-            {
-                List<Order> allOrders = db.Order.ToList();
-                return allOrders;
-            }
-            
+            List<Order> allOrders = db.Order.ToList();
+            return allOrders;
         }
 
         

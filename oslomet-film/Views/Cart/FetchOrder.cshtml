@@ -1,19 +1,32 @@
 ﻿@model oslomet_film.Model.Order
 
 @{
-    ViewBag.Title = "Review";
+    ViewBag.Title = "FetchOrder";
 }
 
-<h2>Review</h2>
+<h2>FetchOrder</h2>
 
-@using (Html.BeginForm("CreateOrder", "Cart"))
-{
-    @Html.AntiForgeryToken()
-
-<div class="form-horizontal">
-    <h4>Er du @Model.CustomerName sikker på at du vil fortsette</h4>
+<div>
+    <h4>Order</h4>
     <hr />
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <dl class="dl-horizontal">
+        <dt>
+            Fult navn :
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CustomerName)
+        </dd>
+
+        <dt>
+            Full pris :
+        </dt>
+
+        <dd>
+            kr ,- @Html.DisplayFor(model => model.TotalPrice)
+        </dd>
+    </dl>
+
     <div class="row">
         <div class="col-md-2"><label>Movie Title</label></div>
         <div class="col-md-2"><label>Price</label></div>
@@ -28,19 +41,8 @@
             <div class="col-md-2">@Html.DisplayFor(modelItem => item.OrderID)</div>
         </div>
     }
-
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Create" class="btn btn-default" />
-        </div>
-    </div>
 </div>
-}
-
-<div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.OrderID }) |
     @Html.ActionLink("Back to List", "Index")
-</div>
-
-<script src="~/Scripts/jquery-1.10.2.min.js"></script>
-<script src="~/Scripts/jquery.validate.min.js"></script>
-<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+</p>
