@@ -28,10 +28,21 @@ $("buy-movies").click(function () {
 });
 
 
+
+/**
+ *  Open/close collapse - movie details
+ */
+$(function () {
+    $(".detailsModal").click(function () {
+        $("#displayModalContent").show();
+    });
+    $(".modal-close").click(function () {
+        $("#displayModalContent").hide();
+    });
+});
 /**
  *  Open/close cart not working
  */
-
 $(function () {
     $("#cart").click(function (e) {
         $.ajax({

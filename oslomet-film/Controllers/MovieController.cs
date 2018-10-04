@@ -20,11 +20,13 @@ namespace oslomet_film.Controllers
             return movieBLL.GetMovie(movieID);
         }
 
+        // Dette viewet må gjøres om til enten en collapse eller en popup!!!
         public ActionResult Details(int movieID)
         {
             var movieBLL = new MovieBLL();
             Movie movie = movieBLL.GetMovie(movieID);
-            return View(movie);
+            //Gjør om til partial
+            return PartialView(movie);
         }
     }
 }

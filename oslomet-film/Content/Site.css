@@ -27,9 +27,11 @@ textarea {
 .thumbnail-small {
     width: 55px
 }
-
 .thumbnail-md {
     width: 50%;
+}
+.thumbnail-lg {
+    width: 100%;
 }
 
 .display-cart-full {

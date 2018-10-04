@@ -1,0 +1,27 @@
+﻿@model oslomet_film.Model.Movie
+
+<div class="collapse display-cart-full img-rounded" id="collapseModal">
+    <div class="card card-body">
+        <div class="col-md-3">
+            <img class="thumbnail-lg" src="" />
+        </div>
+        <div class="col-md-6">
+            <h2>@Model.Title</h2>
+            <br />
+            <p>@Model.Description</p>
+        </div>
+        <div class="col-md-3">
+            <a href="@Url.Action("BuyNow", "Movie", new { movieID = Model.ID})" class="btn btn-primary btn-block" id="#">
+                Buy/Rent now
+            </a>
+            <br />
+            <a href="@Url.Action("AddItem", "Cart", new { movieID = Model.ID})" class="btn btn-primary btn-block" id="#">
+                Add To Cart
+            </a>
+            <a href="@Url.Action("GetCartFull", "Cart", new { movieID = Model.ID})" class="btn btn-primary btn-block" id="#">
+                Go to cart
+            </a>
+        </div>
+    </div>
+</div>
+

@@ -158,6 +158,7 @@
     <Content Include="Views\Cart\Details.cshtml" />
     <Content Include="Views\Cart\FetchOrder.cshtml" />
     <Content Include="Views\Cart\GetCartFull.cshtml" />
+    <Content Include="Views\Movie\Details.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
