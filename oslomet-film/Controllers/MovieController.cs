@@ -19,5 +19,12 @@ namespace oslomet_film.Controllers
             var movieBLL = new MovieBLL();
             return movieBLL.GetMovie(movieID);
         }
+
+        public ActionResult Details(int movieID)
+        {
+            var movieBLL = new MovieBLL();
+            Movie movie = movieBLL.GetMovie(movieID);
+            return View(movie);
+        }
     }
 }

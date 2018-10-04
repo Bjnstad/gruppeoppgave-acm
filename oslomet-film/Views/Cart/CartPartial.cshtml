@@ -1,5 +1,5 @@
 ﻿@model List<oslomet_film.Model.CartItem>
-
+<!-- In use -->
 <a>
     <span class="cart-icon">
         @Model.Count()
@@ -18,7 +18,7 @@
         {
             <div class="row">
                 <div class="col col-md-3">
-                    <img src="@item.Movie.Thumbnail" class="thumbnail-small"/>
+                    <img src="@item.Movie.Thumbnail" class="thumbnail-small" />
                 </div>
                 <div class="col col-md-9">
                     <h5>
@@ -37,9 +37,14 @@
     <h4>
         <b>
             TOTALT: @ViewBag.Total ,-
-            <a href="@Url.Action("Review", "Cart")" class="btn btn-success" id="#">
-               Kjøp
-            </a>
         </b>
     </h4>
+
+    <hr />
+    <a href="@Url.Action("GetCartFull", "Cart")" class="btn btn-primary btn btn-block" id="#">
+        Vis Handlekurv
+    </a>
+    <a href="@Url.Action("Review", "Cart")" class="btn btn-success btn-block" id="#">
+        Lag ordre
+    </a>
 </div>

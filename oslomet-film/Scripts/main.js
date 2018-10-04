@@ -34,8 +34,12 @@ $("buy-movies").click(function () {
 
 $(function () {
     $("#cart").click(function (e) {
+        $.ajax({
+            type: "GET",
+            url: "/Cart/GetTotal"
+        })
         $(".cart-popout-open").toggleClass("hide show").toggleClass("cart-popoup-open cart-popoup-close");
-        e.stopPropagation()
+        e.stopPropagation();
     });
 
     $(".cart-popoup-close").click(function (e) {
