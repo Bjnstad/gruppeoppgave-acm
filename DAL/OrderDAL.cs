@@ -49,7 +49,8 @@ namespace oslomet_film.DAL
                         MovieID = cartItem.Movie.ID,
                         MovieTitle = cartItem.Movie.Title,
                         Price = cartItem.Price,
-                        //OrderID = order.OrderID
+                        OrderID = order.OrderID,
+                        Order = order
                     };
                     order.OrderLines.Add(orderLine);
                     order.TotalPrice += cartItem.Price;
@@ -66,8 +67,8 @@ namespace oslomet_film.DAL
             db.Order.Add(order);
             db.SaveChanges();
 
-            //order.TotalPrice = CreateOrderLines(cart, order.OrderID);
-            //db.SaveChanges();
+            order.TotalPrice = CreateOrderLines(cart, order.OrderID);
+            db.SaveChanges();
         }
 
         public Order FetchOrder(int? id, Customer customer)

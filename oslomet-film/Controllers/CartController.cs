@@ -39,7 +39,8 @@ namespace oslomet_film.Controllers
             MovieBLL movieBLL = new MovieBLL();
             Movie movie = movieBLL.GetMovie(movieID);
             //Tried running test if movie ID exists in List<CartItem> Not finished
-            //if (cart.CartItem.Any(m => m.Movie.ID != movieID))
+            //var checkDuplicte = (cart.CartItem.FindAll(m => m.Movie.ID != movie.ID));
+            //if(checkDuplicte == null)
             //{
                 CartItem item = new CartItem()
             {
@@ -124,6 +125,11 @@ namespace oslomet_film.Controllers
 
         public async Task<ActionResult> Review()
         {
+            if(Session["customer"] == null)
+            {
+                return null;
+            }
+
             Order order = new Order();
             OrderLine orderLine = new OrderLine();
 

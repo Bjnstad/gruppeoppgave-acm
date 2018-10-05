@@ -44,6 +44,15 @@ namespace oslomet_film.Controllers
             return View(loginModel);
         }
 
+        //Test For dropdown login
+        [HttpGet]
+        public ActionResult LoginDropDown()
+        {
+            Customer loginModel = new Customer();
+            return PartialView(loginModel);
+        }
+
+
         [HttpPost]
         public ActionResult Login(Customer loginModel)
         {
@@ -54,21 +63,53 @@ namespace oslomet_film.Controllers
             if (loginSuccess)
                 {
                     ViewBag.LoginSuccess = "Login successfull!";
-                    Session["customer"] = customerSession;
-                    //Session["userName"] = loginModel.Username;
-                    var customer = (Customer)Session["customer"];
-
-                    return RedirectToAction("../Home/Index");
-                }
+                    Session["customerID"] = customerSession.ID;
+                    Sessions();
+                    return RedirectToAction("Home", "Index");
+            }
             ViewBag.LoginFailed = "Login failed";
             return View(loginModel);
         }
 
-        public ActionResult EditUser(int id)
+        //Test For dropdown login
+        [HttpPost]
+        public ActionResult LoginDropDown(Customer loginModel)
         {
+            var customerBLL = new CustomerBLL();
+            bool loginSuccess = customerBLL.login(loginModel);
+            Customer customerSession = customerBLL.fetchCustomerByUsername(loginModel.Username);
+
+            if (loginSuccess)
+            {
+                ViewBag.LoginSuccess = "Login successfull!";
+                Session["customerID"] = customerSession.ID;
+                Sessions();
+                return RedirectToAction("Home", "Index");
+            }
+            ViewBag.LoginFailed = "Login failed";
+            return View(loginModel);
+        }
+
+
+        public ActionResult EditUser()
+        {
+            int id = (int)Session["customerID"];
             var customerBLL = new CustomerBLL();
             Customer editModel = customerBLL.fetchCustomer(id);
             return View(editModel);
+        }
+
+        public void Sessions()
+        {
+            int id = (int)Session["customerID"];
+            var customerBLL = new CustomerBLL();
+            Customer customerDetails = customerBLL.fetchCustomer(id);
+
+            Session["customer"] = customerDetails;
+            Session["userName"] = customerDetails.Username;
+            var customer = (Customer)Session["customer"];
+            string userName = (string)Session["userName"];
+            int customerID = (int)Session["customerID"];
         }
 
         [HttpPost]
@@ -79,7 +120,8 @@ namespace oslomet_film.Controllers
             if (editSuccess)
             {
                 ViewBag.EditSuccessfull = "Edit Successfull";
-                return RedirectToAction("DisplayCustomers");
+                Sessions();
+                return RedirectToAction("Index", "Home");
             }
             ViewBag.EditFailed = "Edit failed";
             return View(editModel);
