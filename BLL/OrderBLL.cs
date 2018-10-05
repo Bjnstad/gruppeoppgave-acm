@@ -14,19 +14,19 @@ namespace oslomet_film.BLL
         public void Review(Cart cart, Customer customer, Order order, OrderLine orderLine)
         {
             var ordre = new OrderDAL();
-            ordre.Review(cart, customer, order, orderLine);
+            //ordre.Review(cart, customer, order, orderLine);
         }
 
-        public void CreateOrder(Order order, Cart cart)
+        public void CreateOrder(Customer customer, Cart cart)
         {
             var ordre = new OrderDAL();
-            ordre.CreateOrder(order, cart);
+            ordre.CreateOrder(customer, cart);
         }
 
         public bool SaveOrder(List<OrderLine> orderLines, Customer customer)
         {
             var order = new OrderDAL();
-            order.SaveOrder(orderLines, customer);
+            ///order.SaveOrder(orderLines, customer);
             return true;
         }
 
