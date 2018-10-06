@@ -1,8 +1,8 @@
 ﻿@model oslomet_film.Model.Cart
 
-<div class="row">
+<div class="clearfix">
     <div class="col col-md-12">
-        <h1>
+        <h1 style="margin-left:0">
             Handlekurv
         </h1>
     </div>
@@ -10,12 +10,6 @@
 
 
 <div class="row">
-    <div class="col-md-12">
-        <a href="@Url.Action("Index", "Home")" class="btn btn-primary btn btn-block" id="#">
-            Continue Browsing
-        </a>
-    </div>
-
 
     @foreach (var item in Model.CartItem)
     {
@@ -35,44 +29,41 @@
                 </p>
                 <br />
                 <p>
-                    Pris : Kr @item.Price,- for å leie i 48 timer.
+                    Pris : @item.Price,-
                 </p>
             </div>
             <div class="col-md-3">
                 <br />
                 <br />
                 <a href="@Url.Action("Details", "Movie", new { movieID = item.Movie.ID})" class="btn btn-primary btn-block">
-                    Movie Details
+                    Les mer
                 </a>
                 <br />
                 <a href="@Url.Action("RemoveItem", "Cart", new { movieID = item.Movie.ID})" class="btn btn-primary btn-block" id="#">
-                    Remove from cart
+                    Fjern
                 </a>
             </div>
         </div>
     }
 
 
-    <div class="col col-md-4">
-
-        Totalt:
-
-        <a class="btn btn-success">
-            Kjøp
-        </a>
-    </div>
-
-    <hr />
-    <div class="col-md-6">
-        <a href="@Url.Action("Review", "Cart")" class="btn btn-primary btn-block" id="#">
-            Lag ordre
-        </a>
-    </div>
-    <div class="col-md-6">
-        <h4>
-            <b>
-                TOTALT: @ViewBag.Total ,-
-            </b>
-        </h4>
-    </div>
+        <div class="col col-md-offset-8 col-md-4">
+            <div class="row">
+                <div class="col col-md-3">
+                    <h4>
+                        <b>
+                            TOTALT: @ViewBag.Total,-
+                        </b>
+                    </h4>
+                </div>
+                <div class="col col-md-9">
+                    <a href="@Url.Action("Index", "Home")" class="btn btn-primary btn-block" id="#">
+                        Fortsett å handle
+                    </a>
+                    <a class="btn btn-success btn-block complete-cart">
+                        Kjøp
+                    </a>
+                </div>
+            </div>
+        </div>
 </div>
