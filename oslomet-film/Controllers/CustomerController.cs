@@ -54,21 +54,33 @@ namespace oslomet_film.Controllers
             if (loginSuccess)
                 {
                     ViewBag.LoginSuccess = "Login successfull!";
-                    Session["customer"] = customerSession;
-                    //Session["userName"] = loginModel.Username;
-                    var customer = (Customer)Session["customer"];
-
+                    Session["customerID"] = customerSession.ID;
+                    Sessions();
                     return RedirectToAction("../Home/Index");
                 }
             ViewBag.LoginFailed = "Login failed";
             return View(loginModel);
         }
 
-        public ActionResult EditUser(int id)
+        public ActionResult EditUser()
         {
+            int id = (int)Session["customerID"];
             var customerBLL = new CustomerBLL();
             Customer editModel = customerBLL.fetchCustomer(id);
             return View(editModel);
+        }
+
+        public void Sessions()
+        {
+            int id = (int)Session["customerID"];
+            var customerBLL = new CustomerBLL();
+            Customer customerDetails = customerBLL.fetchCustomer(id);
+
+            Session["customer"] = customerDetails;
+            Session["userName"] = customerDetails.Username;
+            var customer = (Customer)Session["customer"];
+            string userName = (string)Session["userName"];
+            int customerID = (int)Session["customerID"];
         }
 
         [HttpPost]
@@ -79,7 +91,8 @@ namespace oslomet_film.Controllers
             if (editSuccess)
             {
                 ViewBag.EditSuccessfull = "Edit Successfull";
-                return RedirectToAction("DisplayCustomers");
+                Sessions();
+                return RedirectToAction("../Home/Index");
             }
             ViewBag.EditFailed = "Edit failed";
             return View(editModel);

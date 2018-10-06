@@ -25,19 +25,30 @@
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     @if (Session["customer"] == null)
                     {
-                        <li>@Html.ActionLink("Register", "Register", "Customer")</li>
+                        // @Html.ActionLink("Register", "Register", "Customer")
                         <li>@Html.ActionLink("Log in", "Login", "Customer")</li>
+                                              
                     }
                     else
                     {
-                        <li>@Html.ActionLink("Profile", "Profile", "Customer")</li>
-                        <li>@Html.ActionLink("Log out", "Logout", "Customer")</li>
+                        //int customerID = Session["customerID"];
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" style="text-transform: capitalize;">
+                                @Session["userName"]
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>@Html.ActionLink("Profile", "Profile", "Customer")</li>
+                                <li>@Html.ActionLink("Edit user Info", "EditUser", "Customer") </li>
+                                <li>@Html.ActionLink("Log out", "Logout", "Customer")</li>
+                            </ul>
+                        </li>
                     }
                     <li id="cart">
                         @if (Session["cart"] != null)
                         {
                             Html.RenderAction("GetCart", "Cart");
-                            
+
                         }
                     </li>
                 </ul>

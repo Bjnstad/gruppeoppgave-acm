@@ -89,8 +89,7 @@ namespace oslomet_film.Controllers
             cart.CartItem.RemoveAll(ci => ci.Movie.ID == movieID);
             return RedirectToAction("GetCartFull");
         }
-
-
+        
 
         // GET: Cart
         public ActionResult Index()
@@ -131,6 +130,8 @@ namespace oslomet_film.Controllers
             }
             return total;
         }
+
+        
         private bool InCart(Movie movie, Cart cart)
         {
             foreach(CartItem item in cart.CartItem)

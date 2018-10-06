@@ -103,8 +103,18 @@ $(function () {
     
 });
 
-
-
+/**
+ * Add movie to cart
+ */
+/*$(".movie-thumbnail").click(function () {
+    $.ajax({
+        type: "GET",
+        url: "/Cart/AddItem",
+        data: "movieID=" + this.id
+    }).done(function (response) {
+        $("#cart").html(response)
+    });
+}); 
 /**
  *  Extend movie view
  */
