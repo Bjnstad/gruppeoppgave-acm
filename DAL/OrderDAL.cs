@@ -7,72 +7,38 @@ namespace oslomet_film.DAL
 {
     public class OrderDAL
     {
-        private DB db = new DB();
-
-        public decimal CreateOrderLines(Cart cart, int orderID)
+        public void CreateOrder(Customer customer, Cart cart)
         {
-            decimal orderTotal = 0;
+            var db = new DB();
+
+            List<OrderLine> orderLines = new List<OrderLine>();
+            Order order = new Order
+            {
+                DateCreated = DateTime.Now,
+                Customer = customer
+            };
+
+
+            db.Order.Add(order);
+
             foreach (CartItem cartItem in cart.CartItem)
             {
+                Movie movie = db.Movie.Find(cartItem.Movie.ID);
                 OrderLine orderLine = new OrderLine
                 {
-                    Movie = cartItem.Movie,
-                    MovieID = cartItem.Movie.ID,
-                    MovieTitle = cartItem.Movie.Title,
-                    OrderID = orderID,
-                    Price = cartItem.Price,
+                    Order = order,
+                    Movie = movie,
+                    Price = cartItem.Price
                 };
-
                 db.OrderLine.Add(orderLine);
-                orderTotal += cartItem.Price;
             }
-            db.SaveChanges();
-            //Create method in controller to empty cart
-            return orderTotal;
-        }
 
-
-        public void Review(Cart cart, Customer customer, Order order, OrderLine orderLine)
-        {
-            //List<OrderLine> orderLines = new List<OrderLine>();
-
-            order.UserID = customer.ID;
-            order.CustomerName = customer.Name + " " + customer.Surname;
-            order.OrderLines = new List<OrderLine>();
-            try
-            {
-                foreach (CartItem cartItem in cart.CartItem)
-                {
-                    orderLine = new OrderLine
-                    {
-                        Movie = cartItem.Movie,
-                        MovieID = cartItem.Movie.ID,
-                        MovieTitle = cartItem.Movie.Title,
-                        Price = cartItem.Price,
-                        OrderID = order.OrderID,
-                        Order = order
-                    };
-                    order.OrderLines.Add(orderLine);
-                    order.TotalPrice += cartItem.Price;
-                    db.OrderLine.Add(orderLine);
-                }
-                db.SaveChanges();
-            }
-            catch (Exception ex) { }
-        }
-
-        public void CreateOrder(Order order, Cart cart)
-        {
-            order.DateCreated = DateTime.Now;
-            db.Order.Add(order);
-            db.SaveChanges();
-
-            order.TotalPrice = CreateOrderLines(cart, order.OrderID);
             db.SaveChanges();
         }
 
         public Order FetchOrder(int? id, Customer customer)
         {
+            /*
             var order = db.Order.Where(o => o.OrderID == id && o.UserID == customer.ID).FirstOrDefault();
 
             if (order == null)
@@ -82,42 +48,16 @@ namespace oslomet_film.DAL
             else
             {
                 return order;
-            }
+            }*/
+            return null;
         }
 
 
         
 
-        public bool SaveOrder(List<OrderLine> orderLines, Customer customer)
-        {
-            DateTime now = DateTime.Now;
-            var order = new Order();
-
-            order.DateCreated = now;
-            //order.Customer = customer;
-            order.OrderLines = orderLines;
-
-            foreach (var ordrelinje in orderLines)
-            {
-                db.OrderLine.Add(ordrelinje);
-            }
-                
-
-            try
-            {
-                db.Order.Add(order);
-                db.SaveChanges();
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
-            
-        }
-
         public List<Order> GetAll()
         {
+            var db = new DB();
             List<Order> allOrders = db.Order.ToList();
             return allOrders;
         }

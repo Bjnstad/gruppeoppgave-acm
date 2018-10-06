@@ -1,11 +1,9 @@
 ﻿using System.Web.Mvc;
-using System;
 using System.Linq;
 using oslomet_film.Model;
 using oslomet_film.BLL;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using System.Net;
 
 namespace oslomet_film.Controllers
 {
@@ -137,15 +135,18 @@ namespace oslomet_film.Controllers
             ordre.Review((Cart)Session["cart"], (Customer)Session["customer"], order, orderLine);
             return View(order);
         }
-
-        [HttpPost]
-        public ActionResult CreateOrder([Bind(Include = "UserId")] Order order)
+        
+        public ActionResult CreateOrder()
         {
+            Customer customer = (Customer)Session["customer"];
             var ordre = new OrderBLL();
-            ordre.CreateOrder(order, (Cart)Session["cart"]);
+            ordre.CreateOrder(customer, GetSessionCart());
+
+            // TODO: add error handling for failure to process order
             Session.Remove("cart");
 
-            return RedirectToAction("FetchOrder", new { id = order.OrderID });
+            return Content("ADDED ORDER");
+            //return RedirectToAction("FetchOrder", new { id = order.OrderID });
         }
 
         public ActionResult FetchOrder(int? id, Customer customer)

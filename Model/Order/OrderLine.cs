@@ -10,9 +10,6 @@ namespace oslomet_film.Model
     public class OrderLine
     {
         public int ID { get; set; }
-        public int OrderID { get; set; }
-        public int MovieID { get; set; }
-        public String MovieTitle { get; set; }
         public int Price { get; set; }
         public virtual Movie Movie { get; set; }
         public virtual Order Order { get; set; }
