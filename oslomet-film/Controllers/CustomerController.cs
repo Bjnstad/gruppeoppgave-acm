@@ -44,15 +44,6 @@ namespace oslomet_film.Controllers
             return View(loginModel);
         }
 
-        //Test For dropdown login
-        [HttpGet]
-        public ActionResult LoginDropDown()
-        {
-            Customer loginModel = new Customer();
-            return PartialView(loginModel);
-        }
-
-
         [HttpPost]
         public ActionResult Login(Customer loginModel)
         {
@@ -65,31 +56,11 @@ namespace oslomet_film.Controllers
                     ViewBag.LoginSuccess = "Login successfull!";
                     Session["customerID"] = customerSession.ID;
                     Sessions();
-                    return RedirectToAction("Home", "Index");
-            }
+                    return RedirectToAction("../Home/Index");
+                }
             ViewBag.LoginFailed = "Login failed";
             return View(loginModel);
         }
-
-        //Test For dropdown login
-        [HttpPost]
-        public ActionResult LoginDropDown(Customer loginModel)
-        {
-            var customerBLL = new CustomerBLL();
-            bool loginSuccess = customerBLL.login(loginModel);
-            Customer customerSession = customerBLL.fetchCustomerByUsername(loginModel.Username);
-
-            if (loginSuccess)
-            {
-                ViewBag.LoginSuccess = "Login successfull!";
-                Session["customerID"] = customerSession.ID;
-                Sessions();
-                return RedirectToAction("Home", "Index");
-            }
-            ViewBag.LoginFailed = "Login failed";
-            return View(loginModel);
-        }
-
 
         public ActionResult EditUser()
         {
@@ -121,7 +92,7 @@ namespace oslomet_film.Controllers
             {
                 ViewBag.EditSuccessfull = "Edit Successfull";
                 Sessions();
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("../Home/Index");
             }
             ViewBag.EditFailed = "Edit failed";
             return View(editModel);
