@@ -1,0 +1,77 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Oslomet Film</title>
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <script src="~/Scripts/modernizr-2.6.2.js"></script>
+
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Oslomet-film", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    @if (Session["customer"] == null)
+                    {
+                        // @Html.ActionLink("Register", "Register", "Customer")
+                        <li>@Html.ActionLink("Log in", "Login", "Customer")</li>
+                                              
+                    }
+                    else
+                    {
+                        //int customerID = Session["customerID"];
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" style="text-transform: capitalize;">
+                                @Session["userName"]
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>@Html.ActionLink("Profile", "Profile", "Customer")</li>
+                                <li>@Html.ActionLink("Edit user", "EditUser", "Customer") </li>
+                                <li>@Html.ActionLink("Change password", "EditPassword", "Customer") </li>
+                                <li>@Html.ActionLink("Log out", "Logout", "Customer")</li>
+                            </ul>
+                        </li>
+                    }
+                    <li id="cart">
+                        @if (Session["cart"] != null)
+                        {
+                            Html.RenderAction("GetCart", "Cart");
+
+                        }
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="container body-content">
+        <div>
+            <div id="cart">
+
+            </div>
+        </div>
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year Oslomet Film</p>
+        </footer>
+    </div>
+
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/main.js"></script>
+</body>
+</html>

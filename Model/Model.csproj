@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{D18652F1-5965-43FA-944C-B6268FDD9BBF}</ProjectGuid>
+    <ProjectGuid>{67C32E32-BF37-4C82-9EA9-CC8C074A72B6}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Model</RootNamespace>
@@ -42,7 +42,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="Cart\Cart.cs" />
+    <Compile Include="Cart\CartItem.cs" />
+    <Compile Include="Movie\Category.cs" />
+    <Compile Include="Customer\Customer.cs" />
+    <Compile Include="Customer\DBCustomer.cs" />
+    <Compile Include="Movie\Category_Relation.cs" />
+    <Compile Include="Movie\Movie.cs" />
+    <Compile Include="Movie\MovieMerge.cs" />
+    <Compile Include="Order\Order.cs" />
+    <Compile Include="Order\OrderLine.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -1,0 +1,74 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+
+.movie-thumbnail {
+    height: 288px;
+    width: 200px;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.thumbnail-small {
+    width: 55px
+}
+.thumbnail-md {
+    width: 50%;
+}
+.thumbnail-lg {
+    width: 100%;
+}
+
+.display-cart-full {
+    background-color: #efefef;
+    margin: 1%;
+    padding: 1%;
+}
+
+.show {
+    position: absolute !important;
+    top: 51px !important;
+    width: 340px !important;
+    background-color: #fff !important;
+    right: 75px !important;
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22) !important;
+    padding: 0 15px 5px;
+}
+
+.hide {
+    display: none;
+}
+
+.cart-icon {
+    top: 23px;
+    position: absolute;
+    right: 3px;
+    background-color: red;
+    color: #fff;
+    border-radius: 100%;
+    text-align: center;
+    width: 18px;
+    height: 18px;
+    font-size: 10px;
+    z-index: 2;
+}
+
+
+hr {
+    margin: 7px!important;
+}

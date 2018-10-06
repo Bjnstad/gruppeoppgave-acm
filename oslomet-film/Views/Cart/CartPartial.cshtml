@@ -1,0 +1,50 @@
+﻿@model List<oslomet_film.Model.CartItem>
+<!-- In use -->
+<a>
+    <span class="cart-icon">
+        @Model.Count()
+    </span>
+    <span class="glyphicon glyphicon-shopping-cart"></span>
+</a>
+
+<div class="cart-popout-open hide">
+
+    <h3>
+        Handlekurv
+    </h3>
+    <hr />
+    <div style="max-height: 300px; overflow: hidden scroll">
+        @foreach (var item in Model)
+        {
+            <div class="row">
+                <div class="col col-md-3">
+                    <img src="@item.Movie.Thumbnail" class="thumbnail-small" />
+                </div>
+                <div class="col col-md-9">
+                    <h5>
+                        <b>
+                            @item.Movie.Title
+                        </b>
+                    </h5>
+                    <p>
+                        @item.Price,-
+                    </p>
+                </div>
+            </div>
+            <hr />
+        }
+    </div>
+    <h4>
+        <b>
+            TOTALT: @ViewBag.Total ,-
+        </b>
+    </h4>
+
+    <hr />
+    <a href="@Url.Action("Index", "Cart")" class="btn btn-primary btn btn-block" id="#">
+        Vis Handlekurv
+    </a>
+    <a href="#" class="btn btn-success btn-block complete-cart" id="#">
+        Lag ordre
+    </a>
+</div>
