@@ -1,19 +1,7 @@
 ﻿/**
  *  Filter on  categories 
  */
-$(".category").click(function () {
-    $.ajax({
-        type: "GET",
-        url: "/Movie/FilterMovies",
-        data: "categoryID=" + this.id
-    }).done(function (response) {
-        if (response === "null") {
-            console.log("null: " + response);
-        } else {
-            $('#movies').html(response);
-        }
-    });
-});
+$(".category").click(refreshMovies(this.id));
 
 /**
  * Add movie to cart
@@ -37,12 +25,28 @@ $(".complete-cart").click(() => {
         url: "/Cart/CompleteOrder"
     }).done(function (response) {
         console.log(response);
+
+        // TODO: Check for success
+        refreshMovies(0);
+
         //$("#cart").html(response)
     });
 });
 
 
-
+function refreshMovies(categorId) {
+    $.ajax({
+        type: "GET",
+        url: "/Movie/FilterMovies",
+        data: "categoryID=" + categorId
+    }).done(function (response) {
+        if (response === "null") {
+            console.log("null: " + response);
+        } else {
+            $('#movies').html(response);
+        }
+    });
+}
 
 
 

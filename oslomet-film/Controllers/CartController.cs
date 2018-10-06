@@ -46,11 +46,14 @@ namespace oslomet_film.Controllers
             if(customer == null)
             {
                 // User must be logged in
-                return Content("Need to be logged in to create order");
+                return null;
             }
 
             orderBLL.CreateOrder(customer, GetSessionCart());
-            return Content("DONE");
+
+            return Content("Success");
+            // TODO: Redirect user to owned movies
+            //return Redirect("Pro")
         } 
 
 

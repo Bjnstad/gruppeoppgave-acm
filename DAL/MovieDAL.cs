@@ -13,6 +13,19 @@ namespace oslomet_film.DAL
             return movies;
         }
 
+        public List<Movie> GetMyMovies(Customer customer)
+        {
+            var db = new DB();
+
+            List<Movie> movies = new List<Movie>();
+            List<OrderLine> orderLines = db.OrderLine.ToList();
+            foreach(OrderLine line in orderLines)
+            {
+                movies.Add(line.Movie);
+            }
+            return movies;
+        }
+
         public Movie GetMovie(int movieID)
         {
             var db = new DB();
@@ -30,6 +43,14 @@ namespace oslomet_film.DAL
         {
             var db = new DB();
             Category category = db.Category.Find(categoryId);
+            
+            // Category not found
+            if(category == null)
+            {
+                List<Movie> list = db.Movie.ToList();
+                return list;
+            }
+
             List<Movie> movies = new List<Movie>();
             foreach(Category_Relation relation in category.Category_Relation)
             {
