@@ -16,6 +16,46 @@ $(".category").click(function () {
 });
 
 /**
+ * Add movie to cart
+ */
+$(".movie-thumbnail").click(function () {
+    $.ajax({
+        type: "GET",
+        url: "/Cart/AddMovie",
+        data: "movieID=" + this.id
+    }).done(function (response) {
+        $("#cart").html(response)
+    });
+});
+
+/**
+ * Complete the cart
+ */
+$(".complete-cart").click(() => {
+    $.ajax({
+        type: "GET",
+        url: "/Cart/CompleteOrder"
+    }).done(function (response) {
+        console.log(response);
+        //$("#cart").html(response)
+    });
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/**
  * Buy movies
  */
 $("buy-movies").click(function () {
@@ -75,8 +115,6 @@ $(".movie-thumbnail").click(function () {
         $("#cart").html(response)
     });
 }); 
-
-
 /**
  *  Extend movie view
  */
