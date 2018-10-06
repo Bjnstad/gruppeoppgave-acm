@@ -1,33 +1,24 @@
-﻿@model IEnumerable<oslomet_film.Model.OrderLine>
-
+﻿@model oslomet_film.Model.Customer
 @{
+    /**/
+
     ViewBag.Title = "Profile";
 }
 
 <h2>Profile</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Price)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Price)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
-        </td>
-    </tr>
+@{ 
+    Html.RenderAction("EditUser", new { id = Session["customerID"] });
 }
 
-</table>
+@{ 
+    Html.RenderAction("EditPassword", new { id = Session["customerID"] });
+}
+
+
+<div>
+    @Html.ActionLink("Back to List", "Index", "Home")
+</div>
+
+
+

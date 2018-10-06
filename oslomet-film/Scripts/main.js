@@ -110,7 +110,7 @@ $(function () {
 /**
  * Add movie to cart
  */
-/*$(".movie-thumbnail").click(function () {
+$(".movie-thumbnail").click(function () {
     $.ajax({
         type: "GET",
         url: "/Cart/AddItem",

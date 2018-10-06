@@ -32,7 +32,16 @@ namespace oslomet_film.Controllers
             if (userAdded)
             {
                 ViewBag.RegistrationSuccess = "Registration successfull!";
-                return RedirectToAction("Index", "Home");
+                bool loginSuccess = customerBLL.login(customerModel);
+                Customer customerSession = customerBLL.fetchCustomerByUsername(customerModel.Username);
+
+                if (loginSuccess)
+                {
+                    ViewBag.LoginSuccess = "Login successfull!";
+                    Session["customerID"] = customerSession.ID;
+                    Sessions();
+                    return RedirectToAction("../Home/Index");
+                }
             }
             ViewBag.RegistrationFailed = "Registration Failed";
             return View(customerModel);
@@ -70,6 +79,48 @@ namespace oslomet_film.Controllers
             return View(editModel);
         }
 
+        [HttpPost]
+        public ActionResult EditUser(int id, Customer editModel)
+        {
+            var customerBLL = new CustomerBLL();
+            bool editSuccess = customerBLL.editUser(id, editModel);
+            if (editSuccess)
+            {
+                ViewBag.EditSuccessfull = "Edit Successfull";
+                Sessions();
+                return View(editModel);
+            }
+            ViewBag.EditFailed = "Edit failed";
+            return View(editModel);
+        }
+
+        public ActionResult EditPassword()
+        {
+            int id = (int)Session["customerID"];
+            var customerBLL = new CustomerBLL();
+            Customer editPassModel = customerBLL.fetchCustomer(id);
+            return View(editPassModel);
+        }
+        [HttpPost]
+        public ActionResult EditPassword(int id, Customer editPassModel)
+        {
+            var customerBLL = new CustomerBLL();
+            bool editSuccess = customerBLL.EditPassword(id, editPassModel);
+            if (editSuccess)
+            {
+                ViewBag.EditSuccessfull = "Edit Successfull";
+                Sessions();
+                return View(editPassModel);
+            }
+            ViewBag.EditFailed = "Edit failed";
+            return View(editPassModel);
+        }
+
+        public ActionResult Profile()
+        {
+            return View();
+        }
+
         public void Sessions()
         {
             int id = (int)Session["customerID"];
@@ -81,21 +132,6 @@ namespace oslomet_film.Controllers
             var customer = (Customer)Session["customer"];
             string userName = (string)Session["userName"];
             int customerID = (int)Session["customerID"];
-        }
-
-        [HttpPost]
-        public ActionResult EditUser(int id, Customer editModel)
-        {
-            var customerBLL = new CustomerBLL();
-            bool editSuccess = customerBLL.editUser(id, editModel);
-            if (editSuccess)
-            {
-                ViewBag.EditSuccessfull = "Edit Successfull";
-                Sessions();
-                return RedirectToAction("../Home/Index");
-            }
-            ViewBag.EditFailed = "Edit failed";
-            return View(editModel);
         }
 
         public ActionResult DeleteCustomer(int id)
