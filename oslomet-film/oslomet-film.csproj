@@ -160,6 +160,7 @@
     <Content Include="Views\Cart\GetCartFull.cshtml" />
     <Content Include="Views\Movie\Details.cshtml" />
     <Content Include="Views\Customer\LoginDropDown.cshtml" />
+    <Content Include="Views\Customer\EditPassword.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

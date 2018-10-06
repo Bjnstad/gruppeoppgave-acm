@@ -32,7 +32,6 @@ namespace oslomet_film.DAL
                 };
                 db.OrderLine.Add(orderLine);
             }
-
             db.SaveChanges();
         }
 

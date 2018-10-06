@@ -32,7 +32,16 @@ namespace oslomet_film.Controllers
             if (userAdded)
             {
                 ViewBag.RegistrationSuccess = "Registration successfull!";
-                return RedirectToAction("Index", "Home");
+                bool loginSuccess = customerBLL.login(customerModel);
+                Customer customerSession = customerBLL.fetchCustomerByUsername(customerModel.Username);
+
+                if (loginSuccess)
+                {
+                    ViewBag.LoginSuccess = "Login successfull!";
+                    Session["customerID"] = customerSession.ID;
+                    Sessions();
+                    return RedirectToAction("../Home/Index");
+                }
             }
             ViewBag.RegistrationFailed = "Registration Failed";
             return View(customerModel);
@@ -70,19 +79,6 @@ namespace oslomet_film.Controllers
             return View(editModel);
         }
 
-        public void Sessions()
-        {
-            int id = (int)Session["customerID"];
-            var customerBLL = new CustomerBLL();
-            Customer customerDetails = customerBLL.fetchCustomer(id);
-
-            Session["customer"] = customerDetails;
-            Session["userName"] = customerDetails.Username;
-            var customer = (Customer)Session["customer"];
-            string userName = (string)Session["userName"];
-            int customerID = (int)Session["customerID"];
-        }
-
         [HttpPost]
         public ActionResult EditUser(int id, Customer editModel)
         {
@@ -96,6 +92,41 @@ namespace oslomet_film.Controllers
             }
             ViewBag.EditFailed = "Edit failed";
             return View(editModel);
+        }
+
+        public ActionResult EditPassword()
+        {
+            int id = (int)Session["customerID"];
+            var customerBLL = new CustomerBLL();
+            Customer editModel = customerBLL.fetchCustomer(id);
+            return PartialView(editModel);
+        }
+        [HttpPost]
+        public ActionResult EditPassword(int id, Customer editModel)
+        {
+            var customerBLL = new CustomerBLL();
+            bool editSuccess = customerBLL.EditPassword(id, editModel);
+            if (editSuccess)
+            {
+                ViewBag.EditSuccessfull = "Edit Successfull";
+                Sessions();
+                return PartialView(editModel);
+            }
+            ViewBag.EditFailed = "Edit failed";
+            return PartialView(editModel);
+        }
+
+        public void Sessions()
+        {
+            int id = (int)Session["customerID"];
+            var customerBLL = new CustomerBLL();
+            Customer customerDetails = customerBLL.fetchCustomer(id);
+
+            Session["customer"] = customerDetails;
+            Session["userName"] = customerDetails.Username;
+            var customer = (Customer)Session["customer"];
+            string userName = (string)Session["userName"];
+            int customerID = (int)Session["customerID"];
         }
 
         public ActionResult DeleteCustomer(int id)

@@ -144,27 +144,36 @@ namespace oslomet_film.DAL
             }
         }
 
-       /* public bool editPassword(int id, Customer editPasswordModel)
+        public bool editPassword(int id, Customer editModel)
         {
             var db = new DB();
             byte[] salt = createSalt();
-            byte[] hash = createHash(editPasswordModel.Password, salt);
+            byte[] hash = createHash(editModel.Password, salt);
+            byte[] newHash = createHash(editModel.NewPassword, salt);
 
-            try
+            DBCustomer customer = db.Customers.Find(id);
+            if(customer == null)
             {
-                DBCustomer editCustomer = db.Customers.Find(id);
-                if(editCustomer.Password == editPasswordModel.Password)
-                editCustomer.Password = hash;
-                editCustomer.Salt = salt;
-
+                return false;
+            } else
+            {
+                byte[] testPassword = createHash(editModel.Password, customer.Salt);
+                bool passwordCorrect = customer.Password.SequenceEqual(testPassword);
+                if(passwordCorrect == true)
+                {
+                    customer.Username = editModel.Username;
+                    customer.Name = editModel.Name;
+                    customer.Surname = editModel.Surname;
+                    customer.Phone = editModel.Phone;
+                    customer.Email = editModel.Email;
+                    customer.Password = newHash;
+                    customer.Salt = salt;
+                }
                 db.SaveChanges();
                 return true;
             }
-            catch
-            {
-                return false;
-            }
-        } */
+            
+        } 
 
         public bool deleteUser(int id)
         {
@@ -180,8 +189,6 @@ namespace oslomet_film.DAL
                 return false;
             }
         }
-
-
 
         public Customer fetchCustomer (int id)
         {

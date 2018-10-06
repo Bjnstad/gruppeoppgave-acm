@@ -29,6 +29,12 @@ namespace oslomet_film.BLL
             var CustomerDAL = new CustomerDAL();
             return CustomerDAL.editUser(id, editModel);
         }
+
+        public bool EditPassword(int id, Customer editModel)
+        {
+            var CustomerDAL = new CustomerDAL();
+            return CustomerDAL.editUser(id, editModel);
+        }
         public bool deleteUser(int id)
         {
             var CustomerDAL = new CustomerDAL();

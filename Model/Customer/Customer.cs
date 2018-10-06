@@ -8,27 +8,29 @@ namespace oslomet_film.Model
     {
         public int ID { get; set; }
 
-        //[Required(ErrorMessage = "Required")]
+        [Required(ErrorMessage = "Required")]
         public string Username { get; set; }
 
-       // [Required(ErrorMessage = "Required")]
+        [Required(ErrorMessage = "Required")]
         public string Name { get; set; }
 
-        //[Required(ErrorMessage = "Required")]
+        [Required(ErrorMessage = "Required")]
         public string Surname { get; set; }
 
         [DataType(DataType.PhoneNumber)]
-        //[Required(ErrorMessage = "Required")]
+        [Required(ErrorMessage = "Required")]
         public string Phone { get; set; }
 
         [DataType(DataType.EmailAddress)]
-        //[Required(ErrorMessage = "Required")]
+        [Required(ErrorMessage = "Required")]
         public string Email { get; set; }
 
+        [DataType(DataType.Password)]
+        [Required(ErrorMessage = "Required")]
+        public string Password { get; set; }
 
         [DataType(DataType.Password)]
-        //[Required(ErrorMessage = "Required")]
-        public string Password { get; set; }
+        public string NewPassword { get; set; }
 
         //public virtual List<Order> Order { get; set; }
     }
