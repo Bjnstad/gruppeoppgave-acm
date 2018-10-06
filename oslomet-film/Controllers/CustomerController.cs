@@ -88,7 +88,7 @@ namespace oslomet_film.Controllers
             {
                 ViewBag.EditSuccessfull = "Edit Successfull";
                 Sessions();
-                return RedirectToAction("../Home/Index");
+                return View(editModel);
             }
             ViewBag.EditFailed = "Edit failed";
             return View(editModel);
@@ -98,22 +98,27 @@ namespace oslomet_film.Controllers
         {
             int id = (int)Session["customerID"];
             var customerBLL = new CustomerBLL();
-            Customer editModel = customerBLL.fetchCustomer(id);
-            return PartialView(editModel);
+            Customer editPassModel = customerBLL.fetchCustomer(id);
+            return View(editPassModel);
         }
         [HttpPost]
-        public ActionResult EditPassword(int id, Customer editModel)
+        public ActionResult EditPassword(int id, Customer editPassModel)
         {
             var customerBLL = new CustomerBLL();
-            bool editSuccess = customerBLL.EditPassword(id, editModel);
+            bool editSuccess = customerBLL.EditPassword(id, editPassModel);
             if (editSuccess)
             {
                 ViewBag.EditSuccessfull = "Edit Successfull";
                 Sessions();
-                return PartialView(editModel);
+                return View(editPassModel);
             }
             ViewBag.EditFailed = "Edit failed";
-            return PartialView(editModel);
+            return View(editPassModel);
+        }
+
+        public ActionResult Profile()
+        {
+            return View();
         }
 
         public void Sessions()

@@ -43,8 +43,6 @@ namespace oslomet_film.BLL
             return allOrders;
         }
 
-
-
         public bool OwnsMovie(Customer customer, Movie movie)
         {
             OrderDAL orderDAL = new OrderDAL();

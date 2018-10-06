@@ -53,21 +53,6 @@ namespace oslomet_film.Controllers
             return Content("DONE");
         } 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         public ActionResult GetCart()
         {
             ViewBag.Total = GetTotal();
