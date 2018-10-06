@@ -9,6 +9,65 @@ namespace oslomet_film.Controllers
 {
     public class CartController : Controller
     {
+        public ActionResult AddMovie(int movieID)
+        {
+            MovieBLL movieBLL = new MovieBLL();
+            OrderBLL orderBLL = new OrderBLL();
+
+            Cart cart = GetSessionCart();
+            Movie movie = movieBLL.GetMovie(movieID);
+
+            bool ownMovie = false; // False is user not logged in
+            // Check if user is logged in
+            Customer customer = (Customer)Session["customer"];
+            if (customer != null)
+            {
+                ownMovie = orderBLL.OwnsMovie(customer, movie);
+            }
+
+            if (!InCart(movie, cart) || ownMovie)
+            {
+                CartItem item = new CartItem()
+                {
+                    Movie = movie,
+                    Price = movie.Price
+                };
+                cart.CartItem.Add(item);
+            }
+            
+            ViewBag.Total = GetTotal();
+            return PartialView("CartPartial", cart.CartItem.ToList());
+        }
+        public ActionResult CompleteOrder()
+        {
+            OrderBLL orderBLL = new OrderBLL();
+
+            Customer customer = (Customer)Session["customer"];
+            if(customer == null)
+            {
+                // User must be logged in
+                return Content("Need to be logged in to create order");
+            }
+
+            orderBLL.CreateOrder(customer, GetSessionCart());
+            return Content("DONE");
+        } 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         public ActionResult GetCart()
         {
             ViewBag.Total = GetTotal();
@@ -31,26 +90,7 @@ namespace oslomet_film.Controllers
             return RedirectToAction("GetCartFull");
         }
 
-        public ActionResult AddItem(int movieID)
-        {
-            Cart cart = GetSessionCart();
-            MovieBLL movieBLL = new MovieBLL();
-            Movie movie = movieBLL.GetMovie(movieID);
-            //Tried running test if movie ID exists in List<CartItem> Not finished
-            //if (cart.CartItem.Any(m => m.Movie.ID != movieID))
-            //{
-                CartItem item = new CartItem()
-            {
-                Movie = movie,
-                Price = movie.Price
-            };
-                cart.CartItem.Add(item);
-                ViewBag.Total = GetTotal();
-                return PartialView("CartPartial", cart.CartItem.ToList());
-            //}
-            ViewBag.AlreadyInCart = "Movie is already in Cart";
-            return View("Index");
-        }
+
 
         // GET: Cart
         public ActionResult Index()
@@ -75,6 +115,12 @@ namespace oslomet_film.Controllers
             return cart;
         }
 
+        public ActionResult FetchOrder(int? id, Customer customer)
+        {
+            var order = new OrderBLL();
+            Order orderDetails = order.FetchOrder(id, (Customer)Session["customer"]);
+            return View(orderDetails.OrderLines.ToList());
+        }
 
         private int GetTotal()
         {
@@ -85,70 +131,13 @@ namespace oslomet_film.Controllers
             }
             return total;
         }
-
-        // Trying to create the order and orderline based on the cart Session
-
-
-        /* public ActionResult CreateOrderLine()
-         {
-             if (Session["cart"] == null)
-             {
-                 return Content("Handlekurven er tom");
-             }
-             Cart cart = GetSessionCart();
-             //List<CartItem> cartItem = cart.CartItem;
-             List<OrderLine> orderLines = new List<OrderLine>();
-
-             OrderBLL orderBLL = new OrderBLL();
-
-             //For å generere en tilfeldig ID på de forskjellige Ordrelinjene
-             Random random = new Random();
-
-             foreach (CartItem cartItem in cart.CartItem)
-              {
-                  OrderLine newOrderLine = new OrderLine()
-                  {
-                      //ID = random.Next(1000),
-                      Price = cartItem.Price,
-                      Movie = cartItem.Movie
-                 };
-                 orderLines.Add(newOrderLine);
-             }
-
-             orderBLL.SaveOrder(orderLines, (Customer)Session["customer"]);
-
-             return View("../Order/OrderLinePartial", orderLines.ToList());
-         } */
-
-        public async Task<ActionResult> Review()
+        private bool InCart(Movie movie, Cart cart)
         {
-            Order order = new Order();
-            OrderLine orderLine = new OrderLine();
-
-            var ordre = new OrderBLL();
-            ordre.Review((Cart)Session["cart"], (Customer)Session["customer"], order, orderLine);
-            return View(order);
+            foreach(CartItem item in cart.CartItem)
+            {
+                if (item.Movie.ID == movie.ID) return true;
+            }
+            return false;
         }
-        
-        public ActionResult CreateOrder()
-        {
-            Customer customer = (Customer)Session["customer"];
-            var ordre = new OrderBLL();
-            ordre.CreateOrder(customer, GetSessionCart());
-
-            // TODO: add error handling for failure to process order
-            Session.Remove("cart");
-
-            return Content("ADDED ORDER");
-            //return RedirectToAction("FetchOrder", new { id = order.OrderID });
-        }
-
-        public ActionResult FetchOrder(int? id, Customer customer)
-        {
-            var order = new OrderBLL();
-            Order orderDetails = order.FetchOrder(id, (Customer)Session["customer"]);
-            return View(orderDetails.OrderLines.ToList());
-        }
-
     }
 }
