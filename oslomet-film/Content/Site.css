@@ -72,3 +72,21 @@ textarea {
 hr {
     margin: 7px!important;
 }
+
+
+.movie-hover {
+    opacity: 0;
+}
+
+.movie-hover:hover {
+    opacity: 1;
+}
+
+.movie-hover-background
+{
+    height: 100%;
+    width: 100%;
+    background-color: #fff;
+    opacity: .6;
+    position: absolute;
+}

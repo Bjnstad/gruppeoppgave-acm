@@ -1,15 +1,27 @@
 ﻿@model oslomet_film.Model.MovieMerge
 
-<div style="display: flex">
+<div clsas="row" style="display: flex">
+    <h4>
+        Sorter etter kategori:
+    </h4>
+
+    <a class="category" href="#" id="-1">
+        <h4 style="padding-left: 30px">
+            Alle
+        </h4>
+    </a>
+
     @foreach (var category in Model.Category)
     {
         <a class="category" href="#" id="@category.ID">
-            @category.Name
+            <h4 style="padding-left: 30px">
+                @category.Name
+            </h4>
         </a>
     }
+
+    <hr />
+
 </div>
-
-
-
 
 @Html.Partial("../Movie/MovieList", Model.Movie)
