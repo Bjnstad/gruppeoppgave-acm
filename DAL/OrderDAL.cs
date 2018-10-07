@@ -48,8 +48,9 @@ namespace oslomet_film.DAL
 
         public bool OwnsMovie(Customer customer, Movie movie)
         {
+            if (customer == null || movie == null) return false;
             var db = new DB();
-            OrderLine orderlines = db.OrderLine.Where(line => line.Order.Customer.ID.Equals(customer.ID) && line.Movie.ID.Equals(movie.ID)).First();
+            OrderLine orderlines = db.OrderLine.Where(line => line.Order.Customer.ID.Equals(customer.ID) && line.Movie.ID.Equals(movie.ID)).FirstOrDefault();
             return orderlines != null;
         }
     }

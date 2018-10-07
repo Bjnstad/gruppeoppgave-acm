@@ -1,14 +1,35 @@
 ﻿@model List<oslomet_film.Model.Movie>
 
+
+<div class="clearfix">
+    <div class="col col-md-12">
+        <h1 style="margin-left:0">
+            Dine filmer
+        </h1>
+    </div>
+</div>
+
+
 <div class="row">
 
-    @foreach(var movie in Model)
+    @foreach (var movie in Model)
     {
-        <div class="col col-md-12">
-            <h5>
-                @movie.Title
-            </h5>
+    <div class="row display-cart-full img-rounded">
+        <div class="col col-md-3">
+            <img src="@movie.Thumbnail" class="thumbnail-md" />
         </div>
+        <div class="col col-md-6">
+            <h3>
+                <b>
+                    @movie.Title
+                </b>
+            </h3>
+            <br />
+            <p>
+                @movie.Description
+            </p>
+            <br />
+        </div>
+    </div>
     }
-
 </div>
