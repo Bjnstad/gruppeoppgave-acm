@@ -1,14 +1,12 @@
 ﻿@model System.Collections.Generic.List<oslomet_film.Model.Movie>
 
 <div class="row" id="movies">
-    <div style="display: flex">
-        @foreach (var movie in Model)
-        {
+    @foreach (var movie in Model)
+    {
+        <div class="col">
             <a href="" data-toggle="modal" data-target="#exampleModal" style="padding: 0 15px">
-                <div id="@movie.ID" class="movie-thumbnail" style="background-image: url('@movie.Thumbnail')">
-
-                </div>
+                <div id="@movie.ID" class="movie-thumbnail" style="background-image: url('@movie.Thumbnail')"></div>
             </a>
-        }
-    </div>
-    </div>
+        </div>
+    }
+</div>

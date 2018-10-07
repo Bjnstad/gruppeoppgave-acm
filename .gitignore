@@ -40,6 +40,9 @@ TestResult.xml
 [Rr]eleasePS/
 dlldata.c
 
+#web config
+Web.config
+
 # DNX
 project.lock.json
 project.fragment.lock.json
