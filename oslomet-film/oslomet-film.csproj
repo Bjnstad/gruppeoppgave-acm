@@ -145,16 +145,12 @@
     <Content Include="Views\Customer\Register.cshtml" />
     <Content Include="Views\Customer\Login.cshtml" />
     <Content Include="Views\Customer\EditUser.cshtml" />
-    <Content Include="Views\Customer\DeleteCustomer.cshtml" />
     <Content Include="Views\Customer\FetchCustomer.cshtml" />
     <Content Include="Views\Movie\MovieList.cshtml" />
     <Content Include="Views\Cart\CartPartial.cshtml" />
     <Content Include="Views\Cart\Index.cshtml" />
-    <Content Include="Views\Customer\Profile.cshtml" />
     <Content Include="Views\Movie\Details.cshtml" />
-    <Content Include="Views\Customer\LoginDropDown.cshtml" />
     <Content Include="Views\Profile\Index.cshtml" />
-    <Content Include="Views\Customer\EditPassword.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
