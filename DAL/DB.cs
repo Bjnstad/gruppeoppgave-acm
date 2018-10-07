@@ -8,7 +8,7 @@ namespace oslomet_film.DAL
     {
         public DB() : base("name=acm-film")
         {
-            Database.CreateIfNotExists();
+            //Database.CreateIfNotExists();
             Database.SetInitializer(new DBInit());
         }
 
