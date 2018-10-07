@@ -31,7 +31,7 @@ namespace oslomet_film.DAL
                 }
                 return DomeneKunder;
             }
-            catch(Exception ex)
+            catch
             {
                 //GJØR FEILHÅNDTERING HER
                 return null;
@@ -143,32 +143,6 @@ namespace oslomet_film.DAL
                 return false;
             }
         }
-
-        public bool editPassword(int id, Customer editPassModel)
-        {
-            var db = new DB();
-            byte[] salt = createSalt();
-            byte[] hash = createHash(editPassModel.Password, salt);
-            byte[] newHash = createHash(editPassModel.NewPassword, salt);
-
-            DBCustomer customer = db.Customers.Find(id);
-            if(customer == null)
-            {
-                return false;
-            } else
-            {
-                byte[] testPassword = createHash(editPassModel.Password, customer.Salt);
-                bool passwordCorrect = customer.Password.SequenceEqual(testPassword);
-                if(passwordCorrect == true)
-                {
-                    customer.Password = newHash;
-                    customer.Salt = salt;
-                }
-                db.SaveChanges();
-                return true;
-            }
-            
-        } 
 
         public bool deleteUser(int id)
         {

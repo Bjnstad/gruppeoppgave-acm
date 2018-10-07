@@ -9,7 +9,7 @@
                         <div class="movie-hover-background"></div>
                         <div class="row" style="height: 100%; padding-top: 100px">
                             <div class="col col-lg-offset-1 col-lg-10">
-                                <a id="@movie.ID" href="@Url.Action("Index", "Home")" class="btn btn-primary btn-block" id="#">
+                                <a id="@movie.ID" href="@Url.Action("Details", "Movie", new { movieID = movie.ID})" class="btn btn-primary btn-block" id="#">
                                     Les mer
                                 </a>
                             </div>

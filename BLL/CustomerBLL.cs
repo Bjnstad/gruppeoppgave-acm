@@ -18,7 +18,6 @@ namespace oslomet_film.BLL
             var CustomerDAL = new CustomerDAL();
             return CustomerDAL.addCustomer(customerModel);
         }
-
         public bool login(Customer loginModel)
         {
             var CustomerDAL = new CustomerDAL();
@@ -28,12 +27,6 @@ namespace oslomet_film.BLL
         {
             var CustomerDAL = new CustomerDAL();
             return CustomerDAL.editUser(id, editModel);
-        }
-
-        public bool EditPassword(int id, Customer editPassModel)
-        {
-            var CustomerDAL = new CustomerDAL();
-            return CustomerDAL.editUser(id, editPassModel);
         }
         public bool deleteUser(int id)
         {
@@ -45,7 +38,6 @@ namespace oslomet_film.BLL
             var CustomerDAL = new CustomerDAL();
             return CustomerDAL.fetchCustomer(id);
         }
-
         public Customer fetchCustomerByUsername(String username)
         {
             var CustomerDAL = new CustomerDAL();
