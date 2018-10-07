@@ -75,7 +75,7 @@ namespace oslomet_film.Controllers
         {
             Cart cart = GetSessionCart();
             cart.CartItem.RemoveAll(ci => ci.Movie.ID == movieID);
-            return RedirectToAction("GetCartFull");
+            return View("index", GetSessionCart());
         }
         
 

@@ -20,7 +20,7 @@
                 <div class="col col-md-3">
                     <img src="@item.Movie.Thumbnail" class="thumbnail-small" />
                 </div>
-                <div class="col col-md-9">
+                <div class="col col-md-5">
                     <h5>
                         <b>
                             @item.Movie.Title
@@ -30,18 +30,22 @@
                         @item.Price,-
                     </p>
                 </div>
+                <div class="col col-md-4">
+                    <a href="@Url.Action("RemoveItem", "Cart", new { movieID = item.Movie.ID})" class="btn btn-primary btn-block" id="#">
+                        Fjern
+                    </a>
+                </div>
+                <hr />
             </div>
-            <hr />
         }
-    </div>
-    <h4>
-        <b>
-            TOTALT: @ViewBag.Total ,-
-        </b>
-    </h4>
+        <h4>
+            <b>
+                TOTALT: @ViewBag.Total ,-
+            </b>
+        </h4>
 
-    <hr />
-    <a href="@Url.Action("Index", "Cart")" class="btn btn-primary btn btn-block" id="#">
-        Vis Handlekurv
-    </a>
-</div>
+        <hr />
+        <a href="@Url.Action("Index", "Cart")" class="btn btn-primary btn btn-block" id="#">
+            Vis Handlekurv
+        </a>
+    </div>
