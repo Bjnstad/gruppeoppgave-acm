@@ -150,7 +150,6 @@
     <Content Include="Views\Cart\CartPartial.cshtml" />
     <Content Include="Views\Cart\Index.cshtml" />
     <Content Include="Views\Customer\Profile.cshtml" />
-    <Content Include="Views\Order\OrderLinePartial.cshtml" />
     <Content Include="Views\Order\DisplayAllOrders.cshtml" />
     <Content Include="Views\Cart\Review.cshtml" />
     <Content Include="Views\Cart\Details.cshtml" />
