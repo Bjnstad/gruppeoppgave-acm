@@ -26,7 +26,7 @@ namespace oslomet_film.Controllers
             var movieBLL = new MovieBLL();
             Movie movie = movieBLL.GetMovie(movieID);
             //Gjør om til partial
-            return PartialView(movie);
+            return View(movie);
         }
     }
 }

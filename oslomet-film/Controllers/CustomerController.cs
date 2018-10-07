@@ -116,11 +116,6 @@ namespace oslomet_film.Controllers
             return View(editPassModel);
         }
 
-        public ActionResult Profile()
-        {
-            return View();
-        }
-
         public void Sessions()
         {
             int id = (int)Session["customerID"];

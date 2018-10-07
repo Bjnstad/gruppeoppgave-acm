@@ -31,7 +31,7 @@ namespace oslomet_film.DAL
                 }
                 return DomeneKunder;
             }
-            catch(Exception ex)
+            catch
             {
                 //GJØR FEILHÅNDTERING HER
                 return null;
