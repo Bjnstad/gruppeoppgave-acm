@@ -50,10 +50,8 @@ namespace oslomet_film.Controllers
             }
 
             orderBLL.CreateOrder(customer, GetSessionCart());
-
+            Session["cart"] = null;
             return Content("Success");
-            // TODO: Redirect user to owned movies
-            //return Redirect("Pro")
         } 
 
         public ActionResult GetCart()
@@ -100,13 +98,6 @@ namespace oslomet_film.Controllers
             };
             Session["cart"] = cart;
             return cart;
-        }
-
-        public ActionResult FetchOrder(int? id, Customer customer)
-        {
-            var order = new OrderBLL();
-            Order orderDetails = order.FetchOrder(id, (Customer)Session["customer"]);
-            return View(orderDetails.OrderLines.ToList());
         }
 
         private int GetTotal()

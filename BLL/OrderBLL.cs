@@ -29,13 +29,7 @@ namespace oslomet_film.BLL
             ///order.SaveOrder(orderLines, customer);
             return true;
         }
-
-        public Order FetchOrder(int? id, Customer customer)
-        {
-            var order = new OrderDAL();
-            return order.FetchOrder(id, customer);
-        }
-
+        
         public List<Order> GetAll()
         {
             var order = new OrderDAL();

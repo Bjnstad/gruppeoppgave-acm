@@ -11,7 +11,7 @@ namespace oslomet_film.Model
     {
         public int OrderID { get; set; }
         public DateTime DateCreated { get; set; }
-        public virtual Customer Customer { get; set; }
+        public virtual DBCustomer Customer { get; set; }
         public virtual List<OrderLine> OrderLines { get; set; }
     }
 }

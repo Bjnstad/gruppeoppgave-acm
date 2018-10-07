@@ -11,11 +11,11 @@ namespace oslomet_film.DAL
         {
             var db = new DB();
 
-            List<OrderLine> orderLines = new List<OrderLine>();
+            DBCustomer dBCustomer = db.Customers.Find(customer.ID);
             Order order = new Order
             {
                 DateCreated = DateTime.Now,
-                Customer = customer
+                Customer = dBCustomer
             };
 
 
@@ -35,24 +35,7 @@ namespace oslomet_film.DAL
             db.SaveChanges();
         }
 
-        public Order FetchOrder(int? id, Customer customer)
-        {
-            /*
-            var order = db.Order.Where(o => o.OrderID == id && o.UserID == customer.ID).FirstOrDefault();
-
-            if (order == null)
-            {
-                return null;
-            }
-            else
-            {
-                return order;
-            }*/
-            return null;
-        }
-
-
-        
+  
 
         public List<Order> GetAll()
         {

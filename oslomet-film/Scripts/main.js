@@ -8,7 +8,7 @@ $(".category").click(function () {
 /**
  * Add movie to cart
  */
-$(".movie-thumbnail").click(function () {
+$(".add-movie").click(function () {
     $.ajax({
         type: "GET",
         url: "/Cart/AddMovie",
@@ -26,12 +26,12 @@ $(".complete-cart").click(() => {
         type: "GET",
         url: "/Cart/CompleteOrder"
     }).done(function (response) {
-        console.log(response);
-
-        // TODO: Check for success
-        refreshMovies(0);
-
-        //$("#cart").html(response)
+        console.log(response)
+        if (response === "") {
+            window.location.href = "/Customer/Login";
+        } else {
+            window.location.href = "/Profile";
+        }
     });
 });
 

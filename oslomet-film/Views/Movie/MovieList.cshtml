@@ -4,18 +4,18 @@
     @foreach (var movie in Model)
     {
         <div class="col-md-3">
-                <div id="@movie.ID" class="movie-thumbnail" style="background-image: url('@movie.Thumbnail')">
+                <div class="movie-thumbnail" style="background-image: url('@movie.Thumbnail')">
                     <div class="movie-hover" style="height: 100%">
                         <div class="movie-hover-background"></div>
                         <div class="row" style="height: 100%; padding-top: 100px">
                             <div class="col col-lg-offset-1 col-lg-10">
-                                <a href="@Url.Action("Index", "Home")" class="btn btn-primary btn-block" id="#">
+                                <a id="@movie.ID" href="@Url.Action("Index", "Home")" class="btn btn-primary btn-block" id="#">
                                     Les mer
                                 </a>
                             </div>
 
                             <div class="col col-lg-offset-1 col-lg-10" style="padding-top: 15px">
-                                <a class="btn btn-success btn-block complete-cart">
+                                <a id="@movie.ID" class="btn btn-success btn-block add-movie">
                                     Legg til i handlekurv
                                 </a>
                             </div>
