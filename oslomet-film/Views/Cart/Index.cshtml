@@ -1,0 +1,69 @@
+﻿@model oslomet_film.Model.Cart
+
+<div class="clearfix">
+    <div class="col col-md-12">
+        <h1 style="margin-left:0">
+            Handlekurv
+        </h1>
+    </div>
+</div>
+
+
+<div class="row">
+
+    @foreach (var item in Model.CartItem)
+    {
+        <div class="row display-cart-full img-rounded">
+            <div class="col col-md-3">
+                <img src="@item.Movie.Thumbnail" class="thumbnail-md" />
+            </div>
+            <div class="col col-md-6">
+                <h3>
+                    <b>
+                        @item.Movie.Title
+                    </b>
+                </h3>
+                <br />
+                <p>
+                    @item.Movie.Description
+                </p>
+                <br />
+                <p>
+                    Pris : @item.Price,-
+                </p>
+            </div>
+            <div class="col-md-3">
+                <br />
+                <br />
+                <a href="@Url.Action("Details", "Movie", new { movieID = item.Movie.ID})" class="btn btn-primary btn-block">
+                    Les mer
+                </a>
+                <br />
+                <a href="@Url.Action("RemoveItem", "Cart", new { movieID = item.Movie.ID})" class="btn btn-primary btn-block" id="#">
+                    Fjern
+                </a>
+            </div>
+        </div>
+    }
+
+
+        <div class="col col-md-offset-8 col-md-4">
+            <div class="row">
+                <div class="col col-md-3">
+                    <h4>
+                        <b>
+                            TOTALT: @ViewBag.Total,-
+                        </b>
+                    </h4>
+                </div>
+                <div class="col col-md-9">
+                    <a href="@Url.Action("Index", "Home")" class="btn btn-primary btn-block" id="#">
+                        Fortsett å handle
+                    </a>
+                    <a class="btn btn-success btn-block complete-cart">
+                        Kjøp
+                    </a>
+                </div>
+            </div>
+        </div>
+</div>
