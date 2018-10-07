@@ -6,7 +6,7 @@ namespace oslomet_film.DAL
 {
     public class DB : DbContext
     {
-        public DB() : base("name=ACM")
+        public DB() : base("name=acm-film")
         {
             Database.CreateIfNotExists();
             Database.SetInitializer(new DBInit());
