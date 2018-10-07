@@ -18,6 +18,7 @@ namespace oslomet_film.Controllers
             return View(displayAllCustomers);
         }
 
+        //GET: Register
         public ActionResult Register()
         {
             Customer customerModel = new Customer();
@@ -47,6 +48,7 @@ namespace oslomet_film.Controllers
             return View(customerModel);
         }
 
+        //GET: Login
         public ActionResult Login()
         {
             Customer loginModel = new Customer();
@@ -71,6 +73,7 @@ namespace oslomet_film.Controllers
             return View(loginModel);
         }
 
+        //GET: Edit user info
         public ActionResult EditUser()
         {
             int id = (int)Session["customerID"];
@@ -94,33 +97,7 @@ namespace oslomet_film.Controllers
             return View(editModel);
         }
 
-        public ActionResult EditPassword()
-        {
-            int id = (int)Session["customerID"];
-            var customerBLL = new CustomerBLL();
-            Customer editPassModel = customerBLL.fetchCustomer(id);
-            return View(editPassModel);
-        }
-        [HttpPost]
-        public ActionResult EditPassword(int id, Customer editPassModel)
-        {
-            var customerBLL = new CustomerBLL();
-            bool editSuccess = customerBLL.EditPassword(id, editPassModel);
-            if (editSuccess)
-            {
-                ViewBag.EditSuccessfull = "Edit Successfull";
-                Sessions();
-                return View(editPassModel);
-            }
-            ViewBag.EditFailed = "Edit failed";
-            return View(editPassModel);
-        }
-
-        public ActionResult Profile()
-        {
-            return View();
-        }
-
+        //Setting the sessions
         public void Sessions()
         {
             int id = (int)Session["customerID"];
@@ -132,25 +109,6 @@ namespace oslomet_film.Controllers
             var customer = (Customer)Session["customer"];
             string userName = (string)Session["userName"];
             int customerID = (int)Session["customerID"];
-        }
-
-        public ActionResult DeleteCustomer(int id)
-        {
-            var customerBLL = new CustomerBLL();
-            Customer customer = customerBLL.fetchCustomer(id);
-            return View(customer);
-        }
-
-        [HttpDelete]
-        public ActionResult DeleteCustomer(int id, Customer deleteUser)
-        {
-            var customerBLL = new CustomerBLL();
-            bool customerDeleted = customerBLL.deleteUser(id);
-            if (customerDeleted)
-            {
-                return RedirectToAction("DisplayCustomers");
-            }
-            return View();
         }
 
         public ActionResult FetchCustomer(int id)

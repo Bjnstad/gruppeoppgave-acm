@@ -9,6 +9,7 @@ namespace oslomet_film.DAL
 {
     public class CustomerDAL
     {
+        //Listing all customers
         public List<Customer> getAll()
         {
             try
@@ -38,6 +39,7 @@ namespace oslomet_film.DAL
             }
         }
 
+        //Register new customer
         public bool addCustomer(Customer customerModel)
         {
             var db = new DB();
@@ -75,6 +77,7 @@ namespace oslomet_film.DAL
             }
         }
 
+        //Testing if userinfo already exists
         private static bool checkUser(String inputUsername, String inputEmail, String inputPhone)
         {
             var db = new DB();
@@ -89,6 +92,7 @@ namespace oslomet_film.DAL
             }
         }
 
+        //Chreating hash for password
         public static byte[] createHash(String inputPassword, byte[] inputSalt)
         {
             const int keyLength = 24;
@@ -96,6 +100,7 @@ namespace oslomet_film.DAL
             return pbkd2.GetBytes(keyLength);
         } 
 
+        //Creating salt for password
         public static byte[] createSalt()
         {
             var csprng = new RNGCryptoServiceProvider();
@@ -104,7 +109,7 @@ namespace oslomet_film.DAL
             return salt;
         }
 
-
+        //Login 
         public bool login(Customer loginModel)
         {
             var db = new DB();
@@ -121,6 +126,7 @@ namespace oslomet_film.DAL
             }
         }
 
+        //Editing user information
         public bool editUser(int id, Customer editModel)
         {
             var db = new DB();
@@ -143,48 +149,8 @@ namespace oslomet_film.DAL
                 return false;
             }
         }
-
-        public bool editPassword(int id, Customer editPassModel)
-        {
-            var db = new DB();
-            byte[] salt = createSalt();
-            byte[] hash = createHash(editPassModel.Password, salt);
-            byte[] newHash = createHash(editPassModel.NewPassword, salt);
-
-            DBCustomer customer = db.Customers.Find(id);
-            if(customer == null)
-            {
-                return false;
-            } else
-            {
-                byte[] testPassword = createHash(editPassModel.Password, customer.Salt);
-                bool passwordCorrect = customer.Password.SequenceEqual(testPassword);
-                if(passwordCorrect == true)
-                {
-                    customer.Password = newHash;
-                    customer.Salt = salt;
-                }
-                db.SaveChanges();
-                return true;
-            }
-            
-        } 
-
-        public bool deleteUser(int id)
-        {
-            var db = new DB();
-            try
-            {
-                DBCustomer deleteUser = db.Customers.Find(id);
-                db.Customers.Remove(deleteUser);
-                db.SaveChanges();
-                return true;
-            } catch
-            {
-                return false;
-            }
-        }
-
+        
+        //Fetch/Find customer from customer id
         public Customer fetchCustomer (int id)
         {
             var db = new DB();
@@ -208,6 +174,7 @@ namespace oslomet_film.DAL
             }
         }
 
+        //Fetch/Find customer by customer Username
         public Customer fetchCustomerByUsername(String username)
         {
             var db = new DB();
