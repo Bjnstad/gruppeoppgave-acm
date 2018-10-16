@@ -26,6 +26,8 @@ namespace oslomet_film.DAL
                     domeneKunde.Surname = c.Surname;
                     domeneKunde.Phone = c.Phone;
                     domeneKunde.Email = c.Email;
+                    domeneKunde.Admin = c.Admin;
+
 
                     DomeneKunder.Add(domeneKunde);
                 }
@@ -177,6 +179,7 @@ namespace oslomet_film.DAL
                     Surname = customer.Surname,
                     Phone = customer.Phone,
                     Email = customer.Email,
+                    Admin = customer.Admin
                 };
                 return customerDetails;
             }
@@ -201,6 +204,7 @@ namespace oslomet_film.DAL
                     Surname = customer.Surname,
                     Phone = customer.Phone,
                     Email = customer.Email,
+                    Admin = customer.Admin
                 };
                 return customerDetails;
             }

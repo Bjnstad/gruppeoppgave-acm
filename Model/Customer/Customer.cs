@@ -32,6 +32,7 @@ namespace oslomet_film.Model
         [DataType(DataType.Password)]
         public string NewPassword { get; set; }
 
-        //public virtual List<Order> Order { get; set; }
+        //Vet ikke om dette skal stå sånn.
+        public bool Admin { get; set; }
     }
 }

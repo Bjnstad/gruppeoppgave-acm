@@ -62,9 +62,15 @@ namespace oslomet_film.Controllers
 
             if (loginSuccess)
                 {
-                    ViewBag.LoginSuccess = "Login successfull!";
-                    Session["customerID"] = customerSession.ID;
-                    Sessions();
+                Session["customerID"] = customerSession.ID;
+                ViewBag.LoginSuccess = "Login successfull!";
+                Sessions();
+
+                if (customerSession.Admin == true)
+                {
+                    Session["Admin"] = customerSession; 
+                    return RedirectToAction("Index", "Dashboard");
+                } else
                     return RedirectToAction("../Home/Index");
                 }
             ViewBag.LoginFailed = "Login failed";

@@ -21,7 +21,19 @@ namespace oslomet_film.DAL
                 Email = "axebjo@gmail.com",
                 Password = CustomerDAL.createHash("axel", salt),
                 Salt = salt
-            }; 
+            };
+
+            var customer1 = new DBCustomer
+            {
+                Username = "admin",
+                Name = "admin",
+                Surname = "admin",
+                Phone = "12345678",
+                Email = "admin@gmail.com",
+                Password = CustomerDAL.createHash("admin", salt),
+                Salt = salt,
+                Admin = true
+            };
 
             Movie newMovie = new Movie
             {
@@ -96,8 +108,9 @@ namespace oslomet_film.DAL
             context.Category_Relations.Add(relation);
             context.Category_Relations.Add(relation2);
             context.Category_Relations.Add(relation3);
-
+            
             context.Customers.Add(newCustomer);
+            context.Customers.Add(customer1);
 
             context.SaveChanges();
             base.Seed(context);
