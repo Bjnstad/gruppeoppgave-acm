@@ -60,12 +60,22 @@ namespace oslomet_film.DAL
         }
 
 
-        public bool AddMovie(Movie movie)
+        public bool AddMovie(MovieHelper movieHelper)
         {
             var db = new DB();
             try
             {
-                db.Movie.Add(movie);
+                db.Movie.Add(movieHelper.movie);
+                foreach(var category in movieHelper.selectedList)
+                {
+                    Category c = db.Category.Find(int.Parse(category));
+                    Category_Relation cr = new Category_Relation
+                    {
+                        Movie = movieHelper.movie,
+                        Category = c
+                    };
+                    db.Category_Relations.Add(cr);
+                }
                 db.SaveChanges();
                 return true; 
             }

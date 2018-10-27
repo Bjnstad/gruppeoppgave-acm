@@ -9,25 +9,32 @@ namespace oslomet_film.Controllers
         // GET: Dashboard
         public ActionResult Index()
         {
+            MovieBLL movieBLL = new MovieBLL();
+            MovieHelper movieHelper = new MovieHelper
+            {
+                selectList = movieBLL.GetCategories()
+            };
+
             if(Session["Admin"] == null)
             {
                 return View("NotAllowed");
             }
-            return View();
+            return View(movieHelper);
         }
 
         [HttpPost]
-        public ActionResult Index(Movie movie)
+        public ActionResult Index(MovieHelper movieHelper)
         {
             var movieBLL = new MovieBLL();
-            bool movieAdded = movieBLL.AddMovie(movie);
+            bool movieAdded = movieBLL.AddMovie(movieHelper);
             if (movieAdded)
             {
                 ViewBag.RegistrationSuccess = "Movie added";
                 return RedirectToAction("../Home/Index");  
             }
             ViewBag.RegistrationFailed = "Movie Failed";
-            return View(movie);
+            movieHelper.selectList = movieBLL.GetCategories();
+            return View(movieHelper);
         }
     }
 }
