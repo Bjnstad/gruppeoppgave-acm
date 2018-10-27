@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
+using oslomet_film.Model;
+using oslomet_film.BLL;
 
 namespace oslomet_film.Controllers
 {
@@ -16,6 +14,20 @@ namespace oslomet_film.Controllers
                 return View("NotAllowed");
             }
             return View();
+        }
+
+        [HttpPost]
+        public ActionResult Index(Movie movie)
+        {
+            var movieBLL = new MovieBLL();
+            bool movieAdded = movieBLL.AddMovie(movie);
+            if (movieAdded)
+            {
+                ViewBag.RegistrationSuccess = "Movie added";
+                return RedirectToAction("../Home/Index");  
+            }
+            ViewBag.RegistrationFailed = "Movie Failed";
+            return View(movie);
         }
     }
 }

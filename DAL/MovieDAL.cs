@@ -58,5 +58,21 @@ namespace oslomet_film.DAL
             }
             return movies.ToList();
         }
+
+
+        public bool AddMovie(Movie movie)
+        {
+            var db = new DB();
+            try
+            {
+                db.Movie.Add(movie);
+                db.SaveChanges();
+                return true; 
+            }
+            catch
+            {
+                return false;
+            }
+        }
     }
 }

@@ -41,5 +41,11 @@ namespace oslomet_film.BLL
             var movieDAL = new MovieDAL();
             return movieDAL.GetMyMovies(customer);
         }
+
+        public bool AddMovie(Movie movie)
+        {
+            var movieDAL = new MovieDAL();
+            return movieDAL.AddMovie(movie);
+        }
     }
 }
