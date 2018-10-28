@@ -154,6 +154,7 @@
     <Content Include="Views\Profile\Index.cshtml" />
     <Content Include="Views\Dashboard\Index.cshtml" />
     <Content Include="Views\Dashboard\NotAllowed.cshtml" />
+    <Content Include="Views\Dashboard\DisplayUsers.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

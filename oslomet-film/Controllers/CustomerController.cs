@@ -70,7 +70,7 @@ namespace oslomet_film.Controllers
                 {
                     Session["Admin"] = customerSession; 
                     return RedirectToAction("Index", "Dashboard");
-                } else
+                } 
                     return RedirectToAction("../Home/Index");
                 }
             ViewBag.LoginFailed = "Login failed";

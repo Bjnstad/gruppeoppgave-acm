@@ -1,3 +1,9 @@
 ﻿
 <h3> Velkommen Admins </h3>
 
+<div>
+    @if (Session["Admin"] != null)
+    {
+        Html.RenderAction("DisplayUsers", "Dashboard");
+    }
+</div>
