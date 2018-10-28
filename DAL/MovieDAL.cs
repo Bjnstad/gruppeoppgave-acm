@@ -1,5 +1,6 @@
 ﻿using oslomet_film.Model;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 
 namespace oslomet_film.DAL
@@ -83,6 +84,104 @@ namespace oslomet_film.DAL
             {
                 return false;
             }
+        }
+
+        public List<string> SelectedCategoriesIDs(int movieID)
+        {
+            var db = new DB();
+            Movie movie = db.Movie.Find(movieID);
+            List<string> categories = new List<string>();
+            if (movie == null) return categories;
+            foreach(var cr in db.Category_Relations.ToList())
+            {
+                if(cr.Movie.ID == movie.ID)
+                {
+                    categories.Add("" + cr.Category.ID);
+                }
+            }
+            return categories;
+        }
+
+        public bool EditMovie(int movieID, MovieHelper movieHelper)
+        {
+            var db = new DB();
+
+            //try
+            //{
+                Movie movie = movieHelper.movie;
+                Movie dbmovie = db.Movie.Find(movieID);
+
+                dbmovie.Price = movie.Price;
+                dbmovie.Title = movie.Title;
+                dbmovie.Thumbnail = movie.Thumbnail;
+
+                foreach(var ca in db.Category.ToList())
+                {
+                    bool selected = false;
+                    if(movieHelper.selectedList != null)
+                    {
+                        foreach (var category in movieHelper.selectedList)
+                        {
+                            Category c = db.Category.Find(int.Parse(category));
+                            if (c.ID == ca.ID)
+                            {
+                                selected = true;
+                                break;
+                            }
+                        }
+                    }
+                  
+
+                    if(selected)
+                    {
+                        bool exist = false;
+                        foreach(var cr in db.Category_Relations.ToList())
+                        {
+                            if(cr.Category.ID == ca.ID && cr.Movie.ID == movie.ID)
+                            {
+                                exist = true;
+                                break;
+                            }
+                        }
+
+                        if (!exist)
+                        {
+                            Category_Relation _cr = new Category_Relation
+                            {
+                                Movie = dbmovie,
+                                Category = ca
+                            };
+                            db.Category_Relations.Add(_cr);
+                        }
+                    } else
+                    {
+                        bool exists = false;
+                        Category_Relation addedCr = null;
+                        foreach (var cr in db.Category_Relations.ToList())
+                        {
+                            if (cr.Category.ID == ca.ID && cr.Movie.ID == movie.ID)
+                            {
+                                exists = true;
+                                addedCr = cr;
+                                break;
+                            }
+                        }
+
+                        if(exists)
+                        {
+                            Category_Relation rm = db.Category_Relations.Find(addedCr.ID);
+                            db.Category_Relations.Remove(rm);
+                        }
+                    }
+                }
+ 
+                db.SaveChanges();
+                return true;
+            /*}
+            catch
+            {
+                return false;
+            }*/
         }
     }
 }

@@ -43,7 +43,7 @@ namespace oslomet_film.Controllers
         {
             var movieBLL = new MovieBLL();
             var moviemerge = movieBLL.GetAll();
-            return View(moviemerge);
+            return View(moviemerge.Movie);
         }
 
         //List alle brukere
@@ -52,6 +52,38 @@ namespace oslomet_film.Controllers
             var customerBLL = new CustomerBLL();
             var allCustomers = customerBLL.getAll();
             return View(allCustomers);
+        }
+
+        // Rediger Film
+        public ActionResult EditMovie(int id)
+        {
+            var movieBLL = new MovieBLL();
+            Movie movie = movieBLL.GetMovie(id);
+            if (movie == null) return RedirectToAction("AllMovies"); // Movie not found
+
+            MovieHelper movieHelper = new MovieHelper
+            {
+                movie = movie,
+                selectList = movieBLL.GetCategories(),
+                selectedList = movieBLL.SelectedCategoriesIDs(id)
+        };
+            return View(movieHelper);
+        }
+
+        [HttpPost]
+        public ActionResult EditMovie(int id, MovieHelper movieHelper)
+        {
+            var movieBLL = new MovieBLL();
+            if (movieBLL.EditMovie(id, movieHelper))
+            {
+                ViewBag.EditSuccessfull = "Endret film";
+                return RedirectToAction("AllMovies");
+            }
+
+            movieHelper.selectedList = movieBLL.SelectedCategoriesIDs(id);
+            movieHelper.selectList = movieBLL.GetCategories();
+            ViewBag.EditSuccessfull = "Endring feilet";
+            return View(movieHelper);
         }
 
         // Rediger Bruker

@@ -47,5 +47,17 @@ namespace oslomet_film.BLL
             var movieDAL = new MovieDAL();
             return movieDAL.AddMovie(movieHelper);
         }
+
+        public List<string> SelectedCategoriesIDs(int movieID)
+        {
+            var movieDAL = new MovieDAL();
+            return movieDAL.SelectedCategoriesIDs(movieID);
+        }
+
+        public bool EditMovie(int movieID, MovieHelper movieHelper)
+        {
+            var movieDAL = new MovieDAL();
+            return movieDAL.EditMovie(movieID, movieHelper);
+        }
     }
 }

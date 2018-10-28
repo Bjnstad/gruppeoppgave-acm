@@ -2,20 +2,8 @@
 
 @Html.Partial("../Shared/AdminSideMenu")
 
-<div class="row">
-    <div class="col col-lg-12">
-        <h1> 
-            Admin panel 
-        </h1>
-    </div>
-</div>
 
 <div class="row">
-    <div class="col col-lg-4">
-        <a>
-            Se alle filmer
-        </a>
-    </div>
     <div class="col-lg-8">
        @using (Html.BeginForm("Index", "Dashboard"))
        {
