@@ -54,6 +54,30 @@ namespace oslomet_film.Controllers
             return View(allCustomers);
         }
 
+        // Rediger Bruker
+        public ActionResult EditUser(int id)
+        {
+            var customerBLL = new CustomerBLL();
+            Customer editModel = customerBLL.fetchCustomer(id);
+            return PartialView(editModel);
+        }
+
+        [HttpPost]
+        public ActionResult EditUser(int id, Customer editModel)
+        {
+            var customer = new CustomerController();
+            var customerBLL = new CustomerBLL();
+            bool editSuccess = customerBLL.editUser(id, editModel);
+            if (editSuccess)
+            {
+                ViewBag.EditSuccessfull = "Edit Successfull";
+                return RedirectToAction("AllCustomers");
+            }
+            ViewBag.EditFailed = "Edit failed";
+            return PartialView(editModel);
+        }
+
+        // List Alle ordre
         public ActionResult AllOrders()
         {
             var orderBLL = new OrderBLL();

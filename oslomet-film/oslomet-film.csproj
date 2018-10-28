@@ -160,6 +160,7 @@
     <Content Include="Views\Dashboard\AddMovie.cshtml" />
     <Content Include="Views\Dashboard\AllCustomers.cshtml" />
     <Content Include="Views\Dashboard\AllOrders.cshtml" />
+    <Content Include="Views\Dashboard\EditUser.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

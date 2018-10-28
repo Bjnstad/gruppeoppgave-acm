@@ -135,7 +135,7 @@ namespace oslomet_film.DAL
                 editCustomer.Surname = editModel.Surname;
                 editCustomer.Phone = editModel.Phone;
                 editCustomer.Email = editModel.Email;
-                
+                editCustomer.Admin = editModel.Admin;
 
                     db.SaveChanges();
                     return true;

@@ -106,11 +106,18 @@ namespace oslomet_film.Controllers
             var customerBLL = new CustomerBLL();
             Customer customerDetails = customerBLL.fetchCustomer(id);
 
+            if(customerDetails.Admin == true)
+            {
+                Session["Admin"] = customerDetails;
+            } else
+            {
+                Session["Admin"] = null;
+            }
+
             Session["customer"] = customerDetails;
             Session["userName"] = customerDetails.Username;
             var customer = (Customer)Session["customer"];
             string userName = (string)Session["userName"];
-            int customerID = (int)Session["customerID"];
         }
 
         public ActionResult FetchCustomer(int id)
