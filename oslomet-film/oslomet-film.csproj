@@ -142,7 +142,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Customer\DisplayCustomers.cshtml" />
     <Content Include="Views\Customer\Register.cshtml" />
     <Content Include="Views\Customer\Login.cshtml" />
     <Content Include="Views\Customer\EditUser.cshtml" />
@@ -161,6 +160,7 @@
     <Content Include="Views\Dashboard\AllCustomers.cshtml" />
     <Content Include="Views\Dashboard\AllOrders.cshtml" />
     <Content Include="Views\Dashboard\EditUser.cshtml" />
+    <Content Include="Views\Dashboard\Register.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
