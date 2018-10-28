@@ -49,7 +49,7 @@
             @Html.DisplayFor(modelItem => item.Admin)
         </td>
         <td>
-            @Html.ActionLink("Rediger Bruker", "EditUser", new { id=item.ID }, new { @class = "editUsersModal", @data_target = "editUsersModal" })) 
+            @Html.ActionLink("Rediger Bruker", "EditUser", new { id=item.ID }) 
         </td>
     </tr>
 }

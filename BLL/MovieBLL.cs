@@ -22,6 +22,13 @@ namespace oslomet_film.BLL
             movieMerge.Category = movieDAL.GetCategories();
             return movieMerge;
         }
+
+        public List<Movie> ListMovies()
+        {
+            var movieDAL = new MovieDAL();
+            List<Movie> allMovies = movieDAL.GetMovies();
+            return allMovies;
+        }
         
         public List<Category> GetCategories()
         {

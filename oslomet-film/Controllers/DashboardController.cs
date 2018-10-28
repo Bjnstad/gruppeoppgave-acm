@@ -42,8 +42,8 @@ namespace oslomet_film.Controllers
         public ActionResult AllMovies()
         {
             var movieBLL = new MovieBLL();
-            var moviemerge = movieBLL.GetAll();
-            return View(moviemerge);
+            var alleMovies = movieBLL.ListMovies();
+            return View(alleMovies);
         }
 
         //List alle brukere
@@ -59,7 +59,7 @@ namespace oslomet_film.Controllers
         {
             var customerBLL = new CustomerBLL();
             Customer editModel = customerBLL.fetchCustomer(id);
-            return PartialView(editModel);
+            return View(editModel);
         }
 
         [HttpPost]
