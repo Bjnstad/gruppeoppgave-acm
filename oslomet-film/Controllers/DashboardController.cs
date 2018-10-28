@@ -7,7 +7,7 @@ namespace oslomet_film.Controllers
 {
     public class DashboardController : Controller
     {
-
+        // GET: Dashboard
         public ActionResult Index()
         {
             if (Session["Admin"] == null)
@@ -16,7 +16,7 @@ namespace oslomet_film.Controllers
             }
             return View();
         }
-        // GET: Dashboard
+        // Legg til ny Film
         public ActionResult AddMovie()
         {
             MovieBLL movieBLL = new MovieBLL();
