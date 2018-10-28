@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using oslomet_film.BLL;
+﻿using System.Web.Mvc;
 using oslomet_film.Model;
+using oslomet_film.BLL;
 
 namespace oslomet_film.Controllers
 {
@@ -13,28 +9,32 @@ namespace oslomet_film.Controllers
         // GET: Dashboard
         public ActionResult Index()
         {
+            MovieBLL movieBLL = new MovieBLL();
+            MovieHelper movieHelper = new MovieHelper
+            {
+                selectList = movieBLL.GetCategories()
+            };
+
             if(Session["Admin"] == null)
             {
                 return View("NotAllowed");
             }
-            return View();
+            return View(movieHelper);
         }
 
-        public ActionResult DisplayUsers()
+        [HttpPost]
+        public ActionResult Index(MovieHelper movieHelper)
         {
-            var customerBLL = new CustomerBLL();
-            List<Customer> displayAllCustomers = customerBLL.getAll();
-            return PartialView(displayAllCustomers);
-        }
-
-        public ActionResult DisplayMovies()
-        {
-            return View();
-        }
-
-        public ActionResult DisplayOrders()
-        {
-            return View();
+            var movieBLL = new MovieBLL();
+            bool movieAdded = movieBLL.AddMovie(movieHelper);
+            if (movieAdded)
+            {
+                ViewBag.RegistrationSuccess = "Movie added";
+                return RedirectToAction("../Home/Index");  
+            }
+            ViewBag.RegistrationFailed = "Movie Failed";
+            movieHelper.selectList = movieBLL.GetCategories();
+            return View(movieHelper);
         }
     }
 }
