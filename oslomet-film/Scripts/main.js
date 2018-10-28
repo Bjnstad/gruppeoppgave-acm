@@ -65,3 +65,18 @@ $(".cart-popoup-close").click(function (e) {
 $(document).click(function () {
     $(".cart-popout-close").toggleClass("show hide").toggleClass("cart-popoup-close cart-popoup-open");
 });
+
+/**
+ *  Edit user Adminpanel Modal
+ */
+
+$(function () {
+    $('.editUsersModal').on("click", function (e) {
+        e.preventDefault();
+        //perform the url load  then
+        $('#myModal').modal({
+            keyboard: true
+        }, 'show');
+        return false;
+    })
+})
