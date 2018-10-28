@@ -73,7 +73,6 @@ $(document).click(function () {
 $(function () {
     $('.editUsersModal').on("click", function (e) {
         e.preventDefault();
-        //perform the url load  then
         $('#myModal').modal({
             keyboard: true
         }, 'show');

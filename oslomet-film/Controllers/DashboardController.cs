@@ -7,8 +7,22 @@ namespace oslomet_film.Controllers
 {
     public class DashboardController : Controller
     {
-        // GET: Dashboard
+
         public ActionResult Index()
+        {
+            if (Session["Admin"] == null)
+            {
+                return View("NotAllowed");
+            }
+            var movieBLL = new MovieBLL();
+            MovieHelper mh = new MovieHelper()
+            {
+                selectList = movieBLL.GetCategories()
+            };
+            return View(mh);
+        }
+        // GET: Dashboard
+        public ActionResult AddMovie()
         {
             MovieBLL movieBLL = new MovieBLL();
             MovieHelper movieHelper = new MovieHelper
@@ -24,7 +38,7 @@ namespace oslomet_film.Controllers
         }
 
         [HttpPost]
-        public ActionResult Index(MovieHelper movieHelper)
+        public ActionResult AddMovie(MovieHelper movieHelper)
         {
             var movieBLL = new MovieBLL();
             bool movieAdded = movieBLL.AddMovie(movieHelper);
@@ -41,7 +55,11 @@ namespace oslomet_film.Controllers
         //List alle filmer
         public ActionResult AllMovies()
         {
-            var movieBLL = new MovieBLL();
+            if (Session["Admin"] == null)
+            {
+                return View("NotAllowed");
+            }
+            var movieBLL = new MovieBLL();  
             var moviemerge = movieBLL.GetAll();
             return View(moviemerge.Movie);
         }
@@ -51,6 +69,10 @@ namespace oslomet_film.Controllers
         {
             var customerBLL = new CustomerBLL();
             var allCustomers = customerBLL.getAll();
+            if (Session["Admin"] == null)
+            {
+                return View("NotAllowed");
+            }
             return View(allCustomers);
         }
 
@@ -91,7 +113,11 @@ namespace oslomet_film.Controllers
         {
             var customerBLL = new CustomerBLL();
             Customer editModel = customerBLL.fetchCustomer(id);
-            return PartialView(editModel);
+            if (Session["Admin"] == null)
+            {
+                return View("NotAllowed");
+            }
+            return View(editModel);
         }
 
         [HttpPost]
@@ -109,11 +135,38 @@ namespace oslomet_film.Controllers
             return PartialView(editModel);
         }
 
+        // Legg til ny kunde
+        public ActionResult Register()
+        {
+            Customer customerModel = new Customer();
+            if (Session["Admin"] == null)
+            {
+                return View("NotAllowed");
+            }
+            return View(customerModel);
+        }
+
+        [HttpPost]
+        public ActionResult Register(Customer customerModel)
+        {
+            var customerBLL = new CustomerBLL();
+            bool userAdded = customerBLL.addCustomer(customerModel);
+            if (userAdded)
+            {
+                return RedirectToAction("AllCustomers");
+            }
+            return View(customerModel);
+        }
+
         // List Alle ordre
         public ActionResult AllOrders()
         {
             var orderBLL = new OrderBLL();
             var allOrders = orderBLL.GetAll();
+            if (Session["Admin"] == null)
+            {
+                return View("NotAllowed");
+            }
             return View(allOrders);
         }
     }
