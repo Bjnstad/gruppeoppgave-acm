@@ -26,7 +26,7 @@
                     @if (Session["customer"] == null)
                     {
                     <li>@Html.ActionLink("Register", "Register", "Customer")</li> 
-                        <li>@Html.ActionLink("Log in", "Login", "Customer")</li>
+                    <li>@Html.ActionLink("Log in", "Login", "Customer")</li>
 
                     }
                     else if(Session["Admin"] != null)

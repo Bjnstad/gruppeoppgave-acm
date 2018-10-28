@@ -1,6 +1,7 @@
 ﻿using System.Web.Mvc;
 using oslomet_film.Model;
 using oslomet_film.BLL;
+using System.Collections.Generic;
 
 namespace oslomet_film.Controllers
 {
@@ -35,6 +36,29 @@ namespace oslomet_film.Controllers
             ViewBag.RegistrationFailed = "Movie Failed";
             movieHelper.selectList = movieBLL.GetCategories();
             return View(movieHelper);
+        }
+
+        //List alle filmer
+        public ActionResult AllMovies()
+        {
+            var movieBLL = new MovieBLL();
+            var moviemerge = movieBLL.GetAll();
+            return View(moviemerge);
+        }
+
+        //List alle brukere
+        public ActionResult AllCustomers()
+        {
+            var customerBLL = new CustomerBLL();
+            var allCustomers = customerBLL.getAll();
+            return View(allCustomers);
+        }
+
+        public ActionResult AllOrders()
+        {
+            var orderBLL = new OrderBLL();
+            var allOrders = orderBLL.GetAll();
+            return View(allOrders);
         }
     }
 }

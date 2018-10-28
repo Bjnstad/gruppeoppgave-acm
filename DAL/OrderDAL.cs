@@ -44,8 +44,6 @@ namespace oslomet_film.DAL
             return allOrders;
         }
 
-        
-
         public bool OwnsMovie(Customer customer, Movie movie)
         {
             if (customer == null || movie == null) return false;

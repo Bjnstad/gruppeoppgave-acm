@@ -155,6 +155,11 @@
     <Content Include="Views\Dashboard\Index.cshtml" />
     <Content Include="Views\Dashboard\NotAllowed.cshtml" />
     <Content Include="Views\Dashboard\DisplayUsers.cshtml" />
+    <Content Include="Views\Shared\AdminSideMenu.cshtml" />
+    <Content Include="Views\Dashboard\AllMovies.cshtml" />
+    <Content Include="Views\Dashboard\AddMovie.cshtml" />
+    <Content Include="Views\Dashboard\AllCustomers.cshtml" />
+    <Content Include="Views\Dashboard\AllOrders.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
